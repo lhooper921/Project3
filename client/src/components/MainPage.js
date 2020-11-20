@@ -9,6 +9,7 @@ import NavBar from './NavBar';
 import Profile from './Profile';
 import Schedule from './Schedule';
 import TimeOff from './TimeOff';
+import Footer from './Footer';
 
 class MainPage extends Component {
 	componentDidMount() {
@@ -19,7 +20,6 @@ class MainPage extends Component {
 	render() {
 		return (
 			<div>
-				<h1 className="card-panel teal lighten-2 ">App Name(Logo)</h1>
 				<Router>
 					<NavBar />
 					<Switch>
@@ -29,6 +29,8 @@ class MainPage extends Component {
 						<Route path="/TimeOff" component={TimeOff} />
 					</Switch>
 				</Router>
+
+				<Footer />
 			</div>
 		);
 	}
