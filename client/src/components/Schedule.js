@@ -3,15 +3,15 @@ import React, { Component } from 'react';
 // Import Materialize
 import M from 'materialize-css';
 
-class Profile extends Component {
+class Schedule extends Component {
 	componentDidMount() {
 		// Auto initialize all the things!
 		M.AutoInit();
 	}
 
 	render() {
-		return <h1> Profile</h1>;
+		return <h1> Schedule</h1>;
 	}
 }
 
-export default Profile;
+export default Schedule;
