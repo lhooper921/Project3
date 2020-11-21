@@ -7,16 +7,23 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import "./Schedule.css";
+
+
+
+// import {filter_drama} from '@material-ui/icons';
+
 
 // import DatePicker from "./DatePickerComponent";
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+
 });
 
 function createData(name, monday, tuesday, wednesday, thursday, friday, saturday, sunday) {
-  return { name, monday, tuesday, wednesday, thursday, friday, saturday, sunday};
+  return { name, monday, tuesday, wednesday, thursday, friday, saturday, sunday };
 }
 
 const rows = [
@@ -31,47 +38,105 @@ export default function BasicTable() {
   const classes = useStyles();
 
   return (
-	  <div>
-		<div class= "row">
-<div class = "col s1"></div>
-<div class = "col s10">
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Employee Name</TableCell>
-            <TableCell align="right">Monday</TableCell>
-            <TableCell align="right">Tuesday</TableCell>
-            <TableCell align="right">Wednesday</TableCell>
-            <TableCell align="right">Thursday</TableCell>
-			<TableCell align="right">Friday</TableCell>
-			<TableCell align="right">Saturday</TableCell>
-			<TableCell align="right">Sunday</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.monday}</TableCell>
-              <TableCell align="right">{row.tuesday}</TableCell>
-              <TableCell align="right">{row.wednesday}</TableCell>
-              <TableCell align="right">{row.thursday}</TableCell>
-			  <TableCell align="right">{row.friday}</TableCell>
-			  <TableCell align="right">{row.saturday}</TableCell>
-			  <TableCell align="right">{row.sunday}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-	</div>
-	
-	<div class = "col s1"></div>
-	
-	</div></div>
+    <div>
+
+{/* Select Week 1 or Week 2 */}
+      <div class="row">
+   <h1> Department Schedule</h1>
+          
+
+     <ul class="collapsible">
+    <li>
+    <div class="collapsible-header"><div class="row"><div class="col s12"><i class="material-icons"></i><h3>Week of date1-date2</h3></div></div></div>
+      <div class="collapsible-body"><span>      <div class="row">
+        <div class="col s1"></div>
+        <div class="col s10">
+         
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Employee Name</TableCell>
+                  <TableCell align="right">Monday</TableCell>
+                  <TableCell align="right">Tuesday</TableCell>
+                  <TableCell align="right">Wednesday</TableCell>
+                  <TableCell align="right">Thursday</TableCell>
+                  <TableCell align="right">Friday</TableCell>
+                  <TableCell align="right">Saturday</TableCell>
+                  <TableCell align="right">Sunday</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                  <TableRow key={row.name}>
+                    <TableCell component="th" scope="row">
+                      {row.name}
+                    </TableCell>
+                    <TableCell align="right">{row.monday}</TableCell>
+                    <TableCell align="right">{row.tuesday}</TableCell>
+                    <TableCell align="right">{row.wednesday}</TableCell>
+                    <TableCell align="right">{row.thursday}</TableCell>
+                    <TableCell align="right">{row.friday}</TableCell>
+                    <TableCell align="right">{row.saturday}</TableCell>
+                    <TableCell align="right">{row.sunday}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
+        <div class="col s1"></div>
+      </div></span></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><div class="row"><div class="col s12"><h3>Week of nextdate1-nextdate2</h3></div></div></div>
+      <div class="collapsible-body"><span><div class="row">
+        <div class="col s1"></div>
+        <div class="col s10">
+         
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Employee Name</TableCell>
+                  <TableCell align="right">Monday</TableCell>
+                  <TableCell align="right">Tuesday</TableCell>
+                  <TableCell align="right">Wednesday</TableCell>
+                  <TableCell align="right">Thursday</TableCell>
+                  <TableCell align="right">Friday</TableCell>
+                  <TableCell align="right">Saturday</TableCell>
+                  <TableCell align="right">Sunday</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                  <TableRow key={row.name}>
+                    <TableCell component="th" scope="row">
+                      {row.name}
+                    </TableCell>
+                    <TableCell align="right">{row.monday}</TableCell>
+                    <TableCell align="right">{row.tuesday}</TableCell>
+                    <TableCell align="right">{row.wednesday}</TableCell>
+                    <TableCell align="right">{row.thursday}</TableCell>
+                    <TableCell align="right">{row.friday}</TableCell>
+                    <TableCell align="right">{row.saturday}</TableCell>
+                    <TableCell align="right">{row.sunday}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
+        <div class="col s1"></div>
+      </div></span></div>
+    </li>
+   
+  </ul>   
+      
+        
+      </div>
+    </div>
+
   );
 }
 
