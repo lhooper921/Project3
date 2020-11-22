@@ -1,9 +1,10 @@
 import React from "react";
-import NavBar from "./components/NavBar";
+// import NavBar from "./components/NavBar";
 import 'materialize-css/dist/css/materialize.min.css';
+import RegistrationForm from "./components/RegistrationForm";
 
 function App() {
-  return <NavBar />;
+  return <RegistrationForm />;
 }
 
 export default App;
