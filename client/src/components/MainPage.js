@@ -7,7 +7,7 @@ import M from 'materialize-css';
 import Home from './Home';
 import NavBar from './NavBar';
 import Profile from './Profile';
-import Schedule from './Schedule';
+import Schedule from './Schedule/Schedule';
 import TimeOff from './TimeOff';
 import Board from './Board';
 import Footer from './Footer';
