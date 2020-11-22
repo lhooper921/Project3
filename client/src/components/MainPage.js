@@ -9,6 +9,7 @@ import NavBar from './NavBar';
 import Profile from './Profile';
 import Schedule from './Schedule';
 import TimeOff from './TimeOff';
+import Board from './Board';
 import Footer from './Footer';
 
 class MainPage extends Component {
@@ -27,6 +28,7 @@ class MainPage extends Component {
 						<Route path="/Profile" component={Profile} />
 						<Route path="/Schedule" component={Schedule} />
 						<Route path="/TimeOff" component={TimeOff} />
+						<Route path="/Board" component={Board} />
 					</Switch>
 				</Router>
 

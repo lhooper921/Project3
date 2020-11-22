@@ -38,7 +38,7 @@ class NavBar extends Component {
 						<nav>
 							<div className="nav-wrapper teal" height="500px">
 								<a href="/" className="brand-logo">
-									App name
+									Home
 								</a>
 
 								<ul id="nav-mobile" className="right hide-on-med-and-down">
@@ -48,8 +48,8 @@ class NavBar extends Component {
 										</Link>
 									</li>
 									<li>
-										<Link to="/Profile" className="navlink">
-											Profile
+										<Link to="/Board" className="navlink">
+											Board
 										</Link>
 									</li>
 									<li>
@@ -60,6 +60,11 @@ class NavBar extends Component {
 									<li>
 										<Link to="/TimeOff" className="navlink">
 											Time Off
+										</Link>
+									</li>
+									<li>
+										<Link to="/Profile" className="navlink">
+											Personal Info
 										</Link>
 									</li>
 								</ul>
