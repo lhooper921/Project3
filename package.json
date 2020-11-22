@@ -33,5 +33,7 @@
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "save": "^2.4.0"
+    "@material-ui/core": "^4.11.0",
+    "table": "^6.0.4"
   }
 }

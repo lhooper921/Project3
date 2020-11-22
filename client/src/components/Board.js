@@ -3,15 +3,15 @@ import React, { Component } from 'react';
 // Import Materialize
 import M from 'materialize-css';
 
-class Profile extends Component {
+class Board extends Component {
 	componentDidMount() {
 		// Auto initialize all the things!
 		M.AutoInit();
 	}
 
 	render() {
-		return <h1> Profile</h1>;
+		return <h1> Board</h1>;
 	}
 }
 
-export default Profile;
+export default Board;
