@@ -2,7 +2,7 @@
 
       display: flex;
       justify-content: space-around;
-      align-items: center;
+     align-items: center;
       min-height: 10vh;
       background: dodgerblue;
       color: white;
@@ -13,4 +13,16 @@
 .navlink{
       color: white;
       font-size: x-large;
+}
+
+.navHeader{
+      font-size: xx-large;
+      font-weight: bold;
+      margin-left: 35px;
+}
+
+body{
+
+      padding-left: 60px;
+      padding-right: 60px;
 }

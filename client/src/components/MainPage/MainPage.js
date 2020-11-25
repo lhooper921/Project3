@@ -4,13 +4,13 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 // Import Materialize
 import M from 'materialize-css';
 
-import Home from './Home';
+import Home from '../Home/Home';
 import NavBar from './NavBar';
-import Profile from './Profile';
-import Schedule from './Schedule/Schedule';
-import TimeOff from './TimeOff';
-import Board from './Board';
-import Footer from './Footer';
+import Profile from '../Profile/Profile';
+import Schedule from '../Schedule/Schedule';
+import TimeOff from '../TimeOff/TimeOff';
+import Board from '../Board/Board';
+import Footer from '../Footer/Footer';
 
 class MainPage extends Component {
 	componentDidMount() {
@@ -32,7 +32,7 @@ class MainPage extends Component {
 					</Switch>
 				</Router>
 
-				<Footer />
+				{/* <Footer /> */}
 			</div>
 		);
 	}

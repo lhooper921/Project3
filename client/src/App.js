@@ -1,15 +1,13 @@
-import React from "react";
-// import NavBar from "./components/NavBar";
 import React from 'react';
-
 import 'materialize-css/dist/css/materialize.min.css';
-import RegistrationForm from "./components/RegistrationForm";
+import 'bootstrap/dist/css/bootstrap.css';
 
-import MainPage from './components/MainPage';
+import RegistrationForm from './components/RegistrationForm';
+import MainPage from './components/MainPage/MainPage';
 
 function App() {
-  return <RegistrationForm />;
 	return <MainPage />;
+	return <RegistrationForm />;
 }
 
 export default App;
