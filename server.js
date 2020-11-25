@@ -1,34 +1,72 @@
 const express = require("express");
 const path = require("path");
-// const logger = require("morgan");
-// const mongoose = require("mongoose");
-// const compression = require("compression");
-const PORT = process.env.PORT || 3001;
+const mongoose = require("mongoose");
+const cors = require("cors");
+const passport = require("passport");
+const passportlocal = require("passport-local").Strategy;
+const cookieParser = require("cookie-parser");
+const bcrypt = require("bcryptjs");
+const session = require("express-session");
+const bodyParser = require("body-parser");
+const User = require("./models/user");
+// const { urlencoded } = require("body-parser");
+
+// Set up express
 const app = express();
 
-// Define middleware here
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
+// Set up Mongoose
+mongoose.connect("mongodb+srv://analuna:admin@cluster0.pevcu.mongodb.net/users?retryWrites=true&w=majority",
+{
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+},
+  () => {
+    console.log("Mongoose is connected")
+  });
 
-// app.use(logger("dev"));
+//Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+  cors({
+  origin: "http://localhost:3000", //<--- location of the react app
+  credentials: true,
+}))
 
-// app.use(compression());
+app.use(session({
+  secret: "secretecode",
+  resave: true,
+  saveUninitialized: true,
+}));
 
-// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/...", 
-//   {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useCreateIndex: true,
-//     useFindAndModify: false
-// });
+app.use(cookieParser("secretecode"));
 
-// Define API routes here
-// // routes
-// app.use(require("./routes/api.js"));
+// Routes
+app.post("/login", (req, res) => {
+  console.log(req.body);
+});
+
+app.post("/register", (req, res) => {
+  console.log(req.body);
+  User.findOne(req.body.username), async (err, doc) => {
+    if (err) throw err;
+    if (doc) res.send("User Already Exists");
+    if (!doc) {
+      const newUser = new User({
+        username: req.body.username,
+        password: req.body, password,
+      });
+      await newUser.save();
+    }
+    res.send("User Created!")
+  }
+});
+
+app.get("/user", (req, res) => {
+  console.log(req.body);
+});
+
+const PORT = process.env.PORT || 3001;
 
 // Send every other request to the React app
 // Define any API routes before this runs
