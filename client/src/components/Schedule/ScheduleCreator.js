@@ -10,7 +10,6 @@ import Paper from '@material-ui/core/Paper';
 import "./Schedule.css";
 import { format, compareAsc } from 'date-fns';
 import startOfWeek from 'date-fns/startOfWeek';
-import ScheduleCreator from './ScheduleCreator'
 
 
 
@@ -29,16 +28,16 @@ const useStyles = makeStyles({
 function createData(name, mondayStart, mondayEnd, tuesdayStart, tuesdayEnd, wednesdayStart, wednesdayEnd, thursdayStart, thursdayEnd, fridayStart, fridayEnd, saturdayStart, saturdayEnd, sundayStart, sundayEnd) {
   return { name, mondayStart, mondayEnd, tuesdayStart, tuesdayEnd, wednesdayStart, wednesdayEnd, thursdayStart, thursdayEnd, fridayStart, fridayEnd, saturdayStart, saturdayEnd, sundayStart, sundayEnd};
 }
-
+const time =  <input type="time" id="appt" name="appt"></input>
 const rows = [
-  createData("Ben", "8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am" ,"5:00pm", "8:00am","5:00pm", "Off", "Off", "Off", "Off"),
-  createData("Henry","8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am" ,"5:00pm", "8:00am","5:00pm", "Off", "Off", "Off", "Off"),
-  createData("Marcus","8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am" ,"5:00pm", "8:00am","5:00pm", "Off", "Off", "Off", "Off"),
-  createData("Buddy", "8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am" ,"5:00pm", "8:00am","5:00pm", "Off", "Off", "Off", "Off"),
-  createData("Scarlet","8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am" ,"5:00pm", "8:00am","5:00pm", "Off", "Off", "Off", "Off"),
+  createData("Ben", time, time, time, time, time, time, time , time, time, time, time, time, time, time),
+  createData("Henry",time, time, time, time, time, time, time , time, time, time, time, time, time, time),
+  createData("Marcus",time, time, time, time, time, time, time , time, time, time, time, time, time, time),
+  createData("Buddy", time, time, time, time, time, time, time , time, time, time, time, time, time, time),
+  createData("Scarlet",time, time, time, time, time, time, time , time, time, time, time, time, time, time),
 ];
 
-export default function BasicTable() {
+export default function ScheduleCreator() {
   const classes = useStyles();
 const date = new Date();
 
@@ -51,7 +50,7 @@ const weekOneStart = startOfWeek(todaysDate);
 
 {/* Select Week 1 or Week 2 */}
       <div class="row">
-   <h1> Department Schedule </h1>
+   <h1> Department Schedule Creator</h1>
    <h4> Today's Date: {todaysDate}</h4>
            
 
@@ -161,10 +160,18 @@ const weekOneStart = startOfWeek(todaysDate);
       </div>
 
 
-<ScheduleCreator />
+
      
     </div>
 
   );
 }
+
+
+
+
+
+
+
+
 
