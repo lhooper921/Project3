@@ -42,16 +42,18 @@ export default function ScheduleCreator() {
 const date = new Date();
 
 const todaysDate = format(date, 'MM.dd.yyyy');
-const weekOneStart = startOfWeek(todaysDate);
+
   return (
     <div>
 
  
 
 {/* Select Week 1 or Week 2 */}
-      <div class="row">
-   <h1> Department Schedule Creator</h1>
+<div class="row">
+        <div class ="col s12">
+   <h1> Department Schedule Editor ---Manager page </h1>
    <h4> Today's Date: {todaysDate}</h4>
+   </div> 
            
 
      <ul class="collapsible">

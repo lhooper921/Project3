@@ -26,28 +26,33 @@ class NavBar extends Component {
 
 								<ul id="nav-mobile" className="right hide-on-med-and-down">
 									<li>
-										<Link to="/" className="navlink">
+										<Link to="/MainPage/Home" className="navlink">
 											Home
 										</Link>
 									</li>
 									<li>
-										<Link to="/Board" className="navlink">
+										<Link to="/MainPage/Board" className="navlink">
 											Board
 										</Link>
 									</li>
 									<li>
-										<Link to="/Schedule" className="navlink">
+										<Link to="/MainPage/Schedule" className="navlink">
 											Schedule
 										</Link>
 									</li>
 									<li>
-										<Link to="/TimeOff" className="navlink">
+										<Link to="/MainPage/TimeOff" className="navlink">
 											Time Off
 										</Link>
 									</li>
 									<li>
-										<Link to="/Profile" className="navlink">
+										<Link to="/MainPage/Profile" className="navlink">
 											Personal Info
+										</Link>
+									</li>
+									<li>
+										<Link to="/" className="navlink">
+											Signout
 										</Link>
 									</li>
 								</ul>

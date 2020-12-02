@@ -38,11 +38,13 @@ app.use(
     credentials: true,
   }))
 
-app.use(session({
-  secret: "secretecode",
-  resave: true,
-  saveUninitialized: true,
-}));
+app.use(
+	session({
+		secret: 'secretecode',
+		resave: true,
+		saveUninitialized: true
+	})
+);
 
 app.use(cookieParser("secretecode"));
 app.use(passport.initialize());
@@ -132,10 +134,10 @@ const PORT = process.env.PORT || 3001;
 
 // Send every other request to the React app
 // Define any API routes before this runs
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname, './client/build/index.html'));
 });
 
 app.listen(PORT, () => {
-  console.log(`🌎 ==> API server now on port ${PORT}!`);
+	console.log(`🌎 ==> API server now on port ${PORT}!`);
 });
