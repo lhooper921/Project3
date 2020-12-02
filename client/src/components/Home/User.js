@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-export default function User() {
+export default function User(props) {
 	const classes = useStyles();
 
 	return (
@@ -35,16 +35,16 @@ export default function User() {
 					<div className={classes.demo}>
 						<List>
 							<ListItem>
-								<ListItemText primary="ID:" secondary="0000" />
+								<ListItemText primary="ID:" secondary={props.xid} />
 							</ListItem>
 							<ListItem>
-								<ListItemText primary="Name:" secondary="Aldo Carrillo" />
+								<ListItemText primary="Name:" secondary={props.name} />
 							</ListItem>
 							<ListItem>
-								<ListItemText primary="Department:" secondary="Sales" />
+								<ListItemText primary="Department:" secondary={props.department} />
 							</ListItem>
 							<ListItem>
-								<ListItemText primary="Position:" secondary="Sales Associate" />
+								<ListItemText primary="Position:" secondary={props.position} />
 							</ListItem>
 						</List>
 					</div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 // Import Materialize
 import M from 'materialize-css';
@@ -11,6 +11,7 @@ import Schedule from '../Schedule/Schedule';
 import TimeOff from '../TimeOff/TimeOff';
 import Board from '../Board/Board';
 import Footer from '../Footer/Footer';
+import LogIn from '../LogIn/LogIn';
 
 class MainPage extends Component {
 	componentDidMount() {
@@ -21,16 +22,17 @@ class MainPage extends Component {
 	render() {
 		return (
 			<div>
-				<Router>
+				<BrowserRouter>
 					<NavBar />
 					<Switch>
-						<Route path="/" exact component={Home} />
-						<Route path="/Profile" component={Profile} />
-						<Route path="/Schedule" component={Schedule} />
-						<Route path="/TimeOff" component={TimeOff} />
-						<Route path="/Board" component={Board} />
+						<Route path="/MainPage/Home" component={Home} />
+						<Route path="/MainPage/Profile" component={Profile} />
+						<Route path="/MainPage/Schedule" component={Schedule} />
+						<Route path="/MainPage/TimeOff" component={TimeOff} />
+						<Route path="/MainPage/Board" component={Board} />
+						{/* <Route path="/" exact component={LogIn} /> */}
 					</Switch>
-				</Router>
+				</BrowserRouter>
 
 				{/* <Footer /> */}
 			</div>
