@@ -7,9 +7,9 @@ import MainPage from './components/MainPage/MainPage';
 import LogIn from './components/LogIn/LogIn';
 
 function App() {
+	return <RegistrationForm />;
 	return <LogIn />;
 	return <MainPage />;
-	return <RegistrationForm />;
 }
 
 export default App;
