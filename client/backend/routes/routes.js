@@ -4,6 +4,7 @@ const router = express.Router();
 const UserModel = require('../models/UserModel');
 const MessageModel = require('../models/MessageModel');
 const AnnoucementModel = require('../models/AnnoucementModel');
+const RequestModel = require('../models/RequestModel');
 const bcrypt = require('bcrypt');
 
 router.post('/register', async (req, res) => {
@@ -63,7 +64,24 @@ router.post('/annoucement', async (req, res) => {
 			res.json(error);
 		});
 });
+router.post('/request', async (req, res) => {
+	const newRequest = new RequestModel({
+		name: req.body.name,
+		firstDate: req.body.firstDate,
+		lastDate: req.body.lastDate,
+		requestType: req.body.requestType,
+		comment: req.body.comment
+	});
 
+	newRequest
+		.save()
+		.then((data) => {
+			res.json(data);
+		})
+		.catch((error) => {
+			res.json(error);
+		});
+});
 // router.get('/user', (req, res) => {
 // 	console.log('User to Search', req.query.name);
 // 	UserModel.find({ firstName: req.query.name })
@@ -118,6 +136,16 @@ router.get('/annoucements', (req, res) => {
 	AnnoucementModel.find({})
 		.then((annoucements) => {
 			res.json(annoucements);
+		})
+		.catch((err) => {
+			res.status(404).json(err);
+		});
+});
+
+router.get('/requests', (req, res) => {
+	RequestModel.find({})
+		.then((requests) => {
+			res.json(requests);
 		})
 		.catch((err) => {
 			res.status(404).json(err);
