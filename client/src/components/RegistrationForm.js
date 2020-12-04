@@ -21,6 +21,7 @@ function RegistrationForm() {
 
     const [registerUserName, setRegisterUserName] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
+
     const [logInUserName, setlogInUserName] = useState("");
     const [logInPassword, setlogInPassword] = useState("");
 
@@ -55,13 +56,13 @@ function RegistrationForm() {
         }).then((res) => console.log(res));
     };
 
-    const getUser = () => {
-        axios({
-            method: "GET",
-            withCredentiasl: true,
-            url: "http://localhost:3001/user",
-        }).then((res) => console.log(res));
-    };
+    // const getUser = () => {
+    //     axios({
+    //         method: "GET",
+    //         withCredentiasl: true,
+    //         url: "http://localhost:3001/user",
+    //     }).then((res) => console.log(res));
+    // };
 
     return (
         <div className="Registration">
@@ -90,11 +91,10 @@ function RegistrationForm() {
                 <button onClick={login}>Submit</button>
             </div>
 
-            <div>
+            {/* <div>
                 <h1>Get User</h1>
                 <button onClick={getUser}>Submit</button>
-            </div>
-
+            </div> */}
         </div >
 
     )
