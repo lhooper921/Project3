@@ -4,12 +4,14 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import TimeOffElement from './TimeOffElement';
-
+import { format, compareAsc } from 'date-fns';
 import List from '@material-ui/core/List';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import User from '../Home/User';
+
+import DatePicker from "./DatePickerComponent";
 
 const useStyles = (theme) => ({
 	root: {
@@ -145,6 +147,7 @@ class TimeOff extends Component {
 
 
 	render() {
+
 		const { classes } = this.props;
 		return (
 			<div className={classes.root}>
@@ -160,14 +163,20 @@ class TimeOff extends Component {
 									value={this.state.newRequest.name}
 								/>
 								<TextField
+								align="right"
 									id="firstDate"
+									type="date"
+									InputLabelProps={{ shrink: true }}  
 									label="First Date"
 									onChange={this.changeFirstDate}
 									value={this.state.newRequest.firstDate}
 								/>
 								<TextField
+								align="right"
 									id="lastDate"
+									type="date"
 									label="Last Date"
+									InputLabelProps={{ shrink: true }}  
 									onChange={this.changeLastDate}
 									value={this.state.newRequest.lastDate}
 								/>

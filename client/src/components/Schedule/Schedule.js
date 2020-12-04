@@ -11,7 +11,7 @@ import "./Schedule.css";
 import { format, compareAsc } from 'date-fns';
 import Grid from '@material-ui/core/Grid';
 import startOfWeek from 'date-fns/startOfWeek';
-import ScheduleCreator from './ScheduleCreator'
+
 import company from '../Home/images/company.jpg';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
@@ -91,7 +91,7 @@ export default function BasicTable() {
 
  <Grid item xs={12}>
 <Paper className={classes.paper}>
-   <ScheduleCreator />
+ 
             
           <Accordion>
         <AccordionSummary
