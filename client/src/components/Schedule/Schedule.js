@@ -90,7 +90,9 @@ export default function BasicTable() {
 
 
  <Grid item xs={12}>
-            <Paper className={classes.paper}>
+<Paper className={classes.paper}>
+   <ScheduleCreator />
+            
           <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}

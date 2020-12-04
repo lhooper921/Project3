@@ -1,17 +1,21 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 
+import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import TimeOffElement from './TimeOffElement';
+
+import List from '@material-ui/core/List';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import axios from 'axios';
 import User from '../Home/User';
 
-import { FormControl, Paper, Grid, TextField, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, FormHelperText, Input, InputLabel, Avatar, MenuItem, Select } from '@material-ui/core';
-
-
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = (theme) => ({
 	root: {
-		flexGrow: 1,
-		marginLeft: '25px',
-		marginRight: '25px'
+		alignItems: 'center',
+		width: '100%',
+		backgroundColor: 'whitesmoke'
 	},
 	paper: {
 		padding: theme.spacing(2),
@@ -19,159 +23,185 @@ const useStyles = makeStyles((theme) => ({
 		color: theme.palette.text.secondary,
 		backgroundColor: 'lightgray'
 	},
-	textField: {
-		marginLeft: theme.spacing(1),
-		marginRight: theme.spacing(1),
-		width: '25ch',
-	},
-}));
+	texts: {
+		margin: 'auto',
+		width: '50%',
+		border: '3px solid teal',
+		padding: '30px'
+	}
+});
 
-function createData(name, avatar, firstDateOff, lastDateOff, requestReason, comments, requestStatus) {
-	return { name, avatar, firstDateOff, lastDateOff, requestReason, comments, requestStatus };
-}
+class TimeOff extends Component {
+	constructor() {
+		super();
+		this.state = {
+			requests: [],
+			newRequest: {
+                name:'',
+				firstDate: '',
+				lastDate: '',
+				requestType: '',
+				comment: ''
+			},
+		
+		};
 
-const rows = [
-	createData("Ben", <Avatar>BK</Avatar>, "8/11/2021", "8/19/2021", "Vacation", "BAHAMAS!", "Pending"),
-	createData("Henry", <Avatar>HZ</Avatar>, "1/11/2021", "1/11/2021", "Medical", "", "Pending"),
-	createData("Marcus", <Avatar>MP</Avatar>, "3/16/2021", "3/19/2021", "Vacation", "", "Pending"),
-	createData("Ben", <Avatar>BK</Avatar>, "2/11/2021", "2/13/2021", "Other", "Moving", "Pending"),
-	createData("Ben", <Avatar>BK</Avatar>, "8/11/2022", "8/19/2022", "Vacation", "", "Pending"),
-	createData("Ben", <Avatar>BK</Avatar>, "8/11/2023", "8/19/2023", "Vacation", "", "Pending"),
+		this.onSubmit = this.onSubmit.bind(this);
+        this.changeName = this.changeName.bind(this);
+        this.changeFirstDate = this.changeFirstDate.bind(this);
+		this.changeLastDate = this.changeLastDate.bind(this);
+		this.changeRequestType = this.changeRequestType.bind(this);
+        this.changeComment = this.changeComment.bind(this);
+	}
 
-];
+	componentDidMount() {
+		axios.get('http://localhost:4000/app/requests').then((response) => {
+			const requests = response.data.map((request) => (
+				<TimeOffElement name={request.name} firstDate={request.firstDate} lastDate={request.lastDate} requestType={request.requestType} comment={request.comment} key={request.id} />
+			));
 
-export default function TimeOff() {
-	const classes = useStyles();
-	const [requestReason, setRequestReason] = React.useState('');
-	const [open, setOpen] = React.useState(false);
-	const handleChange = (event) => {
-		setRequestReason(event.target.value);
+			this.setState({
+				requests: requests
+			});
+		});
+
+	
+	}
+
+	
+
+	changeName(event) {
+		this.setState({
+			newRequest: {
+				...this.state.newRequest,
+				name: event.target.value
+			}
+		});
+	}
+	changeFirstDate(event) {
+		this.setState({
+			newRequest: {
+				...this.state.newRequest,
+				firstDate: event.target.value
+			}
+		});
+    }
+	changeLastDate(event) {
+		this.setState({
+			newRequest: {
+				...this.state.newRequest,
+				lastDate: event.target.value
+			}
+		});
+	}
+	
+	changeRequestType(event) {
+		this.setState({
+			newRequest: {
+				...this.state.newRequest,
+				requestType: event.target.value
+			}
+		});
+    }
+    changeComment(event) {
+		this.setState({
+			newRequest: {
+				...this.state.newRequest,
+				comment: event.target.value
+			}
+		});
+	}
+	
+	onSubmit(event) {
+		event.preventDefault();
+
+	
+		const newRequest = {
+			name: this.state.newRequest.name,
+			firstDate: this.state.newRequest.firstDate,
+            lastDate: this.state.newRequest.lastDate,
+            requestType: this.state.newRequest.requestType,
+            comment: this.state.newRequest.comment
+            
+		};
+
+		axios
+		.post('http://localhost:4000/app/request', newRequest)
+		.then((response) => console.log('New Request:', response.data));
+
+		this.setState({
+			newRequest: {
+                name:'',
+				firstDate: '',
+				lastDate: '',
+				requestType: '',
+				comment: ''
+			}
+		});
+
+		this.componentDidMount();
+	}
 
 
-	};
-	return (
-		<div>
+
+	render() {
+		const { classes } = this.props;
+		return (
 			<div className={classes.root}>
 				<Grid container spacing={3}>
 					<Grid item xs={4}>
 						<Paper className={classes.paper}>
-							<h2>User</h2>
-							<User />
+							<h2>Time Off Requests</h2>
+							<form className={classes.root} noValidate autoComplete="off">
+								<TextField
+									id="name"
+									label="Name"
+									onChange={this.changeName}
+									value={this.state.newRequest.name}
+								/>
+								<TextField
+									id="firstDate"
+									label="First Date"
+									onChange={this.changeFirstDate}
+									value={this.state.newRequest.firstDate}
+								/>
+								<TextField
+									id="lastDate"
+									label="Last Date"
+									onChange={this.changeLastDate}
+									value={this.state.newRequest.lastDate}
+								/>
+									<TextField
+									id="requestType"
+									label="Request Type"
+									onChange={this.changeRequestType}
+									value={this.state.newRequest.requestType}
+								/>
+										<TextField
+									id="comment"
+									label="Comment"
+									onChange={this.changeComment}
+									value={this.state.newRequest.comment}
+								/>
+								<Button variant="contained" color="primary" onClick={this.onSubmit}>
+									Create
+								</Button>
+							</form>
 						</Paper>
 					</Grid>
 					<Grid item xs={8}>
-						<Paper className={classes.paper}>
-							<h2>Request Time Off</h2>
-							<Grid container spacing={6}>
+						<Paper className={classes.paper} elevation={3}>
+							
 
-
-								<Grid item xs={4}>
-									<Paper className={classes.paper}>	<FormControl>
-										<InputLabel htmlFor="fn-input">First Date Off</InputLabel>
-										<Input id="fn-input" aria-describedby="fn-helper-text" />
-										{/* <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText> */}
-									</FormControl></Paper>
-								</Grid>
-
-								<Grid item xs={4}>
-									<Paper className={classes.paper}>	<FormControl>
-										<InputLabel htmlFor="fn-input">Last Date Off</InputLabel>
-										<Input id="fn-input" aria-describedby="fn-helper-text" />
-										{/* <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText> */}
-									</FormControl></Paper>
-								</Grid>
-
-								<Grid item xs={4}>
-									<Paper className={classes.paper}> Request Type	<FormControl className={classes.formControl}>
-										<InputLabel id="demo-simple-select-label">Select</InputLabel>
-										<Select
-											labelId="demo-simple-select-label"
-											id="demo-simple-select"
-											value={requestReason}
-											onChange={handleChange}
-										>
-											<MenuItem value={10}>Vacation</MenuItem>
-											<MenuItem value={20}>Medical</MenuItem>
-											<MenuItem value={30}>Other (describe in comments)</MenuItem>
-										</Select>
-									</FormControl>
-									</Paper>
-								</Grid>
-
-								<Grid item xs={8}>
-									<Paper className={classes.paper}>	<FormControl>
-										<InputLabel htmlFor="fn-input">Comments</InputLabel>
-										<Input id="fn-input" aria-describedby="fn-helper-text" />
-										{/* <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText> */}
-									</FormControl></Paper>
-								</Grid>
-								<Grid item xs={4}>
-									<Paper className={classes.paper}>	
-									<Button variant="contained" color="primary">
-										Submit Request
-									</Button>
-									</Paper>
-								</Grid>
-							</Grid>
-
-
-
-
-						</Paper>
-					</Grid>
-
-
-					<Grid item xs={12}>
-						<Paper className={classes.paper}>
-							<h2>All Requests</h2>
-
-
-							<Typography>
-								<TableContainer component={Paper}>
-									<Table className={classes.table} aria-label="simple table">
-										<TableHead>
-											<TableRow><TableCell></TableCell>
-												<TableCell>Employee Name</TableCell>
-												<TableCell align="right">First Date Off </TableCell>
-												<TableCell align="right">Last Date Off</TableCell>
-												<TableCell align="right">Request Type</TableCell>
-												<TableCell align="right">Comments</TableCell>
-												<TableCell align="right">Status</TableCell>
-
-											</TableRow>
-										</TableHead>
-										<TableBody>
-											{rows.map((row) => (
-												<TableRow key={row.name}>
-													<TableCell component="th" scope="row">
-														{row.avatar}
-													</TableCell>
-													<TableCell component="th" scope="row">
-														{row.name}
-													</TableCell>
-
-													<TableCell align="right">{row.firstDateOff} </TableCell>
-													<TableCell align="right">{row.lastDateOff}</TableCell>
-													<TableCell align="right">{row.requestReason}</TableCell>
-													<TableCell align="right">{row.comments}</TableCell>
-													<TableCell align="right">{row.requestStatus}</TableCell>
-
-												</TableRow>
-											))}
-										</TableBody>
-									</Table>
-								</TableContainer>
-							</Typography>
-
-
-
+							<List className={classes.root}>{this.state.requests}</List>
 						</Paper>
 					</Grid>
 				</Grid>
 			</div>
-		</div >
-	);
+		);
+	}
 }
 
 
 
+export default withStyles(useStyles)(TimeOff);
