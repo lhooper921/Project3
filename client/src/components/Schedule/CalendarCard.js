@@ -36,7 +36,7 @@ export default function CalendarCard() {
        <Calendar />
       </CardContent>
       <CardActions>
-        <Button size="small">View My Schedule</Button>
+        <Button size="small">Request Time Off</Button>
       </CardActions>
     </Card>
   );

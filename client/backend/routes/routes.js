@@ -5,6 +5,7 @@ const UserModel = require('../models/UserModel');
 const MessageModel = require('../models/MessageModel');
 const AnnoucementModel = require('../models/AnnoucementModel');
 const RequestModel = require('../models/RequestModel');
+const ScheduleModel = require('../models/ScheduleModel');
 const bcrypt = require('bcrypt');
 
 router.post('/register', async (req, res) => {
@@ -82,6 +83,28 @@ router.post('/request', async (req, res) => {
 			res.json(error);
 		});
 });
+
+router.post('/schedule', async (req, res) => {
+	const newSchedule = new ScheduleModel({
+		date: req.body.date,
+		monday: req.body.monday,
+		tuesday: req.body.tuesday,
+		wednesday: req.body.wednesday,
+		thursday: req.body.thursday,
+		friday: req.body.friday,
+		saturday: req.body.saturday,
+		sunday: req.body.sunday,
+	});
+
+	newSchedule
+		.save()
+		.then((data) => {
+			res.json(data);
+		})
+		.catch((error) => {
+			res.json(error);
+		});
+});
 // router.get('/user', (req, res) => {
 // 	console.log('User to Search', req.query.name);
 // 	UserModel.find({ firstName: req.query.name })
@@ -151,5 +174,18 @@ router.get('/requests', (req, res) => {
 			res.status(404).json(err);
 		});
 });
+
+router.get('/schedules', (req, res) => {
+	ScheduleModel.find({})
+		.then((schedules) => {
+			res.json(schedules);
+		})
+		.catch((err) => {
+			res.status(404).json(err);
+		});
+});
+
+
+
 
 module.exports = router;

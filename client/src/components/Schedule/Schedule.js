@@ -1,16 +1,18 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import { format, compareAsc } from 'date-fns';
+import { List, TextField, Button, Paper, Grid, MenuItem, FormControl, Select, InputLabel, } from '@material-ui/core';
+import axios from 'axios';
+import User from '../Home/User';
+
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import "./Schedule.css";
-import { format, compareAsc } from 'date-fns';
-import Grid from '@material-ui/core/Grid';
-import startOfWeek from 'date-fns/startOfWeek';
+
+
 
 import company from '../Home/images/company.jpg';
 import ScheduleIcon from '@material-ui/icons/Schedule';
@@ -22,20 +24,17 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
+import CheckBox from './CheckBox';
+import CreateIcon from '@material-ui/icons/Create';
+
+import CalendarCard from './CalendarCard'
 
 
-
-
-
-// import {filter_drama} from '@material-ui/icons';
-
-// import DatePicker from "./DatePickerComponent";
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = (theme) => ({
   root: {
-    flexGrow: 1,
-    marginLeft: '25px',
-    marginRight: '25px'
+    alignItems: 'center',
+    width: '100%',
+    backgroundColor: 'whitesmoke'
   },
   paper: {
     padding: theme.spacing(2),
@@ -43,189 +42,265 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
     backgroundColor: 'lightgray'
   },
-  table: {
-    minWidth: 650,
+  texts: {
+    margin: 'auto',
+    width: '50%',
+    border: '3px solid teal',
+    padding: '30px'
   },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    // fontWeight: theme.typography.fontWeightRegular,
-    textAlign: 'center',
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
   },
-}));
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
 
-function createData(name, mondayStart, mondayEnd, tuesdayStart, tuesdayEnd, wednesdayStart, wednesdayEnd, thursdayStart, thursdayEnd, fridayStart, fridayEnd, saturdayStart, saturdayEnd, sundayStart, sundayEnd) {
-  return { name, mondayStart, mondayEnd, tuesdayStart, tuesdayEnd, wednesdayStart, wednesdayEnd, thursdayStart, thursdayEnd, fridayStart, fridayEnd, saturdayStart, saturdayEnd, sundayStart, sundayEnd };
-}
+});
 
-const rows = [
-  createData("Ben", "8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am", "5:00pm", "Off", "Off", "Off", "Off"),
-  createData("Henry", "8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am", "5:00pm", "Off", "Off", "Off", "Off"),
-  createData("Marcus", "8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am", "5:00pm", "Off", "Off", "Off", "Off"),
-  createData("Buddy", "8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am", "5:00pm", "Off", "Off", "Off", "Off"),
-  createData("Scarlet", "8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am", "5:00pm", "8:00am", "5:00pm", "Off", "Off", "Off", "Off"),
-];
+class Schedule extends Component {
+  constructor() {
+    super();
+    // this.state = {
+    //   schedules: [],
+    //   newSchedule: {
 
-export default function BasicTable() {
-  const classes = useStyles();
-  const date = new Date();
+    //     date: '',
+    //     monday: '',
+    //     tuesday: '',
+    //     wednesday: '',
+    //     thursday: '',
+    //     friday: '',
+    //     saturday: '',
+    //     sunday: '',
+    //   },
 
-  const todaysDate = format(date, 'MM.dd.yyyy');
-
-  return (
-    <div>
-
-      <div className={classes.root}>
-        <Grid container spacing={3}>
-          <Grid item xs={3}>
-            <Paper className={classes.paper}>
-              <img src={company} alt="Logo" width="220px" />
-            </Paper>
-          </Grid>
-          <Grid item xs={9}>
-            <Paper className={classes.paper}>
-              <h1> Department Schedule <ScheduleIcon fontSize= "large"/></h1>
-              <h4> Today's Date: {todaysDate}</h4>
-            </Paper>
-          </Grid>
+    // };
 
 
- <Grid item xs={12}>
-<Paper className={classes.paper}>
- 
+  }
+
+  render() {
+    const date = new Date();
+    function createData(date, monday, tuesday, wednesday, thursday, friday, saturday, sunday) {
+      return { date, monday, tuesday, wednesday, thursday, friday, saturday, sunday };
+    }
+
+    const rows = [
+      createData("01/01/2021", "On", "On", "On", "On", "On", "Off", "Off"),
+
+    ];
+
+
+    const todaysDate = format(date, 'MM.dd.yyyy');
+    const { classes } = this.props;
+    return (
+      <div>
+        <div className={classes.root}>
+          <Grid container spacing={3}>
+
+            <Grid item xs={3}>
+              <Paper className={classes.paper}>
+                {/* <img src={company} alt="Logo" width="220px" /> */}
+                <CalendarCard />
+              </Paper>
+            </Grid>
+
+            <Grid item xs={9}>
+              <Paper>
+                <h1> User Schedule <ScheduleIcon fontSize="large" /></h1>
+                <h4> Today's Date: {todaysDate}</h4>
+              </Paper>
             
-          <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}>  <h2>< CalendarTodayIcon fontSize= "large"/> Week of: ______ - _________   </h2></Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-          <TableContainer component={Paper}>
-                      <Table className={classes.table} aria-label="simple table">
-                        <TableHead>
-                          <TableRow>
-                            <TableCell>Employee Name</TableCell>
-                            <TableCell align="right">Monday Start </TableCell>
-                            <TableCell align="right">Monday End</TableCell>
-                            <TableCell align="right">Tuesday Start</TableCell>
-                            <TableCell align="right">Tuesday End</TableCell>
-                            <TableCell align="right">Wednesday Start</TableCell>
-                            <TableCell align="right">Wednesday End</TableCell>
-                            <TableCell align="right">Thursday Start</TableCell>
-                            <TableCell align="right">Thursday End</TableCell>
-                            <TableCell align="right">Friday Start</TableCell>
-                            <TableCell align="right">Friday End</TableCell>
-                            <TableCell align="right">Saturday Start</TableCell>
-                            <TableCell align="right">Saturday End</TableCell>
-                            <TableCell align="right">Sunday Start</TableCell>
-                            <TableCell align="right">Sunday End</TableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {rows.map((row) => (
-                            <TableRow key={row.name}>
-                              <TableCell component="th" scope="row">
-                                {row.name}
-                              </TableCell>
-                              <TableCell align="right"> {row.mondayStart}</TableCell>
-                              <TableCell align="right">{row.mondayEnd} </TableCell>
-                              <TableCell align="right">{row.tuesdayStart}</TableCell>
-                              <TableCell align="right">{row.tuesdayEnd}</TableCell>
-                              <TableCell align="right">{row.wednesdayStart}</TableCell>
-                              <TableCell align="right">{row.wednesdayEnd}</TableCell>
-                              <TableCell align="right">{row.thursdayStart}</TableCell>
-                              <TableCell align="right">{row.thursdayEnd}</TableCell>
-                              <TableCell align="right">{row.fridayStart}</TableCell>
-                              <TableCell align="right">{row.fridayEnd}</TableCell>
-                              <TableCell align="right">{row.saturdayStart}</TableCell>
-                              <TableCell align="right">{row.saturdayEnd}</TableCell>
-                              <TableCell align="right">{row.sundayStart}</TableCell>
-                              <TableCell align="right">{row.sundayEnd}</TableCell>
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}>  <h2>< CalendarTodayIcon fontSize= "large"/> Week of: ______ - _________   </h2></Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-          <TableContainer component={Paper}>
-                      <Table className={classes.table} aria-label="simple table">
-                        <TableHead>
-                          <TableRow>
-                            <TableCell>Employee Name</TableCell>
-                            <TableCell align="right">Monday Start </TableCell>
-                            <TableCell align="right">Monday End</TableCell>
-                            <TableCell align="right">Tuesday Start</TableCell>
-                            <TableCell align="right">Tuesday End</TableCell>
-                            <TableCell align="right">Wednesday Start</TableCell>
-                            <TableCell align="right">Wednesday End</TableCell>
-                            <TableCell align="right">Thursday Start</TableCell>
-                            <TableCell align="right">Thursday End</TableCell>
-                            <TableCell align="right">Friday Start</TableCell>
-                            <TableCell align="right">Friday End</TableCell>
-                            <TableCell align="right">Saturday Start</TableCell>
-                            <TableCell align="right">Saturday End</TableCell>
-                            <TableCell align="right">Sunday Start</TableCell>
-                            <TableCell align="right">Sunday End</TableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {rows.map((row) => (
-                            <TableRow key={row.name}>
-                              <TableCell component="th" scope="row">
-                                {row.name}
-                              </TableCell>
-                              <TableCell align="right"> {row.mondayStart}</TableCell>
-                              <TableCell align="right">{row.mondayEnd} </TableCell>
-                              <TableCell align="right">{row.tuesdayStart}</TableCell>
-                              <TableCell align="right">{row.tuesdayEnd}</TableCell>
-                              <TableCell align="right">{row.wednesdayStart}</TableCell>
-                              <TableCell align="right">{row.wednesdayEnd}</TableCell>
-                              <TableCell align="right">{row.thursdayStart}</TableCell>
-                              <TableCell align="right">{row.thursdayEnd}</TableCell>
-                              <TableCell align="right">{row.fridayStart}</TableCell>
-                              <TableCell align="right">{row.fridayEnd}</TableCell>
-                              <TableCell align="right">{row.saturdayStart}</TableCell>
-                              <TableCell align="right">{row.saturdayEnd}</TableCell>
-                              <TableCell align="right">{row.sundayStart}</TableCell>
-                              <TableCell align="right">{row.sundayEnd}</TableCell>
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-
-
-
-
-
-
-         
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <h2>Current Week</h2>
+              </Paper>
+              <TableContainer component={Paper}>
+                <Table className={classes.table} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Schedule Date</TableCell>
+                      <TableCell align="left">Monday</TableCell>
+                      <TableCell align="left">Tuesday</TableCell>
+                      <TableCell align="left">Wednesday</TableCell>
+                      <TableCell align="left">Thursday</TableCell>
+                      <TableCell align="left">Friday</TableCell>
+                      <TableCell align="left">Saturday</TableCell>
+                      <TableCell align="left">Sunday</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <TableRow key={row.name}>
+                        <TableCell align="left">{row.date}</TableCell>
+                        <TableCell align="left">{row.monday}</TableCell>
+                        <TableCell align="left">{row.tuesday}</TableCell>
+                        <TableCell align="left">{row.wednesday}</TableCell>
+                        <TableCell align="left">{row.thursday}</TableCell>
+                        <TableCell align="left">{row.friday}</TableCell>
+                        <TableCell align="left">{row.saturday}</TableCell>
+                        <TableCell align="left">{row.sunday}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Grid>
             
-            </Paper>
+
+            
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <h2>Next Week</h2>
+              </Paper>
+              <TableContainer component={Paper}>
+
+                <Table className={classes.table} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Schedule Date</TableCell>
+                      <TableCell align="left">Monday</TableCell>
+                      <TableCell align="left">Tuesday</TableCell>
+                      <TableCell align="left">Wednesday</TableCell>
+                      <TableCell align="left">Thursday</TableCell>
+                      <TableCell align="left">Friday</TableCell>
+                      <TableCell align="left">Saturday</TableCell>
+                      <TableCell align="left">Sunday</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <TableRow key={row.date}>
+
+                        <TableCell align="left">{row.date}</TableCell>
+                        <TableCell align="left">{row.monday}</TableCell>
+                        <TableCell align="left">{row.tuesday}</TableCell>
+                        <TableCell align="left">{row.wednesday}</TableCell>
+                        <TableCell align="left">{row.thursday}</TableCell>
+                        <TableCell align="left">{row.friday}</TableCell>
+                        <TableCell align="left">{row.saturday}</TableCell>
+                        <TableCell align="left">{row.sunday}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Grid>
+</Grid>
+
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+
+
+
+                <h2 > Create New Schedule</h2>
+
+
+
+
+
+
+
+
+
+                <TableContainer component={Paper}>
+
+                  <Table className={classes.table} aria-label="simple table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Date</TableCell>
+                        <TableCell align="left">Monday</TableCell>
+                        <TableCell align="left">Tuesday</TableCell>
+                        <TableCell align="left">Wednesday</TableCell>
+                        <TableCell align="left">Thursday</TableCell>
+                        <TableCell align="left">Friday</TableCell>
+                        <TableCell align="left">Saturday</TableCell>
+                        <TableCell align="left">Sunday</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+
+                      <TableRow>
+
+                        <TableCell align="left">	<TextField
+                          align="right"
+                          id="date"
+                          type="date"
+                          InputLabelProps={{ shrink: true }}
+                          label="Select Date"
+                        // onChange={this.changeDate}
+                        // value={this.state.newSchedule.date}
+                        /></TableCell>
+                        <TableCell align="left"><CheckBox /></TableCell>
+                        <TableCell align="left"><CheckBox /></TableCell>
+                        <TableCell align="left"><CheckBox /></TableCell>
+                        <TableCell align="left"><CheckBox /></TableCell>
+                        <TableCell align="left"><CheckBox /></TableCell>
+                        <TableCell align="left"><CheckBox /></TableCell>
+                        <TableCell align="left"><CheckBox /></TableCell>
+                      </TableRow>
+
+
+                    </TableBody>
+
+                  </Table>
+
+                </TableContainer>
+
+                <Button alignItems="right" variant="contained" color="primary">
+                  Submit
+</Button>
+
+              </Paper>
+            </Grid>
+
+
+
+
           </Grid>
-        </Grid>
+        </div>
       </div>
-    </div>
 
-  );
+
+    );
+  }
 }
+
+
+
+export default withStyles(useStyles)(Schedule);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
