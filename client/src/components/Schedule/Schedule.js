@@ -1,12 +1,10 @@
 
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-
 import ScheduleElement from './ScheduleElement';
-import { format, compareAsc, getISOWeek, add, addWeeks, startOfWeek, endOfWeek } from 'date-fns';
+import { format, getISOWeek, addWeeks, startOfWeek, endOfWeek } from 'date-fns';
 import { List, TextField, Button, Paper, Grid, MenuItem, FormControl, Select, InputLabel, FormHelperText, } from '@material-ui/core';
 import axios from 'axios';
-
 import CreateIcon from '@material-ui/icons/Create';
 
 
