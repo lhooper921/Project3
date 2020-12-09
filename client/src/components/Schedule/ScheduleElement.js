@@ -29,39 +29,13 @@ class ScheduleElement extends Component {
 	state = {};
 	render() {
 
-		const date = new Date();
-		const todaysDate = format(date, 'MM.dd.yyyy');
-		const { classes } = this.props;
-		// ===========Current Week
-		// Start of Week
-		var resultStartofWeek = startOfWeek(new Date(todaysDate), { weekStartsOn: 1 })
-		const startOfCurrentWeek = format(resultStartofWeek, 'EEEE.MM.dd.yyyy');
-		// End of Week
-		var resultEndOfCurrentWeek = endOfWeek(new Date(todaysDate), { weekStartsOn: 1 })
-		const endOfCurrentWeek = format(resultEndOfCurrentWeek, 'EEEE.MM.dd.yyyy');
-		// Week number /53
-		var weekNum1 = getISOWeek(new Date(todaysDate))
-
-		// ==============Next Week
-		// Add week to get Next Week
-		var resultWeek = addWeeks(new Date(todaysDate), 1)
-		const nextWeek = format(resultWeek, 'MM.dd.yyyy');
-		// Start of Week
-		var resultStartofWeek2 = startOfWeek(new Date(nextWeek), { weekStartsOn: 1 })
-		const startOfNextWeek = format(resultStartofWeek2, 'EEEE.MM.dd.yyyy');
-		// End of Week
-		var resultendOfNextWeek = endOfWeek(new Date(nextWeek), { weekStartsOn: 1 })
-		const endOfNextWeek = format(resultendOfNextWeek, 'EEEE.MM.dd.yyyy');
-
-
-
-		var weekNum2 = getISOWeek(new Date(resultWeek))
+		
 		return (
 			<div>
 				<ListItem alignItems="flex-start">
 
 					<ListItemText
-						primary={this.props.weekNumber}
+						primary= {this.props.weekNumber}
 						secondary={
 							<React.Fragment>
 								<TableContainer component={Paper}>

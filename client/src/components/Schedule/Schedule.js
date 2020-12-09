@@ -44,6 +44,8 @@ class Schedule extends Component {
     super();
     this.state = {
       schedules: [],
+      schedulesNext: [],
+      auxSchedule: [],
       newSchedule: {
         userId: '',
         weekNumber: '',
@@ -55,6 +57,7 @@ class Schedule extends Component {
         saturday: '',
         sunday: '',
       },
+    
 
     };
 
@@ -72,8 +75,36 @@ class Schedule extends Component {
   }
 
   componentDidMount() {
+    const date = new Date();
+    const todaysDate = format(date, 'MM.dd.yyyy');
+    const { classes } = this.props;
+    // ===========Current Week
+    // Start of Week
+    var resultStartofWeek = startOfWeek(new Date(todaysDate), { weekStartsOn: 1 })
+    const startOfCurrentWeek = format(resultStartofWeek, 'EEEE.MM.dd.yyyy');
+    // End of Week
+    var resultEndOfCurrentWeek = endOfWeek(new Date(todaysDate), { weekStartsOn: 1 })
+    const endOfCurrentWeek = format(resultEndOfCurrentWeek, 'EEEE.MM.dd.yyyy');
+    // Week number /53
+    var weekNum1 = getISOWeek(new Date(todaysDate))
+
+    // ==============Next Week
+    // Add week to get Next Week
+    var resultWeek = addWeeks(new Date(todaysDate), 1)
+    const nextWeek = format(resultWeek, 'MM.dd.yyyy');
+    // Start of Week
+    var resultStartofWeek2 = startOfWeek(new Date(nextWeek), { weekStartsOn: 1 })
+    const startOfNextWeek = format(resultStartofWeek2, 'EEEE.MM.dd.yyyy');
+    // End of Week
+    var resultendOfNextWeek = endOfWeek(new Date(nextWeek), { weekStartsOn: 1 })
+    const endOfNextWeek = format(resultendOfNextWeek, 'EEEE.MM.dd.yyyy');
+
+  var weekNum2 = getISOWeek(new Date(resultWeek))
+    this.setState({weekNumber:weekNum2})
+    
     axios.get('http://localhost:4000/app/schedules').then((response) => {
       const schedules = response.data.map((schedule) => (
+
         <ScheduleElement
           userId={schedule.userId}
           weekNumber={schedule.weekNumber}
@@ -88,10 +119,54 @@ class Schedule extends Component {
       ));
 
       this.setState({
-        schedules: schedules
+       
+        schedules: schedules[schedules.length-2],
+        schedulesNext: schedules[schedules.length-1]
       });
     });
-
+//    axios.get('http://localhost:4000/app/schedules').then((response) => {
+//       response.data.map((schedule) => {  
+//         const newSchedule = {
+//     userId:schedule.userId,
+//           weekNumber:schedule.weekNumber,
+//           monday:schedule.monday,
+//           tuesday:schedule.tuesday,
+//           wednesday:schedule.wednesday,
+//           thursday:schedule.thursday,
+//           friday:schedule.friday,
+//           saturday:schedule.saturday,
+//           sunday:schedule.sunday,
+//   }
+//      if (weekNum2 === schedule.weekNumber){
+//       this.state.schedulesNext.push(newSchedule);
+//      }else {   this.state.schedules.push(newSchedule);
+    
+//   }
+  
+// }
+//       );
+// const tempSchedule = this.state.auxSchedule.map((schedule) => (
+//      <ScheduleElement
+//           userId={schedule.userId}
+//           weekNumber={schedule.weekNumber}
+//           monday={schedule.monday}
+//           tuesday={schedule.tuesday}
+//           wednesday={schedule.wednesday}
+//           thursday={schedule.thursday}
+//           friday={schedule.friday}
+//           saturday={schedule.saturday}
+//           sunday={schedule.sunday}
+//           key={schedule.id} />
+// ));
+     
+     
+// console.log(tempSchedule)
+//       this.setState({
+       
+//         schedules: schedules[schedules.length-2],
+//         schedulesNext: tempSchedule
+//       });
+//     });
 
   }
   changeuserId(event) {
@@ -176,7 +251,7 @@ class Schedule extends Component {
 
     const newSchedule = {
       userId: this.state.newSchedule.userId,
-      weekNumber: this.state.newSchedule.weekNumber,
+      weekNumber:  this.state.weekNumber,
       monday: this.state.newSchedule.monday,
       tuesday: this.state.newSchedule.tuesday,
       wednesday: this.state.newSchedule.wednesday,
@@ -210,7 +285,9 @@ class Schedule extends Component {
 
 
 
+
   render() {
+  
 
     const date = new Date();
     const todaysDate = format(date, 'MM.dd.yyyy');
@@ -236,9 +313,7 @@ class Schedule extends Component {
     var resultendOfNextWeek = endOfWeek(new Date(nextWeek), { weekStartsOn: 1 })
     const endOfNextWeek = format(resultendOfNextWeek, 'EEEE.MM.dd.yyyy');
 
-
-
-    var weekNum2 = getISOWeek(new Date(resultWeek))
+  var weekNum2 = getISOWeek(new Date(resultWeek))
 
 
     return (
@@ -263,13 +338,21 @@ class Schedule extends Component {
                   value={this.state.newSchedule.userId}
 
                 />
-                <TextField
-                  id="weekNumber"
-                  label='Week Number'
-                  type="number"
-                  onChange={this.changeweekNumber}
-                  value={this.state.newSchedule.weekNumber}
-                />
+            
+                  {/* <FormControl className={classes.formControl}>
+                  <InputLabel id="demo-simple-select-label">Week Number</InputLabel>
+                  <Select
+                     id="weekNumber"
+                     label='Week Number'
+                     type="text"
+                     onChange={this.changeweekNumber}
+                     value={this.state.newSchedule.weekNumber}
+                  >
+                    <MenuItem value={weekNum2}>Next Week: #{weekNum2}</MenuItem>
+                  
+                  </Select>
+                  <FormHelperText>Select Week Number</FormHelperText>
+                </FormControl> */}
 
 
 
@@ -441,7 +524,7 @@ class Schedule extends Component {
               <h2>Next Week  </h2>
               <h4>{startOfNextWeek} - {endOfNextWeek}</h4>
               <p>{weekNum2}/53</p>
-              <List className={classes.root}>{this.state.schedules}</List>
+              <List className={classes.root}>{this.state.schedulesNext}</List>
             </Paper>
           </Grid>
         </Grid>
