@@ -1,10 +1,14 @@
 const mongoose = require('mongoose');
 
 const ScheduleSchema = new mongoose.Schema({
-    date: {
+	userId:{
+		type: String,
+        required: true
+	},
+    weekNumber: {
         type: String,
         required: true
-    },
+	},
 	monday: {
 		type: String,
 		required: true

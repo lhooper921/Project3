@@ -1,33 +1,14 @@
+
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { format, compareAsc } from 'date-fns';
-import { List, TextField, Button, Paper, Grid, MenuItem, FormControl, Select, InputLabel, } from '@material-ui/core';
+
+import ScheduleElement from './ScheduleElement';
+import { format, compareAsc, getISOWeek, add, addWeeks, startOfWeek, endOfWeek } from 'date-fns';
+import { List, TextField, Button, Paper, Grid, MenuItem, FormControl, Select, InputLabel, FormHelperText, } from '@material-ui/core';
 import axios from 'axios';
-import User from '../Home/User';
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-
-
-
-import company from '../Home/images/company.jpg';
-import ScheduleIcon from '@material-ui/icons/Schedule';
-import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
-
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
-import CheckBox from './CheckBox';
 import CreateIcon from '@material-ui/icons/Create';
 
-import CalendarCard from './CalendarCard'
 
 
 const useStyles = (theme) => ({
@@ -61,208 +42,410 @@ const useStyles = (theme) => ({
 class Schedule extends Component {
   constructor() {
     super();
-    // this.state = {
-    //   schedules: [],
-    //   newSchedule: {
+    this.state = {
+      schedules: [],
+      newSchedule: {
+        userId: '',
+        weekNumber: '',
+        monday: '',
+        tuesday: '',
+        wednesday: '',
+        thursday: '',
+        friday: '',
+        saturday: '',
+        sunday: '',
+      },
 
-    //     date: '',
-    //     monday: '',
-    //     tuesday: '',
-    //     wednesday: '',
-    //     thursday: '',
-    //     friday: '',
-    //     saturday: '',
-    //     sunday: '',
-    //   },
+    };
 
-    // };
-
+    this.onSubmit = this.onSubmit.bind(this);
+    this.changeuserId = this.changeuserId.bind(this);
+    this.changeweekNumber = this.changeweekNumber.bind(this);
+    this.changemonday = this.changemonday.bind(this);
+    this.changetuesday = this.changetuesday.bind(this);
+    this.changewednesday = this.changewednesday.bind(this);
+    this.changethursday = this.changethursday.bind(this);
+    this.changefriday = this.changefriday.bind(this);
+    this.changesaturday = this.changesaturday.bind(this);
+    this.changesunday = this.changesunday.bind(this);
 
   }
 
+  componentDidMount() {
+    axios.get('http://localhost:4000/app/schedules').then((response) => {
+      const schedules = response.data.map((schedule) => (
+        <ScheduleElement
+          userId={schedule.userId}
+          weekNumber={schedule.weekNumber}
+          monday={schedule.monday}
+          tuesday={schedule.tuesday}
+          wednesday={schedule.wednesday}
+          thursday={schedule.thursday}
+          friday={schedule.friday}
+          saturday={schedule.saturday}
+          sunday={schedule.sunday}
+          key={schedule.id} />
+      ));
+
+      this.setState({
+        schedules: schedules
+      });
+    });
+
+
+  }
+  changeuserId(event) {
+    this.setState({
+      newSchedule: {
+        ...this.state.newSchedule,
+        userId: event.target.value
+      }
+    });
+  }
+
+
+  changeweekNumber(event) {
+    this.setState({
+      newSchedule: {
+        ...this.state.newSchedule,
+        weekNumber: event.target.value
+      }
+    });
+  }
+  changemonday(event) {
+    this.setState({
+      newSchedule: {
+        ...this.state.newSchedule,
+        monday: event.target.value
+      }
+    });
+  }
+  changetuesday(event) {
+    this.setState({
+      newSchedule: {
+        ...this.state.newSchedule,
+        tuesday: event.target.value
+      }
+    });
+  }
+
+  changewednesday(event) {
+    this.setState({
+      newSchedule: {
+        ...this.state.newSchedule,
+        wednesday: event.target.value
+      }
+    });
+  }
+  changethursday(event) {
+    this.setState({
+      newSchedule: {
+        ...this.state.newSchedule,
+        thursday: event.target.value
+      }
+    });
+  }
+
+  changefriday(event) {
+    this.setState({
+      newSchedule: {
+        ...this.state.newSchedule,
+        friday: event.target.value
+      }
+    });
+  }
+  changesaturday(event) {
+    this.setState({
+      newSchedule: {
+        ...this.state.newSchedule,
+        saturday: event.target.value
+      }
+    });
+  }
+  changesunday(event) {
+    this.setState({
+      newSchedule: {
+        ...this.state.newSchedule,
+        sunday: event.target.value
+      }
+    });
+  }
+  onSubmit(event) {
+    event.preventDefault();
+
+
+    const newSchedule = {
+      userId: this.state.newSchedule.userId,
+      weekNumber: this.state.newSchedule.weekNumber,
+      monday: this.state.newSchedule.monday,
+      tuesday: this.state.newSchedule.tuesday,
+      wednesday: this.state.newSchedule.wednesday,
+      thursday: this.state.newSchedule.thursday,
+      friday: this.state.newSchedule.friday,
+      saturday: this.state.newSchedule.saturday,
+      sunday: this.state.newSchedule.sunday
+
+    };
+
+    axios
+      .post('http://localhost:4000/app/schedule', newSchedule)
+      .then((response) => console.log('New schedule:', response.data));
+
+    this.setState({
+      newSchedule: {
+        userId: '',
+        weekNumber: '',
+        monday: '',
+        tuesday: '',
+        wednesday: '',
+        thursday: '',
+        friday: '',
+        saturday: '',
+        sunday: '',
+      }
+    });
+
+    this.componentDidMount();
+  }
+
+
+
   render() {
+
     const date = new Date();
-    function createData(date, monday, tuesday, wednesday, thursday, friday, saturday, sunday) {
-      return { date, monday, tuesday, wednesday, thursday, friday, saturday, sunday };
-    }
-
-    const rows = [
-      createData("01/01/2021", "On", "On", "On", "On", "On", "Off", "Off"),
-
-    ];
-
-
     const todaysDate = format(date, 'MM.dd.yyyy');
     const { classes } = this.props;
+    // ===========Current Week
+    // Start of Week
+    var resultStartofWeek = startOfWeek(new Date(todaysDate), { weekStartsOn: 1 })
+    const startOfCurrentWeek = format(resultStartofWeek, 'EEEE.MM.dd.yyyy');
+    // End of Week
+    var resultEndOfCurrentWeek = endOfWeek(new Date(todaysDate), { weekStartsOn: 1 })
+    const endOfCurrentWeek = format(resultEndOfCurrentWeek, 'EEEE.MM.dd.yyyy');
+    // Week number /53
+    var weekNum1 = getISOWeek(new Date(todaysDate))
+
+    // ==============Next Week
+    // Add week to get Next Week
+    var resultWeek = addWeeks(new Date(todaysDate), 1)
+    const nextWeek = format(resultWeek, 'MM.dd.yyyy');
+    // Start of Week
+    var resultStartofWeek2 = startOfWeek(new Date(nextWeek), { weekStartsOn: 1 })
+    const startOfNextWeek = format(resultStartofWeek2, 'EEEE.MM.dd.yyyy');
+    // End of Week
+    var resultendOfNextWeek = endOfWeek(new Date(nextWeek), { weekStartsOn: 1 })
+    const endOfNextWeek = format(resultendOfNextWeek, 'EEEE.MM.dd.yyyy');
+
+
+
+    var weekNum2 = getISOWeek(new Date(resultWeek))
+
+
     return (
-      <div>
-        <div className={classes.root}>
-          <Grid container spacing={3}>
+      <div className={classes.root}>
+        <Grid container spacing={3}>
+          <Grid item xs={3}>
+            <Paper className={classes.paper}>
 
-            <Grid item xs={3}>
-              <Paper className={classes.paper}>
-                {/* <img src={company} alt="Logo" width="220px" /> */}
-                <CalendarCard />
-              </Paper>
-            </Grid>
-
-            <Grid item xs={9}>
-              <Paper>
-                <h1> User Schedule <ScheduleIcon fontSize="large" /></h1>
-                <h4> Today's Date: {todaysDate}</h4>
-              </Paper>
-            
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <h2>Current Week</h2>
-              </Paper>
-              <TableContainer component={Paper}>
-                <Table className={classes.table} aria-label="simple table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Schedule Date</TableCell>
-                      <TableCell align="left">Monday</TableCell>
-                      <TableCell align="left">Tuesday</TableCell>
-                      <TableCell align="left">Wednesday</TableCell>
-                      <TableCell align="left">Thursday</TableCell>
-                      <TableCell align="left">Friday</TableCell>
-                      <TableCell align="left">Saturday</TableCell>
-                      <TableCell align="left">Sunday</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {rows.map((row) => (
-                      <TableRow key={row.name}>
-                        <TableCell align="left">{row.date}</TableCell>
-                        <TableCell align="left">{row.monday}</TableCell>
-                        <TableCell align="left">{row.tuesday}</TableCell>
-                        <TableCell align="left">{row.wednesday}</TableCell>
-                        <TableCell align="left">{row.thursday}</TableCell>
-                        <TableCell align="left">{row.friday}</TableCell>
-                        <TableCell align="left">{row.saturday}</TableCell>
-                        <TableCell align="left">{row.sunday}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Grid>
-            
-
-            
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <h2>Next Week</h2>
-              </Paper>
-              <TableContainer component={Paper}>
-
-                <Table className={classes.table} aria-label="simple table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Schedule Date</TableCell>
-                      <TableCell align="left">Monday</TableCell>
-                      <TableCell align="left">Tuesday</TableCell>
-                      <TableCell align="left">Wednesday</TableCell>
-                      <TableCell align="left">Thursday</TableCell>
-                      <TableCell align="left">Friday</TableCell>
-                      <TableCell align="left">Saturday</TableCell>
-                      <TableCell align="left">Sunday</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {rows.map((row) => (
-                      <TableRow key={row.date}>
-
-                        <TableCell align="left">{row.date}</TableCell>
-                        <TableCell align="left">{row.monday}</TableCell>
-                        <TableCell align="left">{row.tuesday}</TableCell>
-                        <TableCell align="left">{row.wednesday}</TableCell>
-                        <TableCell align="left">{row.thursday}</TableCell>
-                        <TableCell align="left">{row.friday}</TableCell>
-                        <TableCell align="left">{row.saturday}</TableCell>
-                        <TableCell align="left">{row.sunday}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Grid>
-</Grid>
-
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
+              <h3 > Create New Schedule <CreateIcon /></h3>
+              <p>For the Week of: </p>
+              <p>{startOfNextWeek} - {endOfNextWeek}</p>
+              <p>Week # {weekNum2}/53</p>
 
 
 
-                <h2 > Create New Schedule</h2>
+              <form className={classes.root} noValidate autoComplete="off">
+
+                <TextField
+                  id="userId"
+                  label="userId"
+                  onChange={this.changeuserId}
+                  value={this.state.newSchedule.userId}
+
+                />
+                <TextField
+                  id="weekNumber"
+                  label='Week Number'
+                  type="number"
+                  onChange={this.changeweekNumber}
+                  value={this.state.newSchedule.weekNumber}
+                />
+
+
+
+                <FormControl className={classes.formControl}>
+                  <InputLabel id="demo-simple-select-label">Monday</InputLabel>
+                  <Select
+                    align="right"
+                    id="monday"
+                    type="text"
+                    InputLabelProps={{ shrink: true }}
+                    label="Monday"
+                    onChange={this.changemonday}
+                    value={this.state.newSchedule.monday}
+                  >
+                    <MenuItem value={"Morning"}>Morning 6:00am - 3:00pm</MenuItem>
+                    <MenuItem value={"Mid"}>Mid 10:00am - 3:00pm</MenuItem>
+                    <MenuItem value={"Evening"}>Evening 3:00pm - 11:00pm </MenuItem>
+                    <MenuItem value={"Off"}>Off </MenuItem>
+                  </Select>
+                  <FormHelperText>Select Shift</FormHelperText>
+                </FormControl>
 
 
 
 
+                <FormControl className={classes.formControl}>
+                  <InputLabel id="demo-simple-select-label">Tuesday</InputLabel>
+                  <Select
+                    align="right"
+                    id="tuesday"
+                    type='text'
+                    label="Tuesday"
+                    InputLabelProps={{ shrink: true }}
+                    onChange={this.changetuesday}
+                    value={this.state.newSchedule.tuesday}
+                  >
+                    <MenuItem value={"Morning"}>Morning 6:00am - 3:00pm</MenuItem>
+                    <MenuItem value={"Mid"}>Mid 10:00am - 3:00pm</MenuItem>
+                    <MenuItem value={"Evening"}>Evening 3:00pm - 11:00pm </MenuItem>
+                    <MenuItem value={"Off"}>Off </MenuItem>
+                  </Select>
+                  <FormHelperText>Select Shift</FormHelperText>
+                </FormControl>
+
+
+
+                <FormControl className={classes.formControl}>
+                  <InputLabel id="demo-simple-select-label">Wednesday</InputLabel>
+                  <Select
+                    align="right"
+                    id="wednesday"
+                    type="text"
+                    label="wednesday"
+                    InputLabelProps={{ shrink: true }}
+                    onChange={this.changewednesday}
+                    value={this.state.newSchedule.wednesday}
+                  >
+                    <MenuItem value={"Morning"}>Morning 6:00am - 3:00pm</MenuItem>
+                    <MenuItem value={"Mid"}>Mid 10:00am - 3:00pm</MenuItem>
+                    <MenuItem value={"Evening"}>Evening 3:00pm - 11:00pm </MenuItem>
+                    <MenuItem value={"Off"}>Off </MenuItem>
+                  </Select>
+                  <FormHelperText>Select Shift</FormHelperText>
+                </FormControl>
+
+
+                <FormControl className={classes.formControl}>
+                  <InputLabel id="demo-simple-select-label">Thursday</InputLabel>
+                  <Select
+                    id="thursday"
+                    label="thursday"
+                    type="text"
+                    InputLabelProps={{ shrink: true }}
+                    onChange={this.changethursday}
+                    value={this.state.newSchedule.thursday}
+                  >
+                    <MenuItem value={"Morning"}>Morning 6:00am - 3:00pm</MenuItem>
+                    <MenuItem value={"Mid"}>Mid 10:00am - 3:00pm</MenuItem>
+                    <MenuItem value={"Evening"}>Evening 3:00pm - 11:00pm </MenuItem>
+                    <MenuItem value={"Off"}>Off </MenuItem>
+                  </Select>
+                  <FormHelperText>Select Shift</FormHelperText>
+                </FormControl>
 
 
 
 
 
-                <TableContainer component={Paper}>
+                <FormControl className={classes.formControl}>
+                  <InputLabel id="demo-simple-select-label">Friday</InputLabel>
+                  <Select
+                    id="friday"
+                    label="friday"
+                    type="text"
+                    onChange={this.changefriday}
+                    value={this.state.newSchedule.friday}
+                    InputLabelProps={{ shrink: true }}
 
-                  <Table className={classes.table} aria-label="simple table">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Date</TableCell>
-                        <TableCell align="left">Monday</TableCell>
-                        <TableCell align="left">Tuesday</TableCell>
-                        <TableCell align="left">Wednesday</TableCell>
-                        <TableCell align="left">Thursday</TableCell>
-                        <TableCell align="left">Friday</TableCell>
-                        <TableCell align="left">Saturday</TableCell>
-                        <TableCell align="left">Sunday</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-
-                      <TableRow>
-
-                        <TableCell align="left">	<TextField
-                          align="right"
-                          id="date"
-                          type="date"
-                          InputLabelProps={{ shrink: true }}
-                          label="Select Date"
-                        // onChange={this.changeDate}
-                        // value={this.state.newSchedule.date}
-                        /></TableCell>
-                        <TableCell align="left"><CheckBox /></TableCell>
-                        <TableCell align="left"><CheckBox /></TableCell>
-                        <TableCell align="left"><CheckBox /></TableCell>
-                        <TableCell align="left"><CheckBox /></TableCell>
-                        <TableCell align="left"><CheckBox /></TableCell>
-                        <TableCell align="left"><CheckBox /></TableCell>
-                        <TableCell align="left"><CheckBox /></TableCell>
-                      </TableRow>
-
-
-                    </TableBody>
-
-                  </Table>
-
-                </TableContainer>
-
-                <Button alignItems="right" variant="contained" color="primary">
-                  Submit
-</Button>
-
-              </Paper>
-            </Grid>
+                  >
+                    <MenuItem value={"Morning"}>Morning 6:00am - 3:00pm</MenuItem>
+                    <MenuItem value={"Mid"}>Mid 10:00am - 3:00pm</MenuItem>
+                    <MenuItem value={"Evening"}>Evening 3:00pm - 11:00pm </MenuItem>
+                    <MenuItem value={"Off"}>Off </MenuItem>
+                  </Select>
+                  <FormHelperText>Select Shift</FormHelperText>
+                </FormControl>
 
 
 
 
+                <FormControl className={classes.formControl}>
+                  <InputLabel id="demo-simple-select-label">Saturday</InputLabel>
+                  <Select
+                    id="saturday"
+                    label="saturday"
+                    type="text"
+                    onChange={this.changesaturday}
+                    value={this.state.newSchedule.saturday}
+                    InputLabelProps={{ shrink: true }}
+
+                  >
+                    <MenuItem value={"Morning"}>Morning 6:00am - 3:00pm</MenuItem>
+                    <MenuItem value={"Mid"}>Mid 10:00am - 3:00pm</MenuItem>
+                    <MenuItem value={"Evening"}>Evening 3:00pm - 11:00pm </MenuItem>
+                    <MenuItem value={"Off"}>Off </MenuItem>
+                  </Select>
+                  <FormHelperText>Select Shift</FormHelperText>
+                </FormControl>
+
+
+
+                <FormControl className={classes.formControl}>
+                  <InputLabel id="demo-simple-select-label">Sunday</InputLabel>
+                  <Select
+                    id="sunday"
+                    label="sunday"
+                    type="time"
+                    onChange={this.changesunday}
+                    value={this.state.newSchedule.sunday}
+                    InputLabelProps={{ shrink: true }}
+
+                  >
+                    <MenuItem value={"Morning"}>Morning 6:00am - 3:00pm</MenuItem>
+                    <MenuItem value={"Mid"}>Mid 10:00am - 3:00pm</MenuItem>
+                    <MenuItem value={"Evening"}>Evening 3:00pm - 11:00pm </MenuItem>
+                    <MenuItem value={"Off"}>Off </MenuItem>
+                  </Select>
+                  <FormHelperText>Select Shift</FormHelperText>
+                </FormControl>
+
+
+
+                <Button variant="contained" color="primary" onClick={this.onSubmit}>
+                  Create schedule
+								</Button>
+              </form>
+            </Paper>
           </Grid>
-        </div>
+          <Grid item xs={9}>
+            <Paper className={classes.paper} elevation={3}>
+
+              <h2>Current Week  </h2>
+              <h4>{startOfCurrentWeek} - {endOfCurrentWeek}</h4>
+              <p>{weekNum1}/53</p>
+              <List className={classes.root}>{this.state.schedules}</List>
+            </Paper>
+            <Paper className={classes.paper} elevation={3}>
+
+              <h2>Next Week  </h2>
+              <h4>{startOfNextWeek} - {endOfNextWeek}</h4>
+              <p>{weekNum2}/53</p>
+              <List className={classes.root}>{this.state.schedules}</List>
+            </Paper>
+          </Grid>
+        </Grid>
       </div>
-
-
     );
   }
 }
@@ -270,6 +453,49 @@ class Schedule extends Component {
 
 
 export default withStyles(useStyles)(Schedule);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

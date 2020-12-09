@@ -86,7 +86,8 @@ router.post('/request', async (req, res) => {
 
 router.post('/schedule', async (req, res) => {
 	const newSchedule = new ScheduleModel({
-		date: req.body.date,
+		userId: req.body.userId,
+		weekNumber: req.body.weekNumber,
 		monday: req.body.monday,
 		tuesday: req.body.tuesday,
 		wednesday: req.body.wednesday,
