@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import 'react-calendar/dist/Calendar.css'
 
+
+
 import Calendar from 'react-calendar'
 
 const useStyles = makeStyles({
@@ -36,7 +38,7 @@ export default function CalendarCard() {
        <Calendar />
       </CardContent>
       <CardActions>
-        <Button size="small">View My Schedule</Button>
+      
       </CardActions>
     </Card>
   );
