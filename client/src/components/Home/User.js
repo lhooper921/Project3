@@ -18,6 +18,10 @@ const useStyles = makeStyles((theme) => ({
 	},
 	title: {
 		margin: theme.spacing(4, 0, 2)
+	},
+	text: {
+		fontWeight: 'bold',
+		color: 'teal'
 	}
 }));
 
@@ -35,16 +39,20 @@ export default function User(props) {
 					<div className={classes.demo}>
 						<List>
 							<ListItem>
-								<ListItemText primary="ID:" secondary={props.xid} />
+								<ListItemText primary="Name:" secondary={props.name} className={classes.text} />
 							</ListItem>
 							<ListItem>
-								<ListItemText primary="Name:" secondary={props.name} />
+								<ListItemText primary="LastName:" secondary={props.lastname} className={classes.text} />
 							</ListItem>
 							<ListItem>
-								<ListItemText primary="Department:" secondary={props.department} />
+								<ListItemText
+									primary="Department:"
+									secondary={props.department}
+									className={classes.text}
+								/>
 							</ListItem>
 							<ListItem>
-								<ListItemText primary="Position:" secondary={props.position} />
+								<ListItemText primary="Position:" secondary={props.position} className={classes.text} />
 							</ListItem>
 						</List>
 					</div>
