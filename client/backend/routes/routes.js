@@ -85,7 +85,6 @@ router.post('/request', async (req, res) => {
 			res.json(error);
 		});
 });
-<<<<<<< HEAD
 router.get('/users', (req, res) => {
 	UserModel.find({})
 		.then((users) => {
@@ -95,41 +94,6 @@ router.get('/users', (req, res) => {
 			res.status(404).json(err);
 		});
 });
-=======
-
-router.post('/schedule', async (req, res) => {
-	const newSchedule = new ScheduleModel({
-		userId: req.body.userId,
-		weekNumber: req.body.weekNumber,
-		monday: req.body.monday,
-		tuesday: req.body.tuesday,
-		wednesday: req.body.wednesday,
-		thursday: req.body.thursday,
-		friday: req.body.friday,
-		saturday: req.body.saturday,
-		sunday: req.body.sunday,
-	});
-
-	newSchedule
-		.save()
-		.then((data) => {
-			res.json(data);
-		})
-		.catch((error) => {
-			res.json(error);
-		});
-});
-// router.get('/user', (req, res) => {
-// 	console.log('User to Search', req.query.name);
-// 	UserModel.find({ firstName: req.query.name })
-// 		.then((user) => {
-// 			res.json(user);
-// 		})
-// 		.catch((err) => {
-// 			res.status(404).json(err);
-// 		});
-// });
->>>>>>> 82784eeb33bc7042f38397929fa7ae4d4863425c
 
 // Login
 router.get('/userid', (req, res) => {
@@ -200,8 +164,5 @@ router.get('/schedules', (req, res) => {
 			res.status(404).json(err);
 		});
 });
-
-
-
 
 module.exports = router;
