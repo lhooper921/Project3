@@ -13,12 +13,22 @@
 .navlink{
       color: white;
       font-size: x-large;
+      font-family:  "Lucida Console", "Courier New", monospace;
+      text-decoration: none;
+}
+
+.navlink:hover{
+       
+     text-decoration:none; 
+     cursor:pointer;  
+     
 }
 
 .navHeader{
       font-size: xx-large;
       font-weight: bold;
-      margin-left: 35px;
+      margin-left: 25px;
+      
 }
 
 body{

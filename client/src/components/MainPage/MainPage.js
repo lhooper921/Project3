@@ -22,6 +22,7 @@ class MainPage extends Component {
 		return (
 			<div>
 				<NavBar />
+				<br />
 				<Switch>
 					<Route path="/MainPage/Home" component={Home} />
 					<Route path="/MainPage/Profile" component={Profile} />

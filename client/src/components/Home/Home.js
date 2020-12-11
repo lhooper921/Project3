@@ -21,15 +21,17 @@ const useStyles = (theme) => ({
 		flexGrow: 1,
 		marginLeft: '25px',
 		marginRight: '25px',
-		backgroundColor: 'whitesmoke',
+		backgroundColor: 'floralwhite',
 		padding: '25px'
 	},
 	paper: {
 		padding: theme.spacing(2),
 		textAlign: 'center',
 		color: theme.palette.text.secondary,
-		backgroundColor: 'lightgray'
+		backgroundColor: 'lightgray',
+		height: '100%'
 	},
+
 	messages: {
 		width: '100%',
 		backgroundColor: 'white'
@@ -188,11 +190,6 @@ class Home extends Component {
 							</Paper>
 						</Grid>
 						<Grid item xs={8}>
-							{/* <Paper className={classes.paper}>
-								<h2>Current Schedule</h2>
-								<CurrentSchedule />
-							</Paper> */}
-
 							<Paper className={classes.paper} elevation={3}>
 								<h2>Current Week </h2>
 

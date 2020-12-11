@@ -182,16 +182,6 @@ class Board extends Component {
 		}
 	}
 
-	//Messages vvvv
-
-	// changeName(event) {
-	// 	this.setState({
-	// 		newMessage: {
-	// 			...this.state.newMessage,
-	// 			name: event.target.value
-	// 		}
-	// 	});
-	// }
 	changeTitle(event) {
 		this.setState({
 			newMessage: {

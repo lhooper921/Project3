@@ -15,13 +15,17 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-
-
 const useStyles = (theme) => ({
 	table: {
-		minWidth: 650
+		minWidth: 650,
+		height: '300px'
 	},
-	row: {
+	row1: {
+		backgroundColor: '#2196F3 ',
+		fontColor: 'white',
+		color: 'white'
+	},
+	row2: {
 		backgroundColor: 'lightblue',
 		fontColor: 'white'
 	}
@@ -36,13 +40,13 @@ class ScheduleElement extends Component {
 			<div>
 				<ListItem alignItems="flex-start">
 					<ListItemText
-						primary={this.props.weekNumber}
+						primary={'Week: ' + this.props.weekNumber + '/53'}
 						secondary={
 							<React.Fragment>
 								<TableContainer component={Paper}>
 									<Table className={this.table} aria-label="simple table">
 										<TableHead>
-											<TableRow className={classes.row}>
+											<TableRow className={classes.row1}>
 												<TableCell>Monday</TableCell>
 												<TableCell>Tuesday</TableCell>
 												<TableCell>Wednesday</TableCell>
@@ -53,7 +57,7 @@ class ScheduleElement extends Component {
 											</TableRow>
 										</TableHead>
 										<TableBody>
-											<TableRow key={this.props.weekNumber}>
+											<TableRow key={this.props.weekNumber} className={classes.row2}>
 												<TableCell align="left">{this.props.monday}</TableCell>
 												<TableCell align="left">{this.props.tuesday}</TableCell>
 												<TableCell align="left">{this.props.wednesday}</TableCell>
