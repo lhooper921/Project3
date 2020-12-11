@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import logo from './icon.png';
+import out from './out.png';
 
 // Import Materialize
 import M from 'materialize-css';
@@ -21,7 +22,8 @@ class NavBar extends Component {
 						<nav>
 							<div className="nav-wrapper teal">
 								<a className="navHeader" href="/">
-									<img src={logo} alt="Logo" width="50px" /> The Boring Company
+									{/* <img src={logo} alt="Logo" width="50px" /> */}
+									The Boring Company
 								</a>
 								<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 								<ul id="nav-mobile" className="right hide-on-med-and-down">
@@ -52,7 +54,9 @@ class NavBar extends Component {
 									</li>
 									<li>
 										<Link to="/" className="navlink">
-											Signout
+											<a>
+												<img src={out} alt="Logo" width="30px" />
+											</a>
 										</Link>
 									</li>
 								</ul>

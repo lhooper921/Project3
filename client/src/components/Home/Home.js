@@ -5,12 +5,13 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
 import company from './images/company.jpg';
-
 import User from './User';
-
 import Annoucement from './Annoucements';
 import Messagess from './Messages';
+import MessageElement from '../Board/MessageElement';
+import AnnoucementElement from '../Board/AnnoucementElement';
 import CurrentSchedule from './CurentSchedule';
+import List from '@material-ui/core/List';
 
 import axios from 'axios';
 
@@ -25,6 +26,10 @@ const useStyles = (theme) => ({
 		textAlign: 'center',
 		color: theme.palette.text.secondary,
 		backgroundColor: 'lightgray'
+	},
+	messages: {
+		width: '100%',
+		backgroundColor: 'white'
 	}
 });
 
@@ -32,8 +37,11 @@ class Home extends Component {
 	state = {
 		id: '',
 		name: '',
+		lastname: '',
 		department: '',
-		position: ''
+		position: '',
+		messages: [],
+		announcements: []
 	};
 
 	componentDidMount() {
@@ -45,11 +53,32 @@ class Home extends Component {
 			this.setState({
 				id: response.data[0]._id,
 				name: response.data[0].firstName,
+				lastname: response.data[0].lastName,
 				department: response.data[0].department,
 				position: response.data[0].position
 			});
 
 			console.log(this.state);
+		});
+
+		axios.get('http://localhost:4000/app/messages').then((response) => {
+			const messages = response.data.map((message) => (
+				<MessageElement name={message.name} title={message.title} message={message.message} key={message.id} />
+			));
+
+			this.setState({
+				messages: messages
+			});
+		});
+
+		axios.get('http://localhost:4000/app/annoucements').then((response) => {
+			const annoucements = response.data.map((annoucement) => (
+				<AnnoucementElement title={annoucement.title} content={annoucement.content} date={annoucement.date} />
+			));
+
+			this.setState({
+				announcements: annoucements
+			});
 		});
 	}
 
@@ -79,7 +108,7 @@ class Home extends Component {
 							<Paper className={classes.paper}>
 								<h2>User</h2>
 								<User
-									xid={this.state.id}
+									lastname={this.state.lastname}
 									name={this.state.name}
 									department={this.state.department}
 									position={this.state.position}
@@ -88,21 +117,23 @@ class Home extends Component {
 						</Grid>
 						<Grid item xs={12} md={8}>
 							<Paper className={classes.paper}>
-								<h2>Messages</h2>
-								<Messagess />
+								<h2>Current Schedule</h2>
+								<CurrentSchedule />
 							</Paper>
 						</Grid>
 
 						<Grid item xs={12} md={4}>
 							<Paper className={classes.paper}>
 								<h2>Annoucements</h2>
-								<Annoucement />
+								{/* <Annoucement /> */}
+								<List className={classes.messages}>{this.state.announcements}</List>
 							</Paper>
 						</Grid>
 						<Grid item xs={12} md={8}>
 							<Paper className={classes.paper}>
-								<h2>Current Schedule</h2>
-								<CurrentSchedule />
+								<h2>Messages</h2>
+								{/* <Messagess /> */}
+								<List className={classes.messages}>{this.state.messages}</List>
 							</Paper>
 						</Grid>
 					</Grid>

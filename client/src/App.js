@@ -3,11 +3,10 @@ import 'materialize-css/dist/css/materialize.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import CorePage from './components/CorePage/CorePage';
-import RegistrationForm from './components/RegistrationForm'
-import MainPage from './components/MainPage/MainPage'
+// import RegistrationForm from './components/RegistrationForm';
 
 function App() {
-	return <MainPage />;
+	return <CorePage />;
 	// return <RegistrationForm />;
 }
 
