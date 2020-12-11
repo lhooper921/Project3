@@ -22,7 +22,7 @@ class NavBar extends Component {
 						<nav>
 							<div className="nav-wrapper teal">
 								<a className="navHeader" href="/">
-									{/* <img src={logo} alt="Logo" width="50px" /> */}
+									<img src={logo} alt="Logo" width="50px" />
 									The Boring Company
 								</a>
 

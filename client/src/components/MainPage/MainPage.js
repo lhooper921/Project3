@@ -11,7 +11,6 @@ import Schedule from '../Schedule/Schedule';
 import TimeOff from '../TimeOff/TimeOff';
 import Board from '../Board/Board';
 import Footer from '../Footer/Footer';
-import LogIn from '../LogIn/LogIn';
 
 class MainPage extends Component {
 	componentDidMount() {
@@ -29,10 +28,9 @@ class MainPage extends Component {
 					<Route path="/MainPage/Schedule" component={Schedule} />
 					<Route path="/MainPage/TimeOff" component={TimeOff} />
 					<Route path="/MainPage/Board" component={Board} />
-					{/* <Route path="/" exact component={LogIn} /> */}
 				</Switch>
 
-				{/* <Footer /> */}
+				<Footer />
 			</div>
 		);
 	}
