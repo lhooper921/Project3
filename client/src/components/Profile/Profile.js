@@ -12,6 +12,10 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/TextField';
 
+import image from "../Home/images/bannerImage.jpg"
+import { createMuiTheme } from '@material-ui/core/styles';
+
+
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
@@ -33,6 +37,13 @@ export default function Profile() {
 		<div>
 			<div className={classes.root}>
 				<Grid container spacing={3}>
+				<Grid item xs={12}>
+							<Paper className={classes.paper}>
+	
+
+								<img class ="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}}/>
+							</Paper>
+						</Grid>
 					<Grid item xs={12}>
 						<Paper className={classes.paper}>
 							<h2>Personal info</h2>

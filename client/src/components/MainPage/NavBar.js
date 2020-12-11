@@ -5,6 +5,7 @@ import out from './out.png';
 
 // Import Materialize
 import M from 'materialize-css';
+import checkLogo from '../Home/images/checkLogo.png'
 
 import './NavBar.css';
 
@@ -16,14 +17,13 @@ class NavBar extends Component {
 
 	render() {
 		return (
-			// <div>
-			// 	<div className="row">
-			// 		<div className="col s12 m12 l12">
-			<nav>
-				<div className="nav-wrapper teal">
+
+		
+		
+			<nav >
+				<div className="nav-wrapper ">
 					<a className="navHeader" href="/">
-						<img src={logo} alt="Logo" width="50px" />
-						The Boring Company
+						 <img className="logo" src={logo} alt="Logo" width="80px" /> 'Check the Board' App
 					</a>
 					<a href="#" data-target="mobile-demo" class="sidenav-trigger">
 						<i class="material-icons">menu</i>
@@ -64,9 +64,7 @@ class NavBar extends Component {
 					</ul>
 				</div>
 			</nav>
-			// 		</div>
-			// 	</div>
-			// </div>
+		
 		);
 	}
 }
