@@ -32,7 +32,7 @@ class MainPage extends Component {
 					{/* <Route path="/" exact component={LogIn} /> */}
 				</Switch>
 
-				{/* <Footer /> */}
+				<Footer />
 			</div>
 		);
 	}

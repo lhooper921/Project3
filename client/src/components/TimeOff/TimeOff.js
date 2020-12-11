@@ -7,7 +7,7 @@ import { format, compareAsc } from 'date-fns';
 import { List, TextField, Button, Paper, Grid, MenuItem, FormControl, Select, InputLabel } from '@material-ui/core';
 import axios from 'axios';
 
-
+import image from "../Home/images/bannerImage.jpg"
 const useStyles = (theme) => ({
 	root: {
 		alignItems: 'center',
@@ -155,6 +155,13 @@ class TimeOff extends Component {
 		return (
 			<div className={classes.root}>
 				<Grid container spacing={3}>
+				<Grid item xs={12}>
+							<Paper className={classes.paper}>
+	
+
+								<img class ="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}}/>
+							</Paper>
+						</Grid>
 					<Grid item xs={12} md={4}>
 						<Paper className={classes.paper}>
 							<h2>Time Off Requests</h2>

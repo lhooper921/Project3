@@ -7,7 +7,7 @@ import { List, TextField, Button, Paper, Grid, MenuItem, FormControl, Select, In
 import axios from 'axios';
 import CreateIcon from '@material-ui/icons/Create';
 
-
+import image from "../Home/images/bannerImage.jpg"
 
 const useStyles = (theme) => ({
   root: {
@@ -317,6 +317,13 @@ class Schedule extends Component {
     return (
       <div className={classes.root}>
         <Grid container spacing={3}>
+        <Grid item xs={12}>
+							<Paper className={classes.paper}>
+	
+
+								<img  src={image} alt="Logo" width="100%" height="250px" style={{}}/>
+							</Paper>
+						</Grid>
           <Grid item xs={12} md={3}>
             <Paper className={classes.paper}>
 

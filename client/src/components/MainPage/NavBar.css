@@ -5,15 +5,33 @@
      align-items: center;
       min-height: 10vh;
       background: dodgerblue;
-      color: white;
+      color: black;
       margin: 10px;
 
 
 }
+.nav-wrapper{
+      background-color: rgb(154,154,154);
+      /* background-image: url(../Home/images/frame.jpg); */
+}
 .navlink{
       color: white;
-      font-size: x-large;
+     
+      font-size: 24px;
+ 
 }
+
+
+    
+    /* mouse over link */
+    a:hover {
+      color: rgb(246,159,105);
+    }
+    
+    /* selected link */
+    a:active {
+      color: rgb(4,134,160);
+    }
 
 .navHeader{
       font-size: xx-large;
