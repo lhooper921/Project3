@@ -317,7 +317,7 @@ class Schedule extends Component {
     return (
       <div className={classes.root}>
         <Grid container spacing={3}>
-          <Grid item xs={3}>
+          <Grid item xs={12} md={3}>
             <Paper className={classes.paper}>
 
               <h3 > Create New Schedule <CreateIcon /></h3>
@@ -509,7 +509,7 @@ class Schedule extends Component {
               </form>
             </Paper>
           </Grid>
-          <Grid item xs={9}>
+          <Grid item xs={12} md={9}>
             <Paper className={classes.paper} elevation={3}>
 
               <h2>Current Week  </h2>
