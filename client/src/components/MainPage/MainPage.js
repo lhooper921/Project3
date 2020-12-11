@@ -31,7 +31,7 @@ class MainPage extends Component {
 					<Route path="/MainPage/Board" component={Board} />
 				</Switch>
 
-				{/* <Footer /> */}
+				<Footer />
 			</div>
 		);
 	}

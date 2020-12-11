@@ -20,6 +20,8 @@ import {
 import axios from 'axios';
 import CreateIcon from '@material-ui/icons/Create';
 
+import image from "../Home/images/bannerImage.jpg"
+
 const useStyles = (theme) => ({
 	root: {
 		alignItems: 'center',

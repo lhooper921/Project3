@@ -1,14 +1,18 @@
-.nav{
+nav{
 
-      display: flex;
+    
       justify-content: space-around;
-     align-items: center;
+   
       min-height: 10vh;
-      background: dodgerblue;
-      color: white;
-      margin: 10px;
+      background-image: url(../Home/images/cork.jpg);
+      color: black;
+    
 
 
+}
+.nav-wrapper{
+      background-color: none;
+      
 }
 .navlink{
       color: white;
@@ -24,15 +28,29 @@
      
 }
 
+
+    
+    /* mouse over link */
+    a:hover {
+      color: rgb(246,159,105);
+    }
+    
+    /* selected link */
+    a:active {
+      color: rgb(4,134,160);
+    }
+
 .navHeader{
-      font-size: xx-large;
+      font-size: 18px;
       font-weight: bold;
       margin-left: 25px;
       
 }
+
 
 body{
 
       padding-left: 60px;
       padding-right: 60px;
 }
+
