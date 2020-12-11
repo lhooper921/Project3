@@ -56,7 +56,7 @@ class TimeOff extends Component {
 	}
 
 	componentDidMount() {
-		axios.get('http://localhost:4000/app/requests').then((response) => {
+		axios.get('http://localhost:3001/app/requests').then((response) => {
 			const requests = response.data.map((request) => (
 				<TimeOffElement
 					name={request.name}
@@ -170,7 +170,7 @@ class TimeOff extends Component {
 		return (
 			<div className={classes.root}>
 				<Grid container spacing={3}>
-					<Grid item xs={4}>
+					<Grid item xs={12} md={4}>
 						<Paper className={classes.paper}>
 							<h2>Time Off Requests</h2>
 							<form className={classes.root} noValidate autoComplete="off">
@@ -226,7 +226,7 @@ class TimeOff extends Component {
 							</form>
 						</Paper>
 					</Grid>
-					<Grid item xs={8}>
+					<Grid item xs={12} md={8}>
 						<Paper className={classes.paper} elevation={3}>
 							<List className={classes.root}>{this.state.requests}</List>
 						</Paper>

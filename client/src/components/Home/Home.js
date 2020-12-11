@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -17,7 +16,6 @@ import List from '@material-ui/core/List';
 import ScheduleElement from '../Schedule/ScheduleElement';
 
 import axios from 'axios';
-
 const useStyles = (theme) => ({
 	root: {
 		flexGrow: 1,
@@ -37,7 +35,6 @@ const useStyles = (theme) => ({
 		backgroundColor: 'white'
 	}
 });
-
 class Home extends Component {
 	state = {
 		id: '',
@@ -179,7 +176,7 @@ class Home extends Component {
 								<img src={company} alt="Logo" width="500px" />
 							</Paper>
 						</Grid>
-						<Grid item xs={4}>
+						<Grid item xs={12} md={4}>
 							<Paper className={classes.paper}>
 								<h2>User</h2>
 								<User
@@ -203,14 +200,14 @@ class Home extends Component {
 							</Paper>
 						</Grid>
 
-						<Grid item xs={4}>
+						<Grid item xs={12} md={4}>
 							<Paper className={classes.paper}>
 								<h2>Annoucements</h2>
 								{/* <Annoucement /> */}
 								<List className={classes.messages}>{this.state.announcements}</List>
 							</Paper>
 						</Grid>
-						<Grid item xs={8}>
+						<Grid item xs={12} md={8}>
 							<Paper className={classes.paper}>
 								<h2>Messages</h2>
 								{/* <Messagess /> */}
@@ -223,5 +220,4 @@ class Home extends Component {
 		);
 	}
 }
-
 export default withStyles(useStyles)(Home);
