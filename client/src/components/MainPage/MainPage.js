@@ -22,17 +22,15 @@ class MainPage extends Component {
 	render() {
 		return (
 			<div>
-				<BrowserRouter>
-					<NavBar />
-					<Switch>
-						<Route path="/Home" component={Home} />
-						<Route path="/Profile" component={Profile} />
-						<Route path="/Schedule" component={Schedule} />
-						<Route path="/TimeOff" component={TimeOff} />
-						<Route path="/Board" component={Board} />
-						{/* <Route path="/" exact component={LogIn} /> */}
-					</Switch>
-				</BrowserRouter>
+				<NavBar />
+				<Switch>
+					<Route path="/MainPage/Home" component={Home} />
+					<Route path="/MainPage/Profile" component={Profile} />
+					<Route path="/MainPage/Schedule" component={Schedule} />
+					<Route path="/MainPage/TimeOff" component={TimeOff} />
+					<Route path="/MainPage/Board" component={Board} />
+					{/* <Route path="/" exact component={LogIn} /> */}
+				</Switch>
 
 				{/* <Footer /> */}
 			</div>

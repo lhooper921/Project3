@@ -1,15 +1,12 @@
 
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import TimeOffElement from './TimeOffElement';
 
-import List from '@material-ui/core/List';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import TimeOffElement from './TimeOffElement';
+import { format, compareAsc } from 'date-fns';
+import { List, TextField, Button, Paper, Grid, MenuItem, FormControl, Select, InputLabel } from '@material-ui/core';
 import axios from 'axios';
-import User from '../Home/User';
+
 
 const useStyles = (theme) => ({
 	root: {
@@ -28,7 +25,15 @@ const useStyles = (theme) => ({
 		width: '50%',
 		border: '3px solid teal',
 		padding: '30px'
-	}
+	},
+	formControl: {
+		margin: theme.spacing(1),
+		minWidth: 120,
+	},
+	selectEmpty: {
+		marginTop: theme.spacing(2),
+	},
+
 });
 
 class TimeOff extends Component {
@@ -37,21 +42,21 @@ class TimeOff extends Component {
 		this.state = {
 			requests: [],
 			newRequest: {
-                name:'',
+				name: '',
 				firstDate: '',
 				lastDate: '',
 				requestType: '',
 				comment: ''
 			},
-		
+
 		};
 
 		this.onSubmit = this.onSubmit.bind(this);
-        this.changeName = this.changeName.bind(this);
-        this.changeFirstDate = this.changeFirstDate.bind(this);
+		this.changeName = this.changeName.bind(this);
+		this.changeFirstDate = this.changeFirstDate.bind(this);
 		this.changeLastDate = this.changeLastDate.bind(this);
 		this.changeRequestType = this.changeRequestType.bind(this);
-        this.changeComment = this.changeComment.bind(this);
+		this.changeComment = this.changeComment.bind(this);
 	}
 
 	componentDidMount() {
@@ -65,10 +70,10 @@ class TimeOff extends Component {
 			});
 		});
 
-	
+
 	}
 
-	
+
 
 	changeName(event) {
 		this.setState({
@@ -85,7 +90,7 @@ class TimeOff extends Component {
 				firstDate: event.target.value
 			}
 		});
-    }
+	}
 	changeLastDate(event) {
 		this.setState({
 			newRequest: {
@@ -94,7 +99,7 @@ class TimeOff extends Component {
 			}
 		});
 	}
-	
+
 	changeRequestType(event) {
 		this.setState({
 			newRequest: {
@@ -102,8 +107,8 @@ class TimeOff extends Component {
 				requestType: event.target.value
 			}
 		});
-    }
-    changeComment(event) {
+	}
+	changeComment(event) {
 		this.setState({
 			newRequest: {
 				...this.state.newRequest,
@@ -111,27 +116,27 @@ class TimeOff extends Component {
 			}
 		});
 	}
-	
+
 	onSubmit(event) {
 		event.preventDefault();
 
-	
+
 		const newRequest = {
 			name: this.state.newRequest.name,
 			firstDate: this.state.newRequest.firstDate,
-            lastDate: this.state.newRequest.lastDate,
-            requestType: this.state.newRequest.requestType,
-            comment: this.state.newRequest.comment
-            
+			lastDate: this.state.newRequest.lastDate,
+			requestType: this.state.newRequest.requestType,
+			comment: this.state.newRequest.comment
+
 		};
 
 		axios
-		.post('http://localhost:3001/app/request', newRequest)
-		.then((response) => console.log('New Request:', response.data));
+			.post('http://localhost:4000/app/request', newRequest)
+			.then((response) => console.log('New Request:', response.data));
 
 		this.setState({
 			newRequest: {
-                name:'',
+				name: '',
 				firstDate: '',
 				lastDate: '',
 				requestType: '',
@@ -145,11 +150,12 @@ class TimeOff extends Component {
 
 
 	render() {
+
 		const { classes } = this.props;
 		return (
 			<div className={classes.root}>
 				<Grid container spacing={3}>
-					<Grid item xs={4}>
+					<Grid item xs={12} md={4}>
 						<Paper className={classes.paper}>
 							<h2>Time Off Requests</h2>
 							<form className={classes.root} noValidate autoComplete="off">
@@ -160,38 +166,60 @@ class TimeOff extends Component {
 									value={this.state.newRequest.name}
 								/>
 								<TextField
+									align="right"
 									id="firstDate"
+									type="date"
+									InputLabelProps={{ shrink: true }}
 									label="First Date"
 									onChange={this.changeFirstDate}
 									value={this.state.newRequest.firstDate}
 								/>
 								<TextField
+									align="right"
 									id="lastDate"
+									type="date"
 									label="Last Date"
+									InputLabelProps={{ shrink: true }}
 									onChange={this.changeLastDate}
 									value={this.state.newRequest.lastDate}
 								/>
-									<TextField
-									id="requestType"
-									label="Request Type"
-									onChange={this.changeRequestType}
-									value={this.state.newRequest.requestType}
-								/>
-										<TextField
+
+
+								<FormControl className={classes.formControl}>
+									<InputLabel id="requestType">Request Type</InputLabel>
+									<Select
+										id="requestType"
+
+										onChange={this.changeRequestType}
+										value={this.state.newRequest.requestType}
+									>
+										<MenuItem value={"Paid Time Off (PTO)"}>Paid Time Off (PTO)</MenuItem>
+										<MenuItem value={"Unpaid Time Off"}>Unpaid Time Off</MenuItem>
+										<MenuItem value={"Other (Specify in comments"}>Other (Specify in comments)</MenuItem>
+									</Select>
+								</FormControl>
+
+
+
+
+
+
+
+								<TextField
 									id="comment"
 									label="Comment"
 									onChange={this.changeComment}
 									value={this.state.newRequest.comment}
 								/>
-								<Button variant="contained" color="primary" onClick={this.onSubmit}>
-									Create
+								<Button variant="contained" color="primary"   onClick={this.onSubmit}>
+									Create Request
 								</Button>
 							</form>
 						</Paper>
 					</Grid>
-					<Grid item xs={8}>
+					<Grid item xs={12} md={8}>
 						<Paper className={classes.paper} elevation={3}>
-							
+
 
 							<List className={classes.root}>{this.state.requests}</List>
 						</Paper>

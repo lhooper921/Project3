@@ -22,8 +22,8 @@ class CorePage extends Component {
 			<div>
 				<BrowserRouter>
 					<Switch>
-						{/* <Route path="/" exact component={RegistrationForm} /> */}
-						<Route path="/Register" component={Register} />
+						{/* <Route path="/" exact component={LogIn} />
+						<Route path="/Register" component={Register} /> */}
 						<Route path="/MainPage/Home" component={MainPage} />
 						<Route path="/MainPage" component={MainPage} />
 					</Switch>

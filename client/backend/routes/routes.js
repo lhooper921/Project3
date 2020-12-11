@@ -5,6 +5,7 @@ const UserModel = require('../models/UserModel');
 const MessageModel = require('../models/MessageModel');
 const AnnoucementModel = require('../models/AnnoucementModel');
 const RequestModel = require('../models/RequestModel');
+const ScheduleModel = require('../models/ScheduleModel');
 const bcrypt = require('bcrypt');
 
 router.post('/register', async (req, res) => {
@@ -34,8 +35,10 @@ router.post('/register', async (req, res) => {
 router.post('/message', async (req, res) => {
 	const newMessage = new MessageModel({
 		name: req.body.name,
+		sender: req.body.sender,
 		title: req.body.title,
-		message: req.body.message
+		message: req.body.message,
+		recipient: req.body.recipient
 	});
 
 	newMessage
@@ -82,16 +85,15 @@ router.post('/request', async (req, res) => {
 			res.json(error);
 		});
 });
-// router.get('/user', (req, res) => {
-// 	console.log('User to Search', req.query.name);
-// 	UserModel.find({ firstName: req.query.name })
-// 		.then((user) => {
-// 			res.json(user);
-// 		})
-// 		.catch((err) => {
-// 			res.status(404).json(err);
-// 		});
-// });
+router.get('/users', (req, res) => {
+	UserModel.find({})
+		.then((users) => {
+			res.json(users);
+		})
+		.catch((err) => {
+			res.status(404).json(err);
+		});
+});
 
 // Login
 router.get('/userid', (req, res) => {
@@ -147,6 +149,16 @@ router.get('/requests', (req, res) => {
 	RequestModel.find({})
 		.then((requests) => {
 			res.json(requests);
+		})
+		.catch((err) => {
+			res.status(404).json(err);
+		});
+});
+
+router.get('/schedules', (req, res) => {
+	ScheduleModel.find({})
+		.then((schedules) => {
+			res.json(schedules);
 		})
 		.catch((err) => {
 			res.status(404).json(err);
