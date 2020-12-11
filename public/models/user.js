@@ -14,6 +14,8 @@ const user = new mongoose.Schema({
     lastName: String,
     department: String,
     phoneNumber: String,
+    address: String,
+    email: String,
     role: String,
 });
 

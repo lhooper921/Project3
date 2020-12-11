@@ -10,8 +10,8 @@ import Profile from '../Profile/Profile';
 import Schedule from '../Schedule/Schedule';
 import TimeOff from '../TimeOff/TimeOff';
 import Board from '../Board/Board';
-import Footer from '../Footer/Footer';
-import LogIn from '../LogIn/LogIn';
+// import Footer from '../Footer/Footer';
+// import LogIn from '../LogIn/LogIn';
 
 class MainPage extends Component {
 	componentDidMount() {
@@ -25,11 +25,11 @@ class MainPage extends Component {
 				<BrowserRouter>
 					<NavBar />
 					<Switch>
-						<Route path="/MainPage/Home" component={Home} />
-						<Route path="/MainPage/Profile" component={Profile} />
-						<Route path="/MainPage/Schedule" component={Schedule} />
-						<Route path="/MainPage/TimeOff" component={TimeOff} />
-						<Route path="/MainPage/Board" component={Board} />
+						<Route path="/Home" component={Home} />
+						<Route path="/Profile" component={Profile} />
+						<Route path="/Schedule" component={Schedule} />
+						<Route path="/TimeOff" component={TimeOff} />
+						<Route path="/Board" component={Board} />
 						{/* <Route path="/" exact component={LogIn} /> */}
 					</Switch>
 				</BrowserRouter>

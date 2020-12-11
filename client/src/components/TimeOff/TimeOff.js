@@ -55,7 +55,7 @@ class TimeOff extends Component {
 	}
 
 	componentDidMount() {
-		axios.get('http://localhost:4000/app/requests').then((response) => {
+		axios.get('http://localhost:3001/app/requests').then((response) => {
 			const requests = response.data.map((request) => (
 				<TimeOffElement name={request.name} firstDate={request.firstDate} lastDate={request.lastDate} requestType={request.requestType} comment={request.comment} key={request.id} />
 			));
@@ -126,7 +126,7 @@ class TimeOff extends Component {
 		};
 
 		axios
-		.post('http://localhost:4000/app/request', newRequest)
+		.post('http://localhost:3001/app/request', newRequest)
 		.then((response) => console.log('New Request:', response.data));
 
 		this.setState({
