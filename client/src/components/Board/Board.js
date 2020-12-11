@@ -95,13 +95,15 @@ class Board extends Component {
 					name: response.data[0].firstName
 				}
 			});
+
+			console.log('user ID:', this.state.newMessage);
 		});
 
 		axios.get('http://localhost:4000/app/messages').then((response) => {
 			response.data.map((message) => {
 				if (message.recipient === this.state.newMessage.sender) {
 					const newMessage = {
-						name: message.sender,
+						name: message.name,
 						title: message.title,
 						message: message.message,
 						id: message._id
@@ -122,7 +124,7 @@ class Board extends Component {
 			response.data.map((message) => {
 				if (message.sender === this.state.newMessage.sender) {
 					const newMessage = {
-						name: message.name,
+						name: message.name2,
 						title: message.title,
 						message: message.message,
 						id: message._id
@@ -168,8 +170,6 @@ class Board extends Component {
 			});
 
 			this.setState({ users: resusers });
-
-			console.log('users state', this.state.users);
 		});
 	}
 
@@ -215,7 +215,7 @@ class Board extends Component {
 
 		const newMessage = {
 			name: this.state.newMessage.name,
-
+			name2: this.state.newMessage.name2,
 			title: this.state.newMessage.title,
 			message: this.state.newMessage.message,
 			sender: this.state.newMessage.sender,
@@ -226,14 +226,7 @@ class Board extends Component {
 			.post('http://localhost:4000/app/message', newMessage)
 			.then((response) => console.log('New Message:', response.data));
 
-		this.setState({
-			newMessage: {
-				message: '',
-				title: ''
-			}
-		});
-
-		console.log('State:', this.state);
+		console.log('State:', newMessage);
 
 		// this.componentDidMount();
 	}
@@ -267,13 +260,11 @@ class Board extends Component {
 
 		var mm = today.getMonth() + 1;
 		var yyyy = today.getFullYear();
-		var hh = today.getHours();
-		var nn = today.getMinutes();
 
 		const newAnnoucement = {
 			content: this.state.newAnnoucement.content,
 			title: this.state.newAnnoucement.title,
-			date: hh + ':' + nn + ' - ' + mm + '/' + dd + '/' + yyyy
+			date: mm + '/' + dd + '/' + yyyy
 		};
 
 		axios
@@ -304,9 +295,19 @@ class Board extends Component {
 	};
 
 	handleChange = (event) => {
-		console.log(event.target);
 		this.setState({ user: event.target.value });
 		this.state.user = event.target.value;
+
+		axios.get('http://localhost:4000/app/userid', { params: { id: event.target.value } }).then((response) => {
+			console.log(response.data[0].firstName);
+			this.setState({
+				newMessage: {
+					name2: response.data[0].firstName,
+					name: this.state.newMessage.name,
+					sender: this.state.newMessage.sender
+				}
+			});
+		});
 	};
 
 	render() {
@@ -342,14 +343,16 @@ class Board extends Component {
 									Post
 								</Button>
 							</form>
+							<br />
 
 							<List className={classes.root}>{this.state.annoucements}</List>
 						</Paper>
 					</Grid>
 					<Grid item xs={8}>
 						<Paper className={classes.paper} elevation={3}>
-							<h2>Received</h2>
+							<h2>Inbox</h2>
 							<List className={classes.root}>{this.state.receivedMessages}</List>
+							<br />
 							<h2>Sent</h2>
 							<form className={classes.root} className={classes.input} noValidate autoComplete="off">
 								<FormControl className={classes.formControl}>

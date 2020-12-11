@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -28,12 +27,11 @@ const useStyles = (theme) => ({
 	},
 	formControl: {
 		margin: theme.spacing(1),
-		minWidth: 120,
+		minWidth: 120
 	},
 	selectEmpty: {
-		marginTop: theme.spacing(2),
-	},
-
+		marginTop: theme.spacing(2)
+	}
 });
 
 class TimeOff extends Component {
@@ -47,8 +45,7 @@ class TimeOff extends Component {
 				lastDate: '',
 				requestType: '',
 				comment: ''
-			},
-
+			}
 		};
 
 		this.onSubmit = this.onSubmit.bind(this);
@@ -60,9 +57,16 @@ class TimeOff extends Component {
 	}
 
 	componentDidMount() {
-		axios.get('http://localhost:4000/app/requests').then((response) => {
+		axios.get('http://localhost:3001/app/requests').then((response) => {
 			const requests = response.data.map((request) => (
-				<TimeOffElement name={request.name} firstDate={request.firstDate} lastDate={request.lastDate} requestType={request.requestType} comment={request.comment} key={request.id} />
+				<TimeOffElement
+					name={request.name}
+					firstDate={request.firstDate}
+					lastDate={request.lastDate}
+					requestType={request.requestType}
+					comment={request.comment}
+					key={request.id}
+				/>
 			));
 
 			this.setState({
@@ -70,10 +74,27 @@ class TimeOff extends Component {
 			});
 		});
 
+		const userId = this.loadStoraged();
 
+		axios.get('http://localhost:4000/app/userid', { params: { id: userId } }).then((response) => {
+			this.setState({
+				newRequest: {
+					name: response.data[0].firstName + ' ' + response.data[0].lastName
+				}
+			});
+		});
 	}
 
+	loadStoraged() {
+		if (JSON.parse(localStorage.getItem('users'))) {
+			var storedUsers = JSON.parse(localStorage.getItem('users'));
 
+			return storedUsers[0].id;
+		} else {
+			console.log('not storaged');
+			return 0;
+		}
+	}
 
 	changeName(event) {
 		this.setState({
@@ -120,14 +141,12 @@ class TimeOff extends Component {
 	onSubmit(event) {
 		event.preventDefault();
 
-
 		const newRequest = {
 			name: this.state.newRequest.name,
 			firstDate: this.state.newRequest.firstDate,
 			lastDate: this.state.newRequest.lastDate,
 			requestType: this.state.newRequest.requestType,
 			comment: this.state.newRequest.comment
-
 		};
 
 		axios
@@ -147,10 +166,7 @@ class TimeOff extends Component {
 		this.componentDidMount();
 	}
 
-
-
 	render() {
-
 		const { classes } = this.props;
 		return (
 			<div className={classes.root}>
@@ -191,26 +207,20 @@ class TimeOff extends Component {
 									value={this.state.newRequest.lastDate}
 								/>
 
-
 								<FormControl className={classes.formControl}>
 									<InputLabel id="requestType">Request Type</InputLabel>
 									<Select
 										id="requestType"
-
 										onChange={this.changeRequestType}
 										value={this.state.newRequest.requestType}
 									>
-										<MenuItem value={"Paid Time Off (PTO)"}>Paid Time Off (PTO)</MenuItem>
-										<MenuItem value={"Unpaid Time Off"}>Unpaid Time Off</MenuItem>
-										<MenuItem value={"Other (Specify in comments"}>Other (Specify in comments)</MenuItem>
+										<MenuItem value={'Paid Time Off (PTO)'}>Paid Time Off (PTO)</MenuItem>
+										<MenuItem value={'Unpaid Time Off'}>Unpaid Time Off</MenuItem>
+										<MenuItem value={'Other (Specify in comments'}>
+											Other (Specify in comments)
+										</MenuItem>
 									</Select>
 								</FormControl>
-
-
-
-
-
-
 
 								<TextField
 									id="comment"
@@ -218,7 +228,7 @@ class TimeOff extends Component {
 									onChange={this.changeComment}
 									value={this.state.newRequest.comment}
 								/>
-								<Button variant="contained" color="primary"   onClick={this.onSubmit}>
+								<Button variant="contained" color="primary" onClick={this.onSubmit}>
 									Create Request
 								</Button>
 							</form>
@@ -226,8 +236,6 @@ class TimeOff extends Component {
 					</Grid>
 					<Grid item xs={12} md={8}>
 						<Paper className={classes.paper} elevation={3}>
-
-
 							<List className={classes.root}>{this.state.requests}</List>
 						</Paper>
 					</Grid>
@@ -236,7 +244,5 @@ class TimeOff extends Component {
 		);
 	}
 }
-
-
 
 export default withStyles(useStyles)(TimeOff);

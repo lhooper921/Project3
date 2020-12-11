@@ -19,28 +19,30 @@ import Paper from '@material-ui/core/Paper';
 
 const useStyles = (theme) => ({
 	table: {
-		minWidth: 650,
+		minWidth: 650
 	},
+	row: {
+		backgroundColor: 'lightblue',
+		fontColor: 'white'
+	}
 });
 
 class ScheduleElement extends Component {
 	state = {};
-	render() {
 
-		
+	render() {
+		const { classes } = this.props;
 		return (
 			<div>
 				<ListItem alignItems="flex-start">
-
 					<ListItemText
-						primary= {this.props.weekNumber}
+						primary={this.props.weekNumber}
 						secondary={
 							<React.Fragment>
 								<TableContainer component={Paper}>
 									<Table className={this.table} aria-label="simple table">
 										<TableHead>
-											<TableRow>
-
+											<TableRow className={classes.row}>
 												<TableCell>Monday</TableCell>
 												<TableCell>Tuesday</TableCell>
 												<TableCell>Wednesday</TableCell>

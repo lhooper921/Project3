@@ -4,6 +4,7 @@ import image from "./images/bannerImage.jpg"
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import { format, compareAsc, getISOWeek, add, addWeeks, startOfWeek, endOfWeek } from 'date-fns';
 
 import company from './images/company.jpg';
 import User from './User';
@@ -12,9 +13,10 @@ import Messagess from './Messages';
 import MessageElement from '../Board/MessageElement';
 import AnnoucementElement from '../Board/AnnoucementElement';
 import CurrentSchedule from './CurentSchedule';
+import ScheduleElement from '../Schedule/ScheduleElement'
 import List from '@material-ui/core/List';
 
-import axios from 'axios';
+
 import pushPin from './images/pushPinBlue.png'
 import './Home.css'
 // import { createMuiTheme } from '@material-ui/core/styles';
@@ -42,12 +44,12 @@ import './Home.css'
 // 	},
 //   });
 
+import axios from 'axios';
 const useStyles = (theme) => ({
 	root: {
 		flexGrow: 1,
 		marginLeft: '25px',
 		marginRight: '25px',
-
 	},
 	paper: {
 		padding: theme.spacing(3),
@@ -64,7 +66,6 @@ const useStyles = (theme) => ({
 
 	
 });
-
 class Home extends Component {
 	state = {
 		id: '',
@@ -73,15 +74,17 @@ class Home extends Component {
 		department: '',
 		position: '',
 		messages: [],
-		announcements: []
+		allmessages: [],
+		announcements: [],
+		schedules: [],
+		allSchedules: [],
+		userSchedules: []
 	};
 
 	componentDidMount() {
 		const userId = this.loadStoraged();
 
 		axios.get('http://localhost:4000/app/userid', { params: { id: userId } }).then((response) => {
-			console.log('User From the DB:', response.data);
-
 			this.setState({
 				id: response.data[0]._id,
 				name: response.data[0].firstName,
@@ -89,17 +92,37 @@ class Home extends Component {
 				department: response.data[0].department,
 				position: response.data[0].position
 			});
-
-			console.log(this.state);
 		});
 
+		// axios.get('http://localhost:4000/app/messages').then((response) => {
+		// 	const messages = response.data.map((message) => (
+		// 		<MessageElement name={message.name} title={message.title} message={message.message} key={message.id} />
+		// 	));
+
+		// 	this.setState({
+		// 		messages: messages
+		// 	});
+		// });
+
 		axios.get('http://localhost:4000/app/messages').then((response) => {
-			const messages = response.data.map((message) => (
+			response.data.map((message) => {
+				if (message.recipient === this.state.id) {
+					const newMessage = {
+						name: message.name,
+						title: message.title,
+						message: message.message,
+						id: message._id
+					};
+					this.state.allmessages.push(newMessage);
+				}
+			});
+
+			const Rmessages = this.state.allmessages.map((message) => (
 				<MessageElement name={message.name} title={message.title} message={message.message} key={message.id} />
 			));
 
 			this.setState({
-				messages: messages
+				messages: Rmessages
 			});
 		});
 
@@ -110,6 +133,53 @@ class Home extends Component {
 
 			this.setState({
 				announcements: annoucements
+			});
+		});
+
+		axios.get('http://localhost:4000/app/schedules').then((response) => {
+			response.data.map((schedule) => {
+				const newSchedule = {
+					userId: schedule.userId,
+					weekNumber: schedule.weekNumber,
+					monday: schedule.monday,
+					tuesday: schedule.tuesday,
+					wednesday: schedule.wednesday,
+					thursday: schedule.thursday,
+					friday: schedule.friday,
+					saturday: schedule.saturday,
+					sunday: schedule.sunday
+				};
+				if (schedule.userId === userId) {
+					this.state.userSchedules.push(newSchedule);
+				} else {
+					this.state.allSchedules.push(newSchedule);
+				}
+			});
+			const date = new Date();
+			const todaysDate = format(date, 'MM.dd.yyyy');
+			var weekNum1 = getISOWeek(new Date(todaysDate));
+
+			this.state.userSchedules.map((schedule) => {
+				if (schedule.weekNumber == weekNum1) {
+					const AuxSchedule = (
+						<ScheduleElement
+							userId={schedule.userId}
+							weekNumber={schedule.weekNumber}
+							monday={schedule.monday}
+							tuesday={schedule.tuesday}
+							wednesday={schedule.wednesday}
+							thursday={schedule.thursday}
+							friday={schedule.friday}
+							saturday={schedule.saturday}
+							sunday={schedule.sunday}
+							key={schedule.id}
+						/>
+					);
+
+					this.setState({
+						schedules: AuxSchedule
+					});
+				}
 			});
 		});
 	}
@@ -152,15 +222,19 @@ class Home extends Component {
 							</Paper>
 						</Grid>
 						<Grid item xs={12} md={8}>
-							<Paper elevation={3} className={classes.paper}>
+						
+
+							<Paper className={classes.paper} elevation={3}>
 								<img  src={pushPin} alt="Logo" width="55px" height="40px"  />
-								<h2>Current Schedule</h2>
-								<CurrentSchedule />
+								<h2>Current Schedule </h2>
+
+								<List className={classes.root}>{this.state.schedules}</List>
 							</Paper>
 						</Grid>
 
 						<Grid item xs={12} md={4}>
 							<Paper elevation={3} className={classes.paper}>
+							<img  src={pushPin} alt="Logo" width="55px" height="40px"  />
 								<h2>Annoucements</h2>
 								{/* <Annoucement /> */}
 								<List className={classes.messages}>{this.state.announcements}</List>
@@ -168,6 +242,7 @@ class Home extends Component {
 						</Grid>
 						<Grid item xs={12} md={8}>
 							<Paper elevation={3} className={classes.paper}>
+							<img  src={pushPin} alt="Logo" width="55px" height="40px"  />
 								<h2>Messages</h2>
 								{/* <Messagess /> */}
 								<List className={classes.messages}>{this.state.messages}</List>
@@ -179,5 +254,4 @@ class Home extends Component {
 		);
 	}
 }
-
 export default withStyles(useStyles)(Home);

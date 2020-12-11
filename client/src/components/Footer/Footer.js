@@ -43,7 +43,7 @@ class Footer extends Component {
              
               © 2020 Ana Luna | Aldo Carrillo | Kanoa McKay | Lauren Hooper
             
-                    <a  href="https://github.com/lhooper921" target="_blank"><GitHubIcon />Lauren Github</a>
+                   
                   
                 
               

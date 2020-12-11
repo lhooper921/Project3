@@ -1,18 +1,18 @@
-.nav{
+nav{
 
-      display: flex;
+    
       justify-content: space-around;
-     align-items: center;
+   
       min-height: 10vh;
-      background: dodgerblue;
+      background-image: url(../Home/images/cork.jpg);
       color: black;
-      margin: 10px;
+    
 
 
 }
 .nav-wrapper{
-      background-color: rgb(154,154,154);
-      /* background-image: url(../Home/images/frame.jpg); */
+      background-color: none;
+      
 }
 .navlink{
       color: white;
@@ -34,13 +34,16 @@
     }
 
 .navHeader{
-      font-size: xx-large;
+      font-size: 18px;
       font-weight: bold;
       margin-left: 35px;
+      
 }
+
 
 body{
 
       padding-left: 60px;
       padding-right: 60px;
 }
+
