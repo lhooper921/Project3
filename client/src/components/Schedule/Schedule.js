@@ -1,12 +1,10 @@
 
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-
 import ScheduleElement from './ScheduleElement';
-import { format, compareAsc, getISOWeek, add, addWeeks, startOfWeek, endOfWeek } from 'date-fns';
+import { format, getISOWeek, addWeeks, startOfWeek, endOfWeek } from 'date-fns';
 import { List, TextField, Button, Paper, Grid, MenuItem, FormControl, Select, InputLabel, FormHelperText, } from '@material-ui/core';
 import axios from 'axios';
-
 import CreateIcon from '@material-ui/icons/Create';
 
 
@@ -319,7 +317,7 @@ class Schedule extends Component {
     return (
       <div className={classes.root}>
         <Grid container spacing={3}>
-          <Grid item xs={3}>
+          <Grid item xs={12} md={3}>
             <Paper className={classes.paper}>
 
               <h3 > Create New Schedule <CreateIcon /></h3>
@@ -511,7 +509,7 @@ class Schedule extends Component {
               </form>
             </Paper>
           </Grid>
-          <Grid item xs={9}>
+          <Grid item xs={12} md={9}>
             <Paper className={classes.paper} elevation={3}>
 
               <h2>Current Week  </h2>

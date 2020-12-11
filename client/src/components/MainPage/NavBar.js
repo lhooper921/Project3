@@ -16,16 +16,16 @@ class NavBar extends Component {
 
 	render() {
 		return (
-			<div>
-				<div className="row">
-					<div className="col s12 m12 l12">
+			// <div>
+			// 	<div className="row">
+			// 		<div className="col s12 m12 l12">
 						<nav>
 							<div className="nav-wrapper teal">
 								<a className="navHeader" href="/">
 									{/* <img src={logo} alt="Logo" width="50px" /> */}
 									The Boring Company
 								</a>
-
+								<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 								<ul id="nav-mobile" className="right hide-on-med-and-down">
 									<li>
 										<Link to="/MainPage/Home" className="navlink">
@@ -62,9 +62,9 @@ class NavBar extends Component {
 								</ul>
 							</div>
 						</nav>
-					</div>
-				</div>
-			</div>
+			// 		</div>
+			// 	</div>
+			// </div>
 		);
 	}
 }

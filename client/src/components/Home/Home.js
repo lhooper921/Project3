@@ -104,7 +104,7 @@ class Home extends Component {
 								<img src={company} alt="Logo" width="500px" />
 							</Paper>
 						</Grid>
-						<Grid item xs={4}>
+						<Grid item xs={12} md={4}>
 							<Paper className={classes.paper}>
 								<h2>User</h2>
 								<User
@@ -115,21 +115,21 @@ class Home extends Component {
 								/>
 							</Paper>
 						</Grid>
-						<Grid item xs={8}>
+						<Grid item xs={12} md={8}>
 							<Paper className={classes.paper}>
 								<h2>Current Schedule</h2>
 								<CurrentSchedule />
 							</Paper>
 						</Grid>
 
-						<Grid item xs={4}>
+						<Grid item xs={12} md={4}>
 							<Paper className={classes.paper}>
 								<h2>Annoucements</h2>
 								{/* <Annoucement /> */}
 								<List className={classes.messages}>{this.state.announcements}</List>
 							</Paper>
 						</Grid>
-						<Grid item xs={8}>
+						<Grid item xs={12} md={8}>
 							<Paper className={classes.paper}>
 								<h2>Messages</h2>
 								{/* <Messagess /> */}
