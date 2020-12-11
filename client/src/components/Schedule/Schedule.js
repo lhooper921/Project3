@@ -20,7 +20,7 @@ import {
 import axios from 'axios';
 import CreateIcon from '@material-ui/icons/Create';
 
-import image from "../Home/images/bannerImage.jpg"
+import image from '../Home/images/bannerImage.jpg';
 
 const useStyles = (theme) => ({
 	root: {
@@ -30,7 +30,7 @@ const useStyles = (theme) => ({
 	},
 	paper: {
 		padding: theme.spacing(2),
-		textAlign: 'center',
+		textAlign: 'left',
 		color: theme.palette.text.secondary,
 		backgroundColor: 'lightgray'
 	},

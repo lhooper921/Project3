@@ -14,7 +14,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import axios from 'axios';
 
-import image from "../Home/images/bannerImage.jpg"
+import image from '../Home/images/bannerImage.jpg';
 
 const useStyles = (theme) => ({
 	root: {
@@ -26,7 +26,9 @@ const useStyles = (theme) => ({
 		padding: theme.spacing(2),
 		textAlign: 'center',
 		color: theme.palette.text.secondary,
-		backgroundColor: 'lightgray'
+		backgroundColor: 'lightgray',
+		marginLeft: '25px',
+		marginRight: '25px'
 	},
 	texts: {
 		margin: 'auto',
@@ -306,13 +308,11 @@ class Board extends Component {
 		return (
 			<div className={classes.root}>
 				<Grid container spacing={3}>
-				<Grid item xs={12}>
-							<Paper className={classes.paper}>
-	
-
-								<img class ="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}}/>
-							</Paper>
-						</Grid>
+					<Grid item xs={12}>
+						<Paper className={classes.paper}>
+							<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
+						</Paper>
+					</Grid>
 					<Grid item xs={4}>
 						<Paper className={classes.paper}>
 							<h2>Announcements</h2>

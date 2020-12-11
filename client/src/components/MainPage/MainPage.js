@@ -30,7 +30,7 @@ class MainPage extends Component {
 					<Route path="/MainPage/TimeOff" component={TimeOff} />
 					<Route path="/MainPage/Board" component={Board} />
 				</Switch>
-
+				<br />
 				<Footer />
 			</div>
 		);

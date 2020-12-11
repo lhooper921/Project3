@@ -49,7 +49,7 @@ const useStyles = (theme) => ({
 		flexGrow: 1,
 		marginLeft: '25px',
 		marginRight: '25px',
-		backgroundColor: 'floralwhite',
+		// backgroundColor: 'floralwhite',
 		padding: '25px'
 	},
 	paper: {
@@ -65,6 +65,9 @@ const useStyles = (theme) => ({
 	messages: {
 		width: '100%',
 		backgroundColor: 'white'
+	},
+	schedule: {
+		backgroundColor: 'floralwhite'
 	}
 });
 class Home extends Component {
@@ -223,7 +226,7 @@ class Home extends Component {
 								<img src={pushPin} alt="Logo" width="55px" height="40px" />
 								<h2>Current Schedule </h2>
 
-								<List className={classes.root}>{this.state.schedules}</List>
+								<List className={classes.schedule}>{this.state.schedules}</List>
 							</Paper>
 						</Grid>
 
@@ -245,6 +248,8 @@ class Home extends Component {
 						</Grid>
 					</Grid>
 				</div>
+				<br />
+				<br />
 			</div>
 		);
 	}
