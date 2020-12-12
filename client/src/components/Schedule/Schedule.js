@@ -19,26 +19,58 @@ import {
 } from '@material-ui/core';
 import axios from 'axios';
 import CreateIcon from '@material-ui/icons/Create';
+import pushPin from '../Home/images/pushPinBlue.png';
+import image from '../Home/images/bluebanner.jpg';
 
-import image from '../Home/images/bannerImage.jpg';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+import Hidden from '@material-ui/core/Hidden';
 const useStyles = (theme) => ({
 	root: {
-		alignItems: 'center',
-		width: '100%',
-		backgroundColor: 'whitesmoke'
+		flexGrow: 1,
+		marginLeft: '25px',
+		marginRight: '25px',
+		// backgroundColor: 'floralwhite',
+		padding: '25px'
 	},
 	paper: {
-		padding: theme.spacing(2),
-		textAlign: 'left',
+		padding: theme.spacing(3),
+		paddingBottom: theme.spacing(4),
+		paddingTop: theme.spacing(0),
+		textAlign: 'center',
 		color: theme.palette.text.secondary,
-		backgroundColor: 'lightgray'
+		backgroundColor: 'lightgray',
+		marginBottom: '25px'
+
+	},
+	paper2: {
+
+
+		textAlign: 'center',
+		color: theme.palette.text.secondary,
+		backgroundColor: '#F0F0F0',
+
+	},
+	paper3: {
+
+		textAlign: 'center',
+		color: theme.palette.text.secondary,
+		backgroundColor: '#F0F0F0',
+
 	},
 	texts: {
 		margin: 'auto',
 		width: '50%',
 		border: '3px solid teal',
 		padding: '30px'
+	},
+	input: {
+		backgroundColor: '#F0F0F0',
+
 	},
 	formControl: {
 		margin: theme.spacing(1),
@@ -372,206 +404,227 @@ class Schedule extends Component {
 		var weekNum2 = getISOWeek(new Date(resultWeek));
 
 		return (
-			<div className={classes.root}>
-				<Grid container spacing={3}>
-					<Grid item xs={4}>
-						<Paper className={classes.paper}>
-							<h3>
-								{' '}
-								Create New Schedule <CreateIcon />
-							</h3>
-							<p>For the Week of: </p>
-							<p>
-								{startOfNextWeek} - {endOfNextWeek}
-							</p>
-							<p>Week # {weekNum2}/53</p>
+			<div className="container-fluid">
+				<div className={classes.root}>
+					<Grid container spacing={3}>
 
-							<form className={classes.root} noValidate autoComplete="off">
-								<TextField
-									id="userId"
-									label="User's Name"
-									// onChange={this.changeuserId}
-									value={this.state.user.name}
-								/>
+					<Hidden smDown>
+						<Grid item xs={12}>
+							<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
+						</Grid>
+						</Hidden>
 
-								<Button
-									variant="contained"
-									color="primary"
-									onClick={this.onSubmit}
-									className={classes.button}
-									size="large"
-								>
-									Create schedule
+
+						<Grid item xs={12} md={4}>
+							<Paper elevation={3} className={classes.paper}>
+								<img src={pushPin} alt="Logo" width="55px" height="40px" />
+								<h2>
+
+									Create Schedule <CreateIcon />
+								</h2>
+								<p style={{ fontSize: '18px' }}>
+									{startOfNextWeek} - {endOfNextWeek}
+								</p>
+								<p style={{ fontSize: '12px' }}>Week {weekNum2}/53</p>
+								<Accordion style={{ backgroundColor: '#5dafff ' }}>
+									<AccordionSummary
+									style={{ color:'white', fontSize: '18px', textAlign:'center'}}
+										expandIcon={<ExpandMoreIcon />}
+										aria-controls="panel1a-content"
+										id="panel1a-header"
+									>
+										Create New Schedule
+									</AccordionSummary>
+									<AccordionDetails>
+
+
+
+										<Paper elevation={3} className={classes.paper3} style={{ paddingTop: '20px' }}>
+
+
+
+											<form className={classes.root} noValidate autoComplete="off">
+												<TextField
+													style={{ width: '50%' }}
+													align="right"
+													id="userId"
+													label="User's Name"
+													// onChange={this.changeuserId}
+													value={this.state.user.name}
+												/>
+												<br />
+												
+
+												<FormControl style={{ width: '75%' }} className={classes.formControl}>
+													<InputLabel id="demo-simple-select-label">Monday</InputLabel>
+													<Select
+
+
+														align="right"
+														id="monday"
+														type="text"
+														InputLabelProps={{ shrink: true }}
+														label="Monday"
+														onChange={this.changemonday}
+														value={this.state.newSchedule.monday}
+													>
+														<MenuItem value={'Morning'}>Morning 6:00am - 3:00pm</MenuItem>
+														<MenuItem value={'Mid'}>Mid 10:00am - 3:00pm</MenuItem>
+														<MenuItem value={'Evening'}>Evening 3:00pm - 11:00pm </MenuItem>
+														<MenuItem value={'Off'}>Off </MenuItem>
+													</Select>
+													<FormHelperText>Select Shift</FormHelperText>
+												</FormControl>
+
+												<FormControl style={{ width: '75%' }} className={classes.formControl}>
+													<InputLabel id="demo-simple-select-label">Tuesday</InputLabel>
+													<Select
+														align="right"
+														id="tuesday"
+														type="text"
+														label="Tuesday"
+														InputLabelProps={{ shrink: true }}
+														onChange={this.changetuesday}
+														value={this.state.newSchedule.tuesday}
+													>
+														<MenuItem value={'Morning'}>Morning 6:00am - 3:00pm</MenuItem>
+														<MenuItem value={'Mid'}>Mid 10:00am - 3:00pm</MenuItem>
+														<MenuItem value={'Evening'}>Evening 3:00pm - 11:00pm </MenuItem>
+														<MenuItem value={'Off'}>Off </MenuItem>
+													</Select>
+													<FormHelperText>Select Shift</FormHelperText>
+												</FormControl>
+
+												<FormControl style={{ width: '75%' }} className={classes.formControl}>
+													<InputLabel id="demo-simple-select-label"
+													>Wednesday</InputLabel>
+													<Select
+														align="right"
+														id="wednesday"
+														type="text"
+														label="wednesday"
+														InputLabelProps={{ shrink: true }}
+														onChange={this.changewednesday}
+														value={this.state.newSchedule.wednesday}
+													>
+														<MenuItem value={'Morning'}>Morning 6:00am - 3:00pm</MenuItem>
+														<MenuItem value={'Mid'}>Mid 10:00am - 3:00pm</MenuItem>
+														<MenuItem value={'Evening'}>Evening 3:00pm - 11:00pm </MenuItem>
+														<MenuItem value={'Off'}>Off </MenuItem>
+													</Select>
+													<FormHelperText>Select Shift</FormHelperText>
+												</FormControl>
+
+												<FormControl style={{ width: '75%' }} className={classes.formControl}>
+													<InputLabel id="demo-simple-select-label">Thursday</InputLabel>
+													<Select
+														align="right"
+														id="thursday"
+														label="thursday"
+														type="text"
+														InputLabelProps={{ shrink: true }}
+														onChange={this.changethursday}
+														value={this.state.newSchedule.thursday}
+													>
+														<MenuItem value={'Morning'}>Morning 6:00am - 3:00pm</MenuItem>
+														<MenuItem value={'Mid'}>Mid 10:00am - 3:00pm</MenuItem>
+														<MenuItem value={'Evening'}>Evening 3:00pm - 11:00pm </MenuItem>
+														<MenuItem value={'Off'}>Off </MenuItem>
+													</Select>
+													<FormHelperText>Select Shift</FormHelperText>
+												</FormControl>
+
+												<FormControl style={{ width: '75%' }} className={classes.formControl}>
+													<InputLabel id="demo-simple-select-label">Friday</InputLabel>
+													<Select
+														align="right"
+														id="friday"
+														label="friday"
+														type="text"
+														onChange={this.changefriday}
+														value={this.state.newSchedule.friday}
+														InputLabelProps={{ shrink: true }}
+													>
+														<MenuItem value={'Morning'}>Morning 6:00am - 3:00pm</MenuItem>
+														<MenuItem value={'Mid'}>Mid 10:00am - 3:00pm</MenuItem>
+														<MenuItem value={'Evening'}>Evening 3:00pm - 11:00pm </MenuItem>
+														<MenuItem value={'Off'}>Off </MenuItem>
+													</Select>
+													<FormHelperText>Select Shift</FormHelperText>
+												</FormControl>
+
+												<FormControl style={{ width: '75%' }} className={classes.formControl}>
+													<InputLabel id="demo-simple-select-label">Saturday</InputLabel>
+													<Select
+														align="right"
+														id="saturday"
+														label="saturday"
+														type="text"
+														onChange={this.changesaturday}
+														value={this.state.newSchedule.saturday}
+														InputLabelProps={{ shrink: true }}
+													>
+														<MenuItem value={'Morning'}>Morning 6:00am - 3:00pm</MenuItem>
+														<MenuItem value={'Mid'}>Mid 10:00am - 3:00pm</MenuItem>
+														<MenuItem value={'Evening'}>Evening 3:00pm - 11:00pm </MenuItem>
+														<MenuItem value={'Off'}>Off </MenuItem>
+													</Select>
+													<FormHelperText>Select Shift</FormHelperText>
+												</FormControl>
+
+												<FormControl style={{ width: '75%' }} className={classes.formControl}>
+													<InputLabel id="demo-simple-select-label">Sunday</InputLabel>
+													<Select
+														align="right"
+														id="sunday"
+														label="sunday"
+														type="time"
+														onChange={this.changesunday}
+														value={this.state.newSchedule.sunday}
+														InputLabelProps={{ shrink: true }}
+													>
+														<MenuItem value={'Morning'}>Morning 6:00am - 3:00pm</MenuItem>
+														<MenuItem value={'Mid'}>Mid 10:00am - 3:00pm</MenuItem>
+														<MenuItem value={'Evening'}>Evening 3:00pm - 11:00pm </MenuItem>
+														<MenuItem value={'Off'}>Off </MenuItem>
+													</Select>
+													<FormHelperText>Select Shift</FormHelperText>
+												</FormControl>
+												<br />
+												<Button variant="contained" color="primary" onClick={this.onSubmit}>
+													Create schedule
 								</Button>
-								<br />
-								{/* <FormControl className={classes.formControl}>
-                  <InputLabel id="demo-simple-select-label">Week Number</InputLabel>
-                  <Select
-                     id="weekNumber"
-                     label='Week Number'
-                     type="text"
-                     onChange={this.changeweekNumber}
-                     value={this.state.newSchedule.weekNumber}
-                  >
-                    <MenuItem value={weekNum2}>Next Week: #{weekNum2}</MenuItem>
-                  
-                  </Select>
-                  <FormHelperText>Select Week Number</FormHelperText>
-                </FormControl> */}
+											</form>
+										</Paper>
+								</AccordionDetails>
+						</Accordion>
+							</Paper>
+						</Grid>
 
-								<FormControl className={classes.formControl}>
-									<InputLabel id="demo-simple-select-label">Monday</InputLabel>
-									<Select
-										align="right"
-										id="monday"
-										type="text"
-										InputLabelProps={{ shrink: true }}
-										label="Monday"
-										onChange={this.changemonday}
-										value={this.state.newSchedule.monday}
-									>
-										<MenuItem value={'Morning'}>Morning 6:00am - 3:00pm</MenuItem>
-										<MenuItem value={'Mid'}>Mid 10:00am - 3:00pm</MenuItem>
-										<MenuItem value={'Evening'}>Evening 3:00pm - 11:00pm </MenuItem>
-										<MenuItem value={'Off'}>Off </MenuItem>
-									</Select>
-									<FormHelperText>Select Shift</FormHelperText>
-								</FormControl>
 
-								<FormControl className={classes.formControl}>
-									<InputLabel id="demo-simple-select-label">Tuesday</InputLabel>
-									<Select
-										align="right"
-										id="tuesday"
-										type="text"
-										label="Tuesday"
-										InputLabelProps={{ shrink: true }}
-										onChange={this.changetuesday}
-										value={this.state.newSchedule.tuesday}
-									>
-										<MenuItem value={'Morning'}>Morning 6:00am - 3:00pm</MenuItem>
-										<MenuItem value={'Mid'}>Mid 10:00am - 3:00pm</MenuItem>
-										<MenuItem value={'Evening'}>Evening 3:00pm - 11:00pm </MenuItem>
-										<MenuItem value={'Off'}>Off </MenuItem>
-									</Select>
-									<FormHelperText>Select Shift</FormHelperText>
-								</FormControl>
-								<br />
-
-								<FormControl className={classes.formControl}>
-									<InputLabel id="demo-simple-select-label">Wednesday</InputLabel>
-									<Select
-										align="right"
-										id="wednesday"
-										type="text"
-										label="wednesday"
-										InputLabelProps={{ shrink: true }}
-										onChange={this.changewednesday}
-										value={this.state.newSchedule.wednesday}
-									>
-										<MenuItem value={'Morning'}>Morning 6:00am - 3:00pm</MenuItem>
-										<MenuItem value={'Mid'}>Mid 10:00am - 3:00pm</MenuItem>
-										<MenuItem value={'Evening'}>Evening 3:00pm - 11:00pm </MenuItem>
-										<MenuItem value={'Off'}>Off </MenuItem>
-									</Select>
-									<FormHelperText>Select Shift</FormHelperText>
-								</FormControl>
-
-								<FormControl className={classes.formControl}>
-									<InputLabel id="demo-simple-select-label">Thursday</InputLabel>
-									<Select
-										id="thursday"
-										label="thursday"
-										type="text"
-										InputLabelProps={{ shrink: true }}
-										onChange={this.changethursday}
-										value={this.state.newSchedule.thursday}
-									>
-										<MenuItem value={'Morning'}>Morning 6:00am - 3:00pm</MenuItem>
-										<MenuItem value={'Mid'}>Mid 10:00am - 3:00pm</MenuItem>
-										<MenuItem value={'Evening'}>Evening 3:00pm - 11:00pm </MenuItem>
-										<MenuItem value={'Off'}>Off </MenuItem>
-									</Select>
-									<FormHelperText>Select Shift</FormHelperText>
-								</FormControl>
-								<br />
-
-								<FormControl className={classes.formControl}>
-									<InputLabel id="demo-simple-select-label">Friday</InputLabel>
-									<Select
-										id="friday"
-										label="friday"
-										type="text"
-										onChange={this.changefriday}
-										value={this.state.newSchedule.friday}
-										InputLabelProps={{ shrink: true }}
-									>
-										<MenuItem value={'Morning'}>Morning 6:00am - 3:00pm</MenuItem>
-										<MenuItem value={'Mid'}>Mid 10:00am - 3:00pm</MenuItem>
-										<MenuItem value={'Evening'}>Evening 3:00pm - 11:00pm </MenuItem>
-										<MenuItem value={'Off'}>Off </MenuItem>
-									</Select>
-									<FormHelperText>Select Shift</FormHelperText>
-								</FormControl>
-								<br />
-								<FormControl className={classes.formControl}>
-									<InputLabel id="demo-simple-select-label">Saturday</InputLabel>
-									<Select
-										id="saturday"
-										label="saturday"
-										type="text"
-										onChange={this.changesaturday}
-										value={this.state.newSchedule.saturday}
-										InputLabelProps={{ shrink: true }}
-									>
-										<MenuItem value={'Morning'}>Morning 6:00am - 3:00pm</MenuItem>
-										<MenuItem value={'Mid'}>Mid 10:00am - 3:00pm</MenuItem>
-										<MenuItem value={'Evening'}>Evening 3:00pm - 11:00pm </MenuItem>
-										<MenuItem value={'Off'}>Off </MenuItem>
-									</Select>
-									<FormHelperText>Select Shift</FormHelperText>
-								</FormControl>
-
-								<FormControl className={classes.formControl}>
-									<InputLabel id="demo-simple-select-label">Sunday</InputLabel>
-									<Select
-										id="sunday"
-										label="sunday"
-										type="time"
-										onChange={this.changesunday}
-										value={this.state.newSchedule.sunday}
-										InputLabelProps={{ shrink: true }}
-									>
-										<MenuItem value={'Morning'}>Morning 6:00am - 3:00pm</MenuItem>
-										<MenuItem value={'Mid'}>Mid 10:00am - 3:00pm</MenuItem>
-										<MenuItem value={'Evening'}>Evening 3:00pm - 11:00pm </MenuItem>
-										<MenuItem value={'Off'}>Off </MenuItem>
-									</Select>
-									<FormHelperText>Select Shift</FormHelperText>
-								</FormControl>
-							</form>
-						</Paper>
+						<Grid item xs={12} md={8}>
+							<Paper className={classes.paper} elevation={3}>
+							<img src={pushPin} alt="Logo" width="55px" height="40px" />
+								<h2>Current Week </h2>
+								<h4>
+									{startOfCurrentWeek} - {endOfCurrentWeek}
+								</h4>
+								{/* <p>Week: {weekNum1}/53</p> */}
+								<List className={classes.root}>{this.state.schedules}</List>
+							</Paper>
+							<br />
+							<Paper className={classes.paper} elevation={3}>
+							<img src={pushPin} alt="Logo" width="55px" height="40px" />
+								<h2>Next Week </h2>
+								<h4>
+									{startOfNextWeek} - {endOfNextWeek}
+								</h4>
+								{/* <p>Week: {weekNum2}/53</p> */}
+								<List className={classes.root}>{this.state.schedulesNext}</List>
+							</Paper>
+						</Grid>
 					</Grid>
-					<Grid item xs={8}>
-						<Paper className={classes.paper} elevation={3}>
-							<h2>Current Week </h2>
-							<h4>
-								{startOfCurrentWeek} - {endOfCurrentWeek}
-							</h4>
-							<p>Week: {weekNum1}/53</p>
-							<List className={classes.root}>{this.state.schedules}</List>
-						</Paper>
-						<br />
-						<Paper className={classes.paper} elevation={3}>
-							<h2>Next Week </h2>
-							<h4>
-								{startOfNextWeek} - {endOfNextWeek}
-							</h4>
-							<p>Week: {weekNum2}/53</p>
-							<List className={classes.root}>{this.state.schedulesNext}</List>
-						</Paper>
-					</Grid>
-				</Grid>
+				</div>
 			</div>
 		);
 	}

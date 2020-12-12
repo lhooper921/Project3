@@ -3,17 +3,15 @@ nav{
     
       justify-content: space-around;
    
-      min-height: 10vh;
-      background-image: url(../Home/images/cork.jpg);
+      min-height: 6vh;
+    
       color: black;
     
 
 
 }
 .nav-wrapper{
-      background-color: none;
-      opacity: 90%;
-      
+      background-color: #5dafff;
       
 }
 .navlink{
@@ -33,11 +31,7 @@ nav{
 }
 
     
-    /* mouse over link */
-    a:hover {
-      color: rgb(246,159,105);
-      
-    }
+   
     
     /* selected link */
     a:active {

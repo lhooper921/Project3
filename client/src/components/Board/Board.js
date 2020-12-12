@@ -13,46 +13,85 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import axios from 'axios';
-import Icon from '@material-ui/core/Icon';
+import "./Board.css"
+import image from '../Home/images/bluebanner.jpg';
+import pushPin from '../Home/images/pushPinBlue.png';
+import EmailIcon from '@material-ui/icons/Email';
+import TelegramIcon from '@material-ui/icons/Telegram';
 
-import image from '../Home/images/bannerImage.jpg';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
 
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+import Hidden from '@material-ui/core/Hidden';
 const useStyles = (theme) => ({
 	root: {
-		alignItems: 'center',
-		width: '100%',
-		backgroundColor: 'whitesmoke'
+		flexGrow: 1,
+		marginLeft: '25px',
+		marginRight: '25px',
+		// backgroundColor: 'floralwhite',
+		padding: '25px'
 	},
+	// paper: {
+	// 	padding: theme.spacing(2),
+
+	// 	textAlign: 'center',
+	// 	color: theme.palette.text.secondary,
+	// 	backgroundColor: 'lightgray',
+	// 	// marginLeft: '25px',
+	// 	// marginRight: '25px',
+	// 	marginBottom: '25px'
+	// },
 	paper: {
-		padding: theme.spacing(2),
+		padding: theme.spacing(3),
+		paddingBottom: theme.spacing(4),
+		paddingTop: theme.spacing(0),
 		textAlign: 'center',
 		color: theme.palette.text.secondary,
 		backgroundColor: 'lightgray',
-		marginLeft: '25px',
-		marginRight: '25px'
+		marginBottom: '25px'
+
+	},
+	paper2: {
+
+
+		textAlign: 'center',
+		color: theme.palette.text.secondary,
+		backgroundColor: '#F0F0F0',
+
+	},
+
+	paper3: {
+
+		textAlign: 'center',
+		color: theme.palette.text.secondary,
+		backgroundColor: '#F0F0F0',
+
 	},
 	texts: {
 		margin: 'auto',
 		width: '50%',
 		border: '3px solid teal',
-		padding: '30px'
+		padding: '30px',
+		backgroundColor: '#F0F0F0'
 	},
 	input: {
-		backgroundColor: 'lightblue'
+		backgroundColor: '#F0F0F0',
+
 	},
 	formControl: {
 		margin: theme.spacing(1),
-		minWidth: 120
+		minWidth: 120,
+		backgroundColor: '#F0F0F0'
+
 	},
+
 	selectEmpty: {
 		marginTop: theme.spacing(2)
 	},
-	paper2: {
-		padding: theme.spacing(2),
-		textAlign: 'left',
-		color: theme.palette.text.secondary,
-		backgroundColor: 'lightblue'
-	},
+
 	element: {
 		marginLeft: '20px'
 	},
@@ -325,115 +364,161 @@ class Board extends Component {
 		const { classes } = this.props;
 
 		return (
-			<div className={classes.root}>
-				<Grid container spacing={3}>
-					<Grid item xs={12}>
-						<Paper className={classes.paper}>
+			<div className="container-fluid">
+				<div className={classes.root}>
+					<Grid container spacing={3}>
+					<Hidden smDown>
+						<Grid item xs={12}>
 							<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
-						</Paper>
-					</Grid>
-					<Grid item xs={4}>
-						<Paper className={classes.paper}>
-							<h2>Announcements</h2>
-							<Paper className={classes.paper2} elevation={5}>
-								<form className={classes.root} className={classes.input} noValidate autoComplete="off">
-									<TextField
-										id="title"
-										label="Title"
-										onChange={this.changeATitle}
-										value={this.state.newAnnoucement.title}
-									/>
-									<TextField
-										id="announcement"
-										label="Announcement"
-										onChange={this.changeAContent}
-										value={this.state.newAnnoucement.content}
-									/>
-									<br />
+						</Grid>
+						</Hidden>
 
-									<Button
-										className={classes.button}
-										variant="contained"
-										color="primary"
-										onClick={this.onASubmit}
-										size="large"
+
+						<Grid item xs={12} md={4}>
+							<Paper elevation={3} className={classes.paper}>
+								<img src={pushPin} alt="Logo" width="55px" height="40px" />
+
+								<h2>Announcements</h2>
+									<Accordion style={{ backgroundColor: '#5dafff ', marginBottom: '25px' }}>
+									<AccordionSummary
+										style={{ color: 'white', fontSize: '18px', textAlign: 'center', }}
+										expandIcon={<ExpandMoreIcon />}
+										aria-controls="panel1a-content"
+										id="panel1a-header"
 									>
-										Post
-									</Button>
-								</form>
+										Create New Annoucement
+									</AccordionSummary>
+									<AccordionDetails>
+
+										<Paper className={classes.paper3} style={{ marginTop: '25px' }}>
+
+											<form className={classes.root} noValidate autoComplete="off">
+
+
+												<TextField
+													style={{ width: '50%' }}
+													id="title"
+													label="Title"
+													variant="outlined"
+													onChange={this.changeATitle}
+													value={this.state.newAnnoucement.title}
+												/>
+
+												<TextField
+													style={{ width: '80%', margin: '25px', alignContent: 'center' }}
+													id="annoucement"
+													label="Annoucement"
+													variant="outlined"
+													multiline
+													rows={4}
+													onChange={this.changeAContent}
+													value={this.state.newAnnoucement.content}
+												/>
+
+												<Button variant="contained" color="primary" onClick={this.onASubmit}>
+													Post
+								</Button>
+											</form>
+										</Paper>
+									</AccordionDetails>
+								</Accordion>
+								<Paper elevation={3} className={classes.paper2}>
+									<List className={classes.root}>{this.state.annoucements}</List>
+								</Paper>
+
+
+
 							</Paper>
-							<br />
+						</Grid>
 
-							<List className={classes.root}>{this.state.annoucements}</List>
-						</Paper>
-					</Grid>
-					<Grid item xs={8}>
-						<Paper className={classes.paper} elevation={3}>
-							<h2>Inbox</h2>
-							<List className={classes.root}>{this.state.receivedMessages}</List>
-							<br />
-						</Paper>
-						<br />
 
-						<Paper className={classes.paper} elevation={3}>
-							<h2>Sent</h2>
+						<Grid item xs={12} md={8}>
+							<Paper className={classes.paper} elevation={3}>
+								<img src={pushPin} alt="Logo" width="55px" height="40px" />
+								<h2> Messages</h2>
 
-							<Paper className={classes.paper2} elevation={5}>
-								<form className={classes.root} className={classes.input} noValidate autoComplete="off">
-									<FormControl className={classes.formControl}>
-										<InputLabel id="demo-simple-select-label" className={classes.element}>
-											User
-										</InputLabel>
-										<Select
-											labelId="demo-simple-select-label"
-											id="demo-simple-select"
-											value={this.state.user}
-											onChange={this.handleChange}
-										>
-											{this.state.users.map((user, index) => (
-												<MenuItem value={user.id} id={index}>
-													{user.name}
-												</MenuItem>
-											))}
-										</Select>
-										<FormHelperText>Recipient</FormHelperText>
-									</FormControl>
-
-									<TextField
-										className={classes.element}
-										id="title"
-										label="Title"
-										onChange={this.changeTitle}
-										value={this.state.newMessage.title}
-									/>
-
-									<TextField
-										className={classes.element}
-										id="message"
-										label="Message"
-										onChange={this.changeMessage}
-										value={this.state.newMessage.message}
-									/>
-									<Button
-										variant="contained"
-										color="primary"
-										onClick={this.onSubmit}
-										className={classes.button}
-										endIcon={<Icon>send</Icon>}
-										size="large"
+								<Accordion style={{ backgroundColor: '#5dafff ',  }}>
+									<AccordionSummary
+										style={{ color: 'white', fontSize: '18px', textAlign: 'center' }}
+										expandIcon={<ExpandMoreIcon />}
+										aria-controls="panel1a-content"
+										id="panel1a-header"
 									>
-										Send
-									</Button>
-								</form>
-							</Paper>
-							<br />
+										Write a New Message
+									</AccordionSummary>
+									<AccordionDetails>
+										<Paper className={classes.paper3} elevation={6} style={{ paddingTop: '20px' ,
+										width:'100%'
+									}}>
+										
+									<form className={classes.root} noValidate autoComplete="off">
+												<FormControl className={classes.formControl}
+													style={{ width: '25%', margin: '25px', alignContent: 'center' }}>
+													<InputLabel id="demo-simple-select-label">User</InputLabel>
+													<Select
 
-							<List className={classes.root}>{this.state.sentMessages}</List>
-						</Paper>
+														variant="outlined"
+														labelId="demo-simple-select-label"
+														id="demo-simple-select"
+														value={this.state.user}
+														onChange={this.handleChange}
+													>
+														{this.state.users.map((user, index) => (
+															<MenuItem value={user.id} id={index}>
+																{user.name}
+															</MenuItem>
+														))}
+													</Select>
+													<FormHelperText>Recipient</FormHelperText>
+												</FormControl>
+												<TextField
+													style={{ width: '25%', margin: '25px', alignContent: 'center' }}
+													id="title"
+													variant="outlined"
+													label="Title"
+													onChange={this.changeTitle}
+													value={this.state.newMessage.title}
+												/>
+
+												<TextField
+													style={{ width: '90%', alignContent: 'center' }}
+
+													id="message"
+													label="Message"
+													variant="outlined"
+													multiline
+													rows={4}
+													onChange={this.changeMessage}
+													value={this.state.newMessage.message}
+												/>
+												<Button variant="contained" color="primary" style={{ margin: '15px', alignContent: 'center' }} onClick={this.onSubmit}>
+													Create
+								</Button>
+
+											</form>
+										</Paper>
+									</AccordionDetails>
+								</Accordion></Paper>
+								<Grid item xs={12}>
+								<Paper className={classes.paper} elevation={3}>
+								<img src={pushPin} alt="Logo" width="55px" height="40px" />
+								<h4 style={{ margin: '25px' }}>Inbox <EmailIcon fontSize="medium" /></h4>
+								<List className={classes.root}>{this.state.receivedMessages}</List>
+								
+								
+							
+						
+									
+									
+
+
+									<h4 style={{ margin: '25px' }}>Sent Messages <TelegramIcon  fontSize="medium"/> </h4>
+									<List className={classes.root}>{this.state.sentMessages}</List>
+							</Paper>
+								</Grid>
+						</Grid>
 					</Grid>
-				</Grid>
-				<br />
-				<br />
+				</div>
 			</div>
 		);
 	}
