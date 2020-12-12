@@ -15,6 +15,25 @@
 
 ## User Story
 
+AS an employee for a big or small company
+I WANT to have the ablity to have an employee portal 
+SO THAT I can view my schedule, submit time-off requests 
+AND communicate with my coworkers through announcements and direct messages.
+
+## Acceptance Criteria
+
+GIVEN an employee portal
+WHEN I register and enter my user credentilas I will
+THEN be given access to an employee dashboard containing a summary of recent activity
+WHEN I click on Board on the navigation bar and hyperlink
+THEN it will display announcements and messages I have received and I can send messages
+WHEN I click on Schedule on the navigation bar and hyperlink
+THEN it will display my current week schedule and next week schedule
+WHEN I click on Time Off on the navigation bar
+THEN it will display a request time off form with a list of past requests
+WHEN I click Personal Info on the navigation bar
+THEN it will display my personal information and allow me to edit and update the fields
+
 
 ## Demo
 
