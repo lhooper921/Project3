@@ -12,6 +12,7 @@ dotenv.config();
 mongoose
 	.connect('mongodb://localhost/Company-App', {
 		userCreateIndex: true,
+		useUnifiedTopology: true,
 		useNewUrlParser: true,
 		useFindAndModify: false
 	})

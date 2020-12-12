@@ -25,30 +25,30 @@ class NavBar extends Component {
 									{/* <img src={logo} alt="Logo" width="50px" /> */}
 									The Boring Company
 								</a>
-								<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+								<a href="#" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a>
 								<ul id="nav-mobile" className="right hide-on-med-and-down">
 									<li>
-										<Link to="/Home" className="navlink">
+										<Link to="/MainPage/Home" className="navlink">
 											Home
 										</Link>
 									</li>
 									<li>
-										<Link to="/Board" className="navlink">
+										<Link to="/MainPage/Board" className="navlink">
 											Board
 										</Link>
 									</li>
 									<li>
-										<Link to="/Schedule" className="navlink">
+										<Link to="/MainPage/Schedule" className="navlink">
 											Schedule
 										</Link>
 									</li>
 									<li>
-										<Link to="/TimeOff" className="navlink">
+										<Link to="/MainPage/TimeOff" className="navlink">
 											Time Off
 										</Link>
 									</li>
 									<li>
-										<Link to="/Profile" className="navlink">
+										<Link to="/MainPage/Profile" className="navlink">
 											Personal Info
 										</Link>
 									</li>

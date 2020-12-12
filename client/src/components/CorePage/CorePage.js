@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // Import Materialize
 import M from 'materialize-css';
 
-// import LogIn from '../LogIn/LogIn';
+import LogIn from '../LogIn/LogIn';
 
 // import RegistrationForm from '../Register/RegistrationForm'
 
@@ -22,8 +22,8 @@ class CorePage extends Component {
 			<div>
 				<BrowserRouter>
 					<Switch>
-						{/* <Route path="/" exact component={LogIn} />
-						<Route path="/Register" component={Register} /> */}
+						<Route path="/" exact component={LogIn} />
+						<Route path="/Register" component={Register} />
 						<Route path="/MainPage/Home" component={MainPage} />
 						<Route path="/MainPage" component={MainPage} />
 					</Switch>

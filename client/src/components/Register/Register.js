@@ -11,6 +11,8 @@ import { Container, Row, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import logo from "../avatar/1.png";
+
 const useStyles = (theme) => ({
 	root: {
 		flexGrow: 1,
@@ -34,6 +36,7 @@ class Register extends Component {
 	constructor() {
 		super();
 		this.state = {
+			avatarID: '',
 			firstName: '',
 			lastName: '',
 			email: '',
@@ -44,12 +47,19 @@ class Register extends Component {
 			address: ''
 		};
 
+		this.changeAvatarID = this.changeAvatarID.bind(this);
 		this.changeFirstName = this.changeFirstName.bind(this);
 		this.changeLastName = this.changeLastName.bind(this);
 		this.changeEmail = this.changeEmail.bind(this);
 		this.changeDepartment = this.changeDepartment.bind(this);
 		this.changePassword = this.changePassword.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
+	}
+
+	changeAvatarID(event) {
+		this.setState({
+			avatarID: event.targer.value
+		});
 	}
 
 	changeFirstName(event) {
@@ -82,6 +92,7 @@ class Register extends Component {
 		event.preventDefault();
 
 		const registered = {
+			avatarID: this.state.avatarID,
 			firstName: this.state.firstName,
 			lastName: this.state.lastName,
 			email: this.state.email,
@@ -97,6 +108,7 @@ class Register extends Component {
 			.then((response) => console.log('User Registered', response.data));
 
 		this.setState({
+			avatarID: '',
 			firstName: '',
 			lastName: '',
 			email: '',
@@ -118,6 +130,11 @@ class Register extends Component {
 							<h2>Registration </h2>
 							<Container className={classes.texts}>
 								<Row>
+								<h4>Select your Avatar:</h4>
+								<Button><img src={logo} alt="Logo" width="50px" /></Button>
+
+								</Row>
+								<Row>
 									<TextField
 										id="FirstName"
 										label="First Name"
@@ -125,7 +142,6 @@ class Register extends Component {
 										value={this.state.firstName}
 									/>
 								</Row>
-
 								<Row>
 									<TextField
 										id="LastName"
