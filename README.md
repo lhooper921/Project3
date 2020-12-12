@@ -109,5 +109,5 @@ Email:
 
 
 ## Badges
-![GitHub repo size](https://img.shields.io/github/repo-size/melty100/project2)
-![GitHub Commits](https://img.shields.io/github/commit-activity/w/melty100/project2)
+![GitHub repo size](https://img.shields.io/github/repo-size/analuna01/project3)
+![GitHub Commits](https://img.shields.io/github/commit-activity/w/analuna01/project3)
