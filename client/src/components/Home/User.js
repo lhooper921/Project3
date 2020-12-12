@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 		maxWidth: '100%'
 	},
 	demo: {
-		backgroundColor: theme.palette.background.paper
+		backgroundColor: '#F0F0F0'
 	},
 	title: {
 		margin: theme.spacing(4, 0, 2)

@@ -9,15 +9,11 @@ import './TimeOff.css'
 import image from '../Home/images/bluebanner.jpg';
 import pushPin from '../Home/images/pushPinBlue.png';
 
-<<<<<<< HEAD
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-=======
-import image from '../Home/images/bannerImage.jpg';
->>>>>>> 58d9347e404be58e960f3a3c9a0ac04474f22f5f
 const useStyles = (theme) => ({
 	root: {
 		flexGrow: 1,
@@ -41,14 +37,14 @@ const useStyles = (theme) => ({
 
 		textAlign: 'center',
 		color: theme.palette.text.secondary,
-		backgroundColor: 'white',
+		backgroundColor: '#F0F0F0',
 
 	},
 	paper3: {
 
 		textAlign: 'center',
 		color: theme.palette.text.secondary,
-		backgroundColor: 'white',
+		backgroundColor: '#F0F0F0',
 
 	},
 	texts: {
@@ -58,7 +54,7 @@ const useStyles = (theme) => ({
 		padding: '30px'
 	},
 	input: {
-		backgroundColor: 'white',
+		backgroundColor: '#F0F0F0',
 
 	},
 	formControl: {
@@ -220,7 +216,7 @@ class TimeOff extends Component {
 						<img src={pushPin} alt="Logo" width="55px" height="40px" />
 							<h2>Make a Request</h2>
 							
-							<Accordion style={{ backgroundColor: '#2196F3 ' }}>
+							<Accordion style={{ backgroundColor: '#5dafff ' }}>
 									<AccordionSummary
 									style={{ color:'white'}}
 										expandIcon={<ExpandMoreIcon />}
@@ -243,16 +239,19 @@ class TimeOff extends Component {
 								<br />
 								<br />
 								<TextField
+								 style={{ width: '45%', marginRight:'25px' }}
 									align="right"
 									id="firstDate"
 									type="date"
+									
 									InputLabelProps={{ shrink: true }}
 									label="First Date"
 									onChange={this.changeFirstDate}
 									value={this.state.newRequest.firstDate}
 								/>
-								{'              '}
+								{'            '}
 								<TextField
+								 style={{ width: '45%' }}
 									align="right"
 									id="lastDate"
 									type="date"
@@ -263,7 +262,7 @@ class TimeOff extends Component {
 								/>
 								<br />
 								<br />
-								<FormControl className={classes.formControl}>
+								<FormControl  style={{ width: '45%' }}className={classes.formControl}>
 									<InputLabel id="requestType">Request Type</InputLabel>
 									<Select
 										id="requestType"
@@ -280,6 +279,9 @@ class TimeOff extends Component {
 								<TextField
 									id="comment"
 									label="Comment"
+									variant="outlined"
+									multiline
+									rows={4}
 									onChange={this.changeComment}
 									value={this.state.newRequest.comment}
 								/>

@@ -64,10 +64,10 @@ const useStyles = (theme) => ({
 
 	messages: {
 		width: '100%',
-		backgroundColor: 'white'
+		backgroundColor: '#F0F0F0'
 	},
 	schedule: {
-		backgroundColor: 'floralwhite'
+		backgroundColor: '#F0F0F0'
 	},
 	atag: {
 		color: 'rgba(0, 0, 0, 0.54)'

@@ -50,14 +50,14 @@ const useStyles = (theme) => ({
 
 		textAlign: 'center',
 		color: theme.palette.text.secondary,
-		backgroundColor: 'white',
+		backgroundColor: '#F0F0F0',
 
 	},
 	paper3: {
 
 		textAlign: 'center',
 		color: theme.palette.text.secondary,
-		backgroundColor: 'white',
+		backgroundColor: '#F0F0F0',
 
 	},
 	texts: {
@@ -67,7 +67,7 @@ const useStyles = (theme) => ({
 		padding: '30px'
 	},
 	input: {
-		backgroundColor: 'white',
+		backgroundColor: '#F0F0F0',
 
 	},
 	formControl: {
@@ -416,26 +416,26 @@ class Schedule extends Component {
 								<img src={pushPin} alt="Logo" width="55px" height="40px" />
 								<h2>
 
-									Create New Schedule <CreateIcon />
+									Create Schedule <CreateIcon />
 								</h2>
 								<p style={{ fontSize: '18px' }}>
 									{startOfNextWeek} - {endOfNextWeek}
 								</p>
-								<p style={{ fontSize: '12px' }}>Week # {weekNum2}/53</p>
-								<Accordion style={{ backgroundColor: '#2196F3 ' }}>
+								<p style={{ fontSize: '12px' }}>Week {weekNum2}/53</p>
+								<Accordion style={{ backgroundColor: '#5dafff ' }}>
 									<AccordionSummary
-									style={{ color:'white'}}
+									style={{ color:'white', fontSize: '18px', textAlign:'center'}}
 										expandIcon={<ExpandMoreIcon />}
 										aria-controls="panel1a-content"
 										id="panel1a-header"
 									>
-										<Typography className={classes.heading}>Create New Schedule</Typography>
+										Create New Schedule
 									</AccordionSummary>
 									<AccordionDetails>
 
 
 
-										<Paper className={classes.paper3} style={{ paddingTop: '20px' }}>
+										<Paper elevation={3} className={classes.paper3} style={{ paddingTop: '20px' }}>
 
 
 
@@ -449,20 +449,7 @@ class Schedule extends Component {
 													value={this.state.user.name}
 												/>
 												<br />
-												{/* <FormControl className={classes.formControl}>
-                  <InputLabel id="demo-simple-select-label">Week Number</InputLabel>
-                  <Select
-                     id="weekNumber"
-                     label='Week Number'
-                     type="text"
-                     onChange={this.changeweekNumber}
-                     value={this.state.newSchedule.weekNumber}
-                  >
-                    <MenuItem value={weekNum2}>Next Week: #{weekNum2}</MenuItem>
-                  
-                  </Select>
-                  <FormHelperText>Select Week Number</FormHelperText>
-                </FormControl> */}
+												
 
 												<FormControl style={{ width: '75%' }} className={classes.formControl}>
 													<InputLabel id="demo-simple-select-label">Monday</InputLabel>
@@ -613,20 +600,22 @@ class Schedule extends Component {
 
 						<Grid item xs={8}>
 							<Paper className={classes.paper} elevation={3}>
+							<img src={pushPin} alt="Logo" width="55px" height="40px" />
 								<h2>Current Week </h2>
 								<h4>
 									{startOfCurrentWeek} - {endOfCurrentWeek}
 								</h4>
-								<p>Week: {weekNum1}/53</p>
+								{/* <p>Week: {weekNum1}/53</p> */}
 								<List className={classes.root}>{this.state.schedules}</List>
 							</Paper>
 							<br />
 							<Paper className={classes.paper} elevation={3}>
+							<img src={pushPin} alt="Logo" width="55px" height="40px" />
 								<h2>Next Week </h2>
 								<h4>
 									{startOfNextWeek} - {endOfNextWeek}
 								</h4>
-								<p>Week: {weekNum2}/53</p>
+								{/* <p>Week: {weekNum2}/53</p> */}
 								<List className={classes.root}>{this.state.schedulesNext}</List>
 							</Paper>
 						</Grid>

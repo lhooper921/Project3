@@ -21,11 +21,11 @@ const useStyles = (theme) => ({
 		height: '300px'
 	},
 	row1: {
-		backgroundColor: '#2196f3',
+		backgroundColor: '#5dafff',
 	
 	},
 	row2: {
-		backgroundColor: 'lightblue',
+		backgroundColor: '#F0F0F0',
 		fontColor: 'white'
 	}
 });
@@ -42,28 +42,28 @@ class ScheduleElement extends Component {
 						primary={'Week: ' + this.props.weekNumber + '/53'}
 						secondary={
 							<React.Fragment>
-								<TableContainer component={Paper}>
+								<TableContainer component={Paper} elevation={3}>
 									<Table className={this.table} aria-label="simple table">
 										<TableHead>
-											<TableRow className={classes.row1}>
-												<TableCell style={{ color:'white'}}>Monday</TableCell>
-												<TableCell style={{ color:'white'}}>Tuesday</TableCell>
-												<TableCell style={{ color:'white'}}>Wednesday</TableCell>
-												<TableCell style={{ color:'white'}}>Thursday</TableCell>
-												<TableCell style={{ color:'white'}}>Friday</TableCell>
-												<TableCell style={{ color:'white'}}>Saturday</TableCell>
-												<TableCell style={{ color:'white'}}>Sunday</TableCell>
+											<TableRow style={{ border: '3px solid #11518f', color:'white'}} className={classes.row1}>
+												<TableCell style={{ borderRight: '1px ridge #808080', color:'white', fontSize:'24px'}}>Monday</TableCell>
+												<TableCell style={{ borderRight: '1px ridge #808080', color:'white', fontSize:'24px'}}>Tuesday</TableCell>
+												<TableCell style={{ borderRight: '1px ridge #808080', color:'white', fontSize:'24px'}}>Wednesday</TableCell>
+												<TableCell style={{ borderRight: '1px ridge #808080', color:'white', fontSize:'24px'}}>Thursday</TableCell>
+												<TableCell style={{ borderRight: '1px ridge #808080', color:'white', fontSize:'24px'}}>Friday</TableCell>
+												<TableCell style={{ borderRight: '1px ridge #808080', color:'white', fontSize:'24px'}}>Saturday</TableCell>
+												<TableCell style={{ borderRight: '1px ridge #808080', color:'white', fontSize:'24px'}}>Sunday</TableCell>
 											</TableRow>
 										</TableHead>
 										<TableBody>
-											<TableRow key={this.props.weekNumber} className={classes.row2}>
-												<TableCell align="left">{this.props.monday}</TableCell>
-												<TableCell align="left">{this.props.tuesday}</TableCell>
-												<TableCell align="left">{this.props.wednesday}</TableCell>
-												<TableCell align="left">{this.props.thursday}</TableCell>
-												<TableCell align="left">{this.props.friday}</TableCell>
-												<TableCell align="left">{this.props.saturday}</TableCell>
-												<TableCell align="left">{this.props.sunday}</TableCell>
+											<TableRow style={{ border: '3px solid #11518f'}} key={this.props.weekNumber} className={classes.row2}>
+												<TableCell style={{ fontSize:'16px', borderRight: '1px ridge #808080'}}align="center">{this.props.monday}</TableCell>
+												<TableCell style={{ fontSize:'16px', borderRight: '1px ridge #808080'}}align="center">{this.props.tuesday}</TableCell>
+												<TableCell style={{ fontSize:'16px', borderRight: '1px ridge #808080'}}align="center">{this.props.wednesday}</TableCell>
+												<TableCell style={{ fontSize:'16px', borderRight: '1px ridge #808080'}}align="center">{this.props.thursday}</TableCell>
+												<TableCell style={{ fontSize:'16px', borderRight: '1px ridge #808080'}}align="center">{this.props.friday}</TableCell>
+												<TableCell style={{ fontSize:'16px', borderRight: '1px ridge #808080'}}align="center">{this.props.saturday}</TableCell>
+												<TableCell style={{ fontSize:'16px', borderRight: '1px ridge #808080'}}align="center">{this.props.sunday}</TableCell>
 											</TableRow>
 										</TableBody>
 									</Table>
@@ -72,7 +72,7 @@ class ScheduleElement extends Component {
 						}
 					/>
 				</ListItem>
-				<Divider variant="inset" component="li" />
+			
 			</div>
 		);
 	}
