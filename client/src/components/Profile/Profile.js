@@ -34,81 +34,29 @@ export default function Profile() {
 	const classes = useStyles();
 
 	return (
-		<div className="container-fluid">
+		<div className="container-fluid"> 
 			<div className={classes.root}>
-				<Grid container spacing={3}>
+			<Grid container spacing={3}>
 				<Hidden smDown>
 						<Grid item xs={12}>
 							<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
 						</Grid>
 						</Hidden>
-					<Grid item xs={12}>
-						<Paper className={classes.paper}>
+				
+						<Grid item xs={12}>
 							<h2>Personal info</h2>
+							</Grid>
+							<Grid item xs={12} md={6}>
+								this is a box
+							</Grid>
+							<Grid item xs={12} md={6}>
+								this is a box
+							</Grid>
 
-							{/* <form>
-								<Grid container>
-									<Grid item xs={6}>
-										<Input
-											name="firstName"
-											label="first Name"
-											value=""
-											onChange=""
-										/>
-										<Input
-											variant="outlined"
-											label="Last Name"
-											name="lastName"
-											value=""
-											onChange=""
-										/>
-										<Input
-											variant="outlined"
-											label="Phone Number"
-											value=""
-											onChange=""
-										/>
-										<Input
-											variant="outlined"
-											label="Email"
-											value=""
-											onChange=""
-										/>
-									</Grid>
-									<Grid item xs={6}>
-										<Controls.Select
-											name="departmentId"
-											label="Department"
-											value=""
-											onChange=""
-											options=""
-										/>
-										<Input
-											variant="outlined"
-											label="Address"
-											value=""
-											onChange=""
-										/>
-										<Input
-											variant="outlined"
-											label="Position"
-											value=""
-											onChange=""
-										/>
-										<formControl classname={classes.formControl}>
-											<InputLabel id="Departments">Choose your Department</InputLabel>
-											<Select labelId="Departmnets" value={department} onChange={handleChange}>
-												<MenuItem value="Sales">Sales</MenuItem>
-												<MenuItem value="Finance">Finance</MenuItem>
-												<MenuItem value="Customer Service">Customer Service</MenuItem>
-											</Select>
-										</formControl>
-									</Grid>
-								</Grid>
-							</form> */}
-						</Paper>
+						
+						
 					</Grid>
-				</Grid>
+			
 			</div>
 		</div>
 	);
