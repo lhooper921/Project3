@@ -155,7 +155,7 @@ class Login extends Component {
 							alignItems="center"
 
 						>
-							<Paper className={classes.paper}>
+							<Paper className={classes.paper} style={{ paddingTop: '20px' }}>
 								<h2>Login</h2>
 								<Paper elevation={3} className={classes.paper3} style={{ paddingTop: '20px' }}>
 									<form className={classes.root} style={{ marginBottom: '25px' }} noValidate autoComplete="off">

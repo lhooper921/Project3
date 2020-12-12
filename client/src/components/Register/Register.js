@@ -250,7 +250,7 @@ class Register extends Component {
 										value={this.state.department}
 									/>
 									<Grid item xs={12}>
-										<Button variant="contained"
+										<Button onClick={this.onSubmit} variant="contained"
 												  	style={{
 														   background:'#5dafff', 
 														   margin:'10px', 
