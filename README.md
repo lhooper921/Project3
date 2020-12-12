@@ -11,7 +11,7 @@
 
 
 ## Description
-
+This application serves as the dashboard for employees of The Boring Company. Employees
 
 ## User Story
 
