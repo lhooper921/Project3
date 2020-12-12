@@ -46,6 +46,11 @@ const useStyles = (theme) => ({
 	},
 	selectEmpty: {
 		marginTop: theme.spacing(2)
+	},
+	button: {
+		marginLeft: '20px',
+		marginTop: '30px'
+		// backgroundColor: 'orange'
 	}
 });
 
@@ -388,6 +393,16 @@ class Schedule extends Component {
 									// onChange={this.changeuserId}
 									value={this.state.user.name}
 								/>
+
+								<Button
+									variant="contained"
+									color="primary"
+									onClick={this.onSubmit}
+									className={classes.button}
+									size="large"
+								>
+									Create schedule
+								</Button>
 								<br />
 								{/* <FormControl className={classes.formControl}>
                   <InputLabel id="demo-simple-select-label">Week Number</InputLabel>
@@ -441,6 +456,7 @@ class Schedule extends Component {
 									</Select>
 									<FormHelperText>Select Shift</FormHelperText>
 								</FormControl>
+								<br />
 
 								<FormControl className={classes.formControl}>
 									<InputLabel id="demo-simple-select-label">Wednesday</InputLabel>
@@ -478,6 +494,7 @@ class Schedule extends Component {
 									</Select>
 									<FormHelperText>Select Shift</FormHelperText>
 								</FormControl>
+								<br />
 
 								<FormControl className={classes.formControl}>
 									<InputLabel id="demo-simple-select-label">Friday</InputLabel>
@@ -496,7 +513,7 @@ class Schedule extends Component {
 									</Select>
 									<FormHelperText>Select Shift</FormHelperText>
 								</FormControl>
-
+								<br />
 								<FormControl className={classes.formControl}>
 									<InputLabel id="demo-simple-select-label">Saturday</InputLabel>
 									<Select
@@ -532,10 +549,6 @@ class Schedule extends Component {
 									</Select>
 									<FormHelperText>Select Shift</FormHelperText>
 								</FormControl>
-								<br />
-								<Button variant="contained" color="primary" onClick={this.onSubmit}>
-									Create schedule
-								</Button>
 							</form>
 						</Paper>
 					</Grid>

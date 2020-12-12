@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import logo from './icon.png';
+import logo from './icon2.png';
 import out from './out.png';
 
 // Import Materialize
@@ -57,7 +57,7 @@ class NavBar extends Component {
 						<li>
 							<Link to="/" className="navlink">
 								<a>
-									<img src={out} alt="Logo" width="25px" />
+									<img src={out} alt="Logo" width="30px" />
 								</a>
 							</Link>
 						</li>

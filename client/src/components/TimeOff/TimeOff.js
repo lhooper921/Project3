@@ -6,7 +6,7 @@ import { format, compareAsc } from 'date-fns';
 import { List, TextField, Button, Paper, Grid, MenuItem, FormControl, Select, InputLabel } from '@material-ui/core';
 import axios from 'axios';
 
-import image from "../Home/images/bannerImage.jpg"
+import image from '../Home/images/bannerImage.jpg';
 const useStyles = (theme) => ({
 	root: {
 		alignItems: 'center',
@@ -57,7 +57,7 @@ class TimeOff extends Component {
 	}
 
 	componentDidMount() {
-		axios.get('http://localhost:3001/app/requests').then((response) => {
+		axios.get('http://localhost:4000/app/requests').then((response) => {
 			const requests = response.data.map((request) => (
 				<TimeOffElement
 					name={request.name}
@@ -171,16 +171,14 @@ class TimeOff extends Component {
 		return (
 			<div className={classes.root}>
 				<Grid container spacing={3}>
-				<Grid item xs={12}>
-							<Paper className={classes.paper}>
-	
-
-								<img class ="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}}/>
-							</Paper>
-						</Grid>
+					<Grid item xs={12}>
+						<Paper className={classes.paper}>
+							<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
+						</Paper>
+					</Grid>
 					<Grid item xs={12} md={4}>
 						<Paper className={classes.paper}>
-							<h2>Time Off Requests</h2>
+							<h2>Request Time Off </h2>
 							<form className={classes.root} noValidate autoComplete="off">
 								<TextField
 									id="name"
@@ -188,6 +186,8 @@ class TimeOff extends Component {
 									onChange={this.changeName}
 									value={this.state.newRequest.name}
 								/>
+								<br />
+								<br />
 								<TextField
 									align="right"
 									id="firstDate"
@@ -197,6 +197,7 @@ class TimeOff extends Component {
 									onChange={this.changeFirstDate}
 									value={this.state.newRequest.firstDate}
 								/>
+								{'              '}
 								<TextField
 									align="right"
 									id="lastDate"
@@ -206,7 +207,8 @@ class TimeOff extends Component {
 									onChange={this.changeLastDate}
 									value={this.state.newRequest.lastDate}
 								/>
-
+								<br />
+								<br />
 								<FormControl className={classes.formControl}>
 									<InputLabel id="requestType">Request Type</InputLabel>
 									<Select
@@ -214,11 +216,10 @@ class TimeOff extends Component {
 										onChange={this.changeRequestType}
 										value={this.state.newRequest.requestType}
 									>
-										<MenuItem value={'Paid Time Off (PTO)'}>Paid Time Off (PTO)</MenuItem>
+										<MenuItem value={'Paid Time Off'}>Paid Time Off</MenuItem>
 										<MenuItem value={'Unpaid Time Off'}>Unpaid Time Off</MenuItem>
-										<MenuItem value={'Other (Specify in comments'}>
-											Other (Specify in comments)
-										</MenuItem>
+										<MenuItem value={'Vacations'}>Vacations</MenuItem>
+										<MenuItem value={'Personal Holiday'}>Personal Holiday</MenuItem>
 									</Select>
 								</FormControl>
 
@@ -228,18 +229,25 @@ class TimeOff extends Component {
 									onChange={this.changeComment}
 									value={this.state.newRequest.comment}
 								/>
-								<Button variant="contained" color="primary" onClick={this.onSubmit}>
+								<br />
+								<br />
+								<Button variant="contained" size="large" color="primary" onClick={this.onSubmit}>
 									Create Request
 								</Button>
+								<br />
+								<br />
 							</form>
 						</Paper>
 					</Grid>
 					<Grid item xs={12} md={8}>
 						<Paper className={classes.paper} elevation={3}>
+							<h2> All Your Requests</h2>
 							<List className={classes.root}>{this.state.requests}</List>
 						</Paper>
 					</Grid>
 				</Grid>
+				<br />
+				<br />
 			</div>
 		);
 	}

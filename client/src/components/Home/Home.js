@@ -68,6 +68,9 @@ const useStyles = (theme) => ({
 	},
 	schedule: {
 		backgroundColor: 'floralwhite'
+	},
+	atag: {
+		color: 'rgba(0, 0, 0, 0.54)'
 	}
 });
 class Home extends Component {
@@ -132,7 +135,12 @@ class Home extends Component {
 
 		axios.get('http://localhost:4000/app/annoucements').then((response) => {
 			const annoucements = response.data.map((annoucement) => (
-				<AnnoucementElement title={annoucement.title} content={annoucement.content} date={annoucement.date} />
+				<AnnoucementElement
+					title={annoucement.title}
+					content={annoucement.content}
+					date={annoucement.date}
+					key={annoucement._id}
+				/>
 			));
 
 			this.setState({
@@ -212,7 +220,9 @@ class Home extends Component {
 						<Grid item xs={12} md={4}>
 							<Paper elevation={3} className={classes.paper}>
 								<img src={pushPin} alt="Logo" width="55px" height="40px" />
-								<h2>User </h2>
+								<a href="/MainPage/Profile" className={classes.atag}>
+									<h2>User </h2>
+								</a>
 								<User
 									lastname={this.state.lastname}
 									name={this.state.name}
@@ -224,7 +234,9 @@ class Home extends Component {
 						<Grid item xs={8}>
 							<Paper className={classes.paper} elevation={3}>
 								<img src={pushPin} alt="Logo" width="55px" height="40px" />
-								<h2>Current Schedule </h2>
+								<a href="/MainPage/Schedule" className={classes.atag}>
+									<h2>Current Schedule </h2>
+								</a>
 
 								<List className={classes.schedule}>{this.state.schedules}</List>
 							</Paper>
@@ -233,7 +245,9 @@ class Home extends Component {
 						<Grid item xs={12} md={4}>
 							<Paper elevation={3} className={classes.paper}>
 								<img src={pushPin} alt="Logo" width="55px" height="40px" />
-								<h2>Annoucements</h2>
+								<a href="/MainPage/Board" className={classes.atag}>
+									<h2>Annoucements</h2>
+								</a>
 								{/* <Annoucement /> */}
 								<List className={classes.messages}>{this.state.announcements}</List>
 							</Paper>
@@ -241,7 +255,9 @@ class Home extends Component {
 						<Grid item xs={12} md={8}>
 							<Paper elevation={3} className={classes.paper}>
 								<img src={pushPin} alt="Logo" width="55px" height="40px" />
-								<h2>Messages</h2>
+								<a href="/MainPage/Board" className={classes.atag}>
+									<h2>Messages</h2>
+								</a>
 								{/* <Messagess /> */}
 								<List className={classes.messages}>{this.state.messages}</List>
 							</Paper>
