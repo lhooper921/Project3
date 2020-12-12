@@ -408,10 +408,10 @@ class Schedule extends Component {
 				<div className={classes.root}>
 					<Grid container spacing={3}>
 
-					<Hidden smDown>
-						<Grid item xs={12}>
-							<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
-						</Grid>
+						<Hidden smDown>
+							<Grid item xs={12}>
+								<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
+							</Grid>
 						</Hidden>
 
 
@@ -428,7 +428,7 @@ class Schedule extends Component {
 								<p style={{ fontSize: '12px' }}>Week {weekNum2}/53</p>
 								<Accordion style={{ backgroundColor: '#5dafff ' }}>
 									<AccordionSummary
-									style={{ color:'white', fontSize: '18px', textAlign:'center'}}
+										style={{ color: 'white', fontSize: '18px', textAlign: 'center' }}
 										expandIcon={<ExpandMoreIcon />}
 										aria-controls="panel1a-content"
 										id="panel1a-header"
@@ -453,7 +453,7 @@ class Schedule extends Component {
 													value={this.state.user.name}
 												/>
 												<br />
-												
+
 
 												<FormControl style={{ width: '75%' }} className={classes.formControl}>
 													<InputLabel id="demo-simple-select-label">Monday</InputLabel>
@@ -596,15 +596,15 @@ class Schedule extends Component {
 								</Button>
 											</form>
 										</Paper>
-								</AccordionDetails>
-						</Accordion>
+									</AccordionDetails>
+								</Accordion>
 							</Paper>
 						</Grid>
 
 
 						<Grid item xs={12} md={8}>
 							<Paper className={classes.paper} elevation={3}>
-							<img src={pushPin} alt="Logo" width="55px" height="40px" />
+								<img src={pushPin} alt="Logo" width="55px" height="40px" />
 								<h2>Current Week </h2>
 								<h4>
 									{startOfCurrentWeek} - {endOfCurrentWeek}
@@ -614,7 +614,7 @@ class Schedule extends Component {
 							</Paper>
 							<br />
 							<Paper className={classes.paper} elevation={3}>
-							<img src={pushPin} alt="Logo" width="55px" height="40px" />
+								<img src={pushPin} alt="Logo" width="55px" height="40px" />
 								<h2>Next Week </h2>
 								<h4>
 									{startOfNextWeek} - {endOfNextWeek}
