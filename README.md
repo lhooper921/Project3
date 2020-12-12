@@ -104,10 +104,14 @@ GitHub: https://github.com/lhooper921
 ### Konoa McKay
 
 GitHub: https://github.com/Kanoa89
-Email:
+
 
 
 
 ## Badges
 ![GitHub repo size](https://img.shields.io/github/repo-size/analuna01/project3)
-![GitHub Commits](https://img.shields.io/github/commit-activity/w/analuna01/project3)
+![Top Language](https://img.shields.io/github/languages/top/analuna01/project3)
+![Count Language](https://img.shields.io/github/languages/count/analuna01/project3)
+
+
+
