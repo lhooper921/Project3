@@ -11,7 +11,7 @@
 
 
 ## Description
-This application serves as the dashboard for employees of The Boring Company. Employees
+This application serves as the dashboard for employees of The Boring Company. Employees can send messages to each other, track their schedules, request time off, and view all the information on the main dashboard.
 
 ## User Story
 
@@ -23,7 +23,7 @@ AND communicate with my coworkers through announcements and direct messages.
 ## Acceptance Criteria
 
 GIVEN an employee portal
-WHEN I register and enter my user credentilas I will
+WHEN I register and enter my user credentials I will
 THEN be given access to an employee dashboard containing a summary of recent activity
 WHEN I click on Board on the navigation bar and hyperlink
 THEN it will display announcements and messages I have received and I can send messages
