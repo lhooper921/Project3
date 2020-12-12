@@ -11,13 +11,12 @@ import { Container, Row, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import avatar1 from "../avatar/1.png";
-import avatar2 from "../avatar/2.png";
-import avatar3 from "../avatar/3.png";
-import avatar4 from "../avatar/4.png";
-import avatar5 from "../avatar/5.png";
-import avatar6 from "../avatar/6.png";
-
+import avatar1 from '../avatar/1.png';
+import avatar2 from '../avatar/2.png';
+import avatar3 from '../avatar/3.png';
+import avatar4 from '../avatar/4.png';
+import avatar5 from '../avatar/5.png';
+import avatar6 from '../avatar/6.png';
 
 const useStyles = (theme) => ({
 	root: {
@@ -42,7 +41,14 @@ class Register extends Component {
 	constructor() {
 		super();
 		this.state = {
-			avatarList: [{img:avatar1, id:1}, {img:avatar2, id:2}, {img:avatar3, id:3}, {img:avatar4, id:4}, {img:avatar5, id:5},{img:avatar6, id:6}],
+			avatarList: [
+				{ img: avatar1, id: 1 },
+				{ img: avatar2, id: 2 },
+				{ img: avatar3, id: 3 },
+				{ img: avatar4, id: 4 },
+				{ img: avatar5, id: 5 },
+				{ img: avatar6, id: 6 }
+			],
 			avatar: 1,
 			firstName: '',
 			lastName: '',
@@ -89,8 +95,8 @@ class Register extends Component {
 		});
 	}
 
-	handleAvatarClick(id){
-		this.state.avatar = id
+	handleAvatarClick(id) {
+		this.state.avatar = id;
 		console.log(id);
 	}
 
@@ -110,7 +116,7 @@ class Register extends Component {
 		};
 		console.log(registered);
 		axios
-			.post('/app/register', registered)
+			.post('http://localhost:4000/app/register', registered)
 			.then((response) => console.log('User Registered', response.data));
 
 		this.setState({
@@ -136,16 +142,25 @@ class Register extends Component {
 							<h2>Registration </h2>
 							<Container className={classes.texts}>
 								<Row>
-								<h4>Select your avatar:</h4>
+									<h4>Select your avatar:</h4>
 								</Row>
 
 								<Row>
-									{this.state.avatarList.map( (avatar, key) => {
-										return <Button  key={key} variant="outline-light" size="sm" onClick={(e) => {this.handleAvatarClick(avatar.id)}}><img src={avatar.img} value={avatar.id} alt={avatar.id} width="50px" /></Button>
-	
+									{this.state.avatarList.map((avatar, key) => {
+										return (
+											<Button
+												key={key}
+												variant="outline-light"
+												size="sm"
+												onClick={(e) => {
+													this.handleAvatarClick(avatar.id);
+												}}
+											>
+												<img src={avatar.img} value={avatar.id} alt={avatar.id} width="50px" />
+											</Button>
+										);
 									})}
-								
-								 </Row>
+								</Row>
 								<Row>
 									<TextField
 										id="FirstName"

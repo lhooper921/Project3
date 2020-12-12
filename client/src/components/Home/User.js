@@ -6,6 +6,12 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import Grid from '@material-ui/core/Grid';
+import user1 from '../avatar/1.png';
+import user2 from '../avatar/2.png';
+import user3 from '../avatar/3.png';
+import user4 from '../avatar/4.png';
+import user5 from '../avatar/5.png';
+import user6 from '../avatar/6.png';
 
 import user from './images/user.png';
 
@@ -24,18 +30,40 @@ const useStyles = makeStyles((theme) => ({
 		fontsize: '2.4rem'
 	},
 	img: {
-		width: '160px'
+		width: '140px'
 	}
 }));
 
 export default function User(props) {
 	const classes = useStyles();
 
+	var userimg = <img src={user} alt="Logo" className={classes.img} />;
+	switch (props.avatar) {
+		case 1:
+			userimg = <img src={user1} alt="Logo" className={classes.img} />;
+			break;
+		case 2:
+			userimg = <img src={user2} alt="Logo" className={classes.img} />;
+			break;
+		case 3:
+			userimg = <img src={user3} alt="Logo" className={classes.img} />;
+			break;
+		case 4:
+			userimg = <img src={user4} alt="Logo" className={classes.img} />;
+			break;
+		case 5:
+			userimg = <img src={user5} alt="Logo" className={classes.img} />;
+			break;
+		case 6:
+			userimg = <img src={user6} alt="Logo" className={classes.img} />;
+			break;
+	}
+
 	return (
 		<div className={classes.root}>
 			<Grid container spacing={2}>
 				<Grid item xs={5}>
-					<img src={user} alt="Logo" className={classes.img} />
+					{userimg}
 				</Grid>
 
 				<Grid item xs={7}>

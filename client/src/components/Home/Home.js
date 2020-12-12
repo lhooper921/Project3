@@ -77,6 +77,7 @@ const useStyles = (theme) => ({
 class Home extends Component {
 	state = {
 		id: '',
+		avatar: '',
 		name: '',
 		lastname: '',
 		department: '',
@@ -95,6 +96,7 @@ class Home extends Component {
 		axios.get('http://localhost:4000/app/userid', { params: { id: userId } }).then((response) => {
 			this.setState({
 				id: response.data[0]._id,
+				avatar: response.data[0].avatar,
 				name: response.data[0].firstName,
 				lastname: response.data[0].lastName,
 				department: response.data[0].department,
@@ -195,6 +197,8 @@ class Home extends Component {
 				}
 			});
 		});
+
+		console.log(this.state.avatar);
 	}
 
 	loadStoraged() {
@@ -215,10 +219,10 @@ class Home extends Component {
 			<div className="container-fluid">
 				<div className={classes.root}>
 					<Grid container spacing={3}>
-					<Hidden smDown>
-						<Grid item xs={12}>
-							<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
-						</Grid>
+						<Hidden smDown>
+							<Grid item xs={12}>
+								<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
+							</Grid>
 						</Hidden>
 						<Grid item xs={12} md={4}>
 							<Paper elevation={3} className={classes.paper}>
@@ -227,6 +231,7 @@ class Home extends Component {
 									<h2>User </h2>
 								</a>
 								<User
+									avatar={this.state.avatar}
 									lastname={this.state.lastname}
 									name={this.state.name}
 									department={this.state.department}
