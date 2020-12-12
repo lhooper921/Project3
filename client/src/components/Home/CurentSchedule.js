@@ -11,8 +11,13 @@ import Paper from '@material-ui/core/Paper';
 const useStyles = makeStyles({
 	table: {
 		minWidth: 650,
-		background: 'lightblue'
-	}
+		background: 'rgb(253,164,80, .15)',
+	},
+	// tableCell: {
+	// 	textAlign: 'center',
+	// 	background: 'white',
+	// 	outline:
+	// }
 });
 
 function createData(Text, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday) {
@@ -31,9 +36,9 @@ export default function CurrentSchedule() {
 		<TableContainer component={Paper}>
 			<Table className={classes.table} aria-label="simple table">
 				<TableHead>
-					<TableRow>
-						<TableCell>Time</TableCell>
-						<TableCell align="right">Monday</TableCell>
+					<TableRow component={Paper}>
+					<TableCell   className={classes.tableCell} align="right"></TableCell>
+						<TableCell  className={classes.tableCell} align="right">Monday</TableCell>
 						<TableCell align="right">Tuesday</TableCell>
 						<TableCell align="right">Wednesday</TableCell>
 						<TableCell align="right">Thursday</TableCell>
@@ -44,7 +49,7 @@ export default function CurrentSchedule() {
 				</TableHead>
 				<TableBody>
 					{rows.map((row) => (
-						<TableRow key={row.Text}>
+						<TableRow component={Paper} key={row.Text}>
 							<TableCell component="th" scope="row">
 								{row.Text}
 							</TableCell>

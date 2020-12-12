@@ -6,8 +6,6 @@ import M from 'materialize-css';
 
 import LogIn from '../LogIn/LogIn';
 
-// import RegistrationForm from '../Register/RegistrationForm'
-
 import Register from '../Register/Register';
 import MainPage from '../MainPage/MainPage';
 

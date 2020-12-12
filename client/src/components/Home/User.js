@@ -20,8 +20,11 @@ const useStyles = makeStyles((theme) => ({
 		margin: theme.spacing(4, 0, 2)
 	},
 	text: {
-		fontWeight: 'bold',
-		color: 'teal'
+		color: 'teal',
+		fontsize: '2.4rem'
+	},
+	img: {
+		width: '160px'
 	}
 }));
 
@@ -32,7 +35,7 @@ export default function User(props) {
 		<div className={classes.root}>
 			<Grid container spacing={2}>
 				<Grid item xs={5}>
-					<img src={user} alt="Logo" height="150px" />
+					<img src={user} alt="Logo" className={classes.img} />
 				</Grid>
 
 				<Grid item xs={7}>
@@ -61,43 +64,3 @@ export default function User(props) {
 		</div>
 	);
 }
-
-// import { Container, Row, Col } from 'react-bootstrap';
-// import React from 'react';
-// import { Component } from 'react';
-// import user from './images/user.png';
-
-// class User extends Component {
-// 	constructor(props) {
-// 		super(props);
-// 		this.state = {};
-// 	}
-// 	render() {
-// 		return (
-// 			<Container>
-// 				<Row>
-// 					<Col xs={6}>
-// 						<img src={user} alt="Logo" height="150px" />
-// 					</Col>
-// 					<Col xs={6}>
-// 						<Row>
-// 							<a>Id:</a>
-// 						</Row>
-// 						<Row>
-// 							<a>Name:</a>
-// 						</Row>
-
-// 						<Row>
-// 							<a>Department:</a>
-// 						</Row>
-// 						<Row>
-// 							<a>Position:</a>
-// 						</Row>
-// 					</Col>
-// 				</Row>
-// 			</Container>
-// 		);
-// 	}
-// }
-
-// export default User;

@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+
+import image from './images/bannerImage.jpg';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import { format, compareAsc, getISOWeek, add, addWeeks, startOfWeek, endOfWeek } from 'date-fns';
+
 import company from './images/company.jpg';
 import User from './User';
 import Annoucement from './Annoucements';
@@ -9,23 +13,64 @@ import Messagess from './Messages';
 import MessageElement from '../Board/MessageElement';
 import AnnoucementElement from '../Board/AnnoucementElement';
 import CurrentSchedule from './CurentSchedule';
+import ScheduleElement from '../Schedule/ScheduleElement';
 import List from '@material-ui/core/List';
+
+import pushPin from './images/pushPinBlue.png';
+import './Home.css';
+// import { createMuiTheme } from '@material-ui/core/styles';
+// const theme = createMuiTheme({
+// 	palette: {
+// 	  primary: {
+// 		// light: will be calculated from palette.primary.main,
+// 		main: '#ff4400',
+// 		// dark: will be calculated from palette.primary.main,
+// 		// contrastText: will be calculated to contrast with palette.primary.main
+// 	  },
+// 	  secondary: {
+// 		light: '#0066ff',
+// 		main: '#5e749b',
+// 		// dark: will be calculated from palette.secondary.main,
+// 		contrastText: '#ffcc00',
+// 	  },
+// 	  // Used by `getContrastText()` to maximize the contrast between
+// 	  // the background and the text.
+// 	  contrastThreshold: 3,
+// 	  // Used by the functions below to shift a color's luminance by approximately
+// 	  // two indexes within its tonal palette.
+// 	  // E.g., shift from Red 500 to Red 300 or Red 700.
+// 	  tonalOffset: 0.2,
+// 	},
+//   });
+
 import axios from 'axios';
 const useStyles = (theme) => ({
 	root: {
 		flexGrow: 1,
 		marginLeft: '25px',
-		marginRight: '25px'
+		marginRight: '25px',
+		// backgroundColor: 'floralwhite',
+		padding: '25px'
 	},
 	paper: {
-		padding: theme.spacing(2),
+		padding: theme.spacing(3),
+		paddingBottom: theme.spacing(4),
+		paddingTop: theme.spacing(0),
 		textAlign: 'center',
 		color: theme.palette.text.secondary,
-		backgroundColor: 'lightgray'
+		backgroundColor: 'lightgray',
+		height: '100%'
 	},
+
 	messages: {
 		width: '100%',
 		backgroundColor: 'white'
+	},
+	schedule: {
+		backgroundColor: 'floralwhite'
+	},
+	atag: {
+		color: 'rgba(0, 0, 0, 0.54)'
 	}
 });
 class Home extends Component {
@@ -36,15 +81,17 @@ class Home extends Component {
 		department: '',
 		position: '',
 		messages: [],
-		announcements: []
+		allmessages: [],
+		announcements: [],
+		schedules: [],
+		allSchedules: [],
+		userSchedules: []
 	};
 
 	componentDidMount() {
 		const userId = this.loadStoraged();
 
 		axios.get('http://localhost:4000/app/userid', { params: { id: userId } }).then((response) => {
-			console.log('User From the DB:', response.data);
-
 			this.setState({
 				id: response.data[0]._id,
 				name: response.data[0].firstName,
@@ -52,27 +99,99 @@ class Home extends Component {
 				department: response.data[0].department,
 				position: response.data[0].position
 			});
-
-			console.log(this.state);
 		});
 
+		// axios.get('http://localhost:4000/app/messages').then((response) => {
+		// 	const messages = response.data.map((message) => (
+		// 		<MessageElement name={message.name} title={message.title} message={message.message} key={message.id} />
+		// 	));
+
+		// 	this.setState({
+		// 		messages: messages
+		// 	});
+		// });
+
 		axios.get('http://localhost:4000/app/messages').then((response) => {
-			const messages = response.data.map((message) => (
+			response.data.map((message) => {
+				if (message.recipient === this.state.id) {
+					const newMessage = {
+						name: message.name,
+						title: message.title,
+						message: message.message,
+						id: message._id
+					};
+					this.state.allmessages.push(newMessage);
+				}
+			});
+
+			const Rmessages = this.state.allmessages.map((message) => (
 				<MessageElement name={message.name} title={message.title} message={message.message} key={message.id} />
 			));
 
 			this.setState({
-				messages: messages
+				messages: Rmessages
 			});
 		});
 
 		axios.get('http://localhost:4000/app/annoucements').then((response) => {
 			const annoucements = response.data.map((annoucement) => (
-				<AnnoucementElement title={annoucement.title} content={annoucement.content} date={annoucement.date} />
+				<AnnoucementElement
+					title={annoucement.title}
+					content={annoucement.content}
+					date={annoucement.date}
+					key={annoucement._id}
+				/>
 			));
 
 			this.setState({
 				announcements: annoucements
+			});
+		});
+
+		axios.get('http://localhost:4000/app/schedules').then((response) => {
+			response.data.map((schedule) => {
+				const newSchedule = {
+					userId: schedule.userId,
+					weekNumber: schedule.weekNumber,
+					monday: schedule.monday,
+					tuesday: schedule.tuesday,
+					wednesday: schedule.wednesday,
+					thursday: schedule.thursday,
+					friday: schedule.friday,
+					saturday: schedule.saturday,
+					sunday: schedule.sunday
+				};
+				if (schedule.userId === userId) {
+					this.state.userSchedules.push(newSchedule);
+				} else {
+					this.state.allSchedules.push(newSchedule);
+				}
+			});
+			const date = new Date();
+			const todaysDate = format(date, 'MM.dd.yyyy');
+			var weekNum1 = getISOWeek(new Date(todaysDate));
+
+			this.state.userSchedules.map((schedule) => {
+				if (schedule.weekNumber == weekNum1) {
+					const AuxSchedule = (
+						<ScheduleElement
+							userId={schedule.userId}
+							weekNumber={schedule.weekNumber}
+							monday={schedule.monday}
+							tuesday={schedule.tuesday}
+							wednesday={schedule.wednesday}
+							thursday={schedule.thursday}
+							friday={schedule.friday}
+							saturday={schedule.saturday}
+							sunday={schedule.sunday}
+							key={schedule.id}
+						/>
+					);
+
+					this.setState({
+						schedules: AuxSchedule
+					});
+				}
 			});
 		});
 	}
@@ -90,18 +209,20 @@ class Home extends Component {
 
 	render() {
 		const { classes } = this.props;
+
 		return (
-			<div>
+			<div className="container-fluid">
 				<div className={classes.root}>
 					<Grid container spacing={3}>
 						<Grid item xs={12}>
-							<Paper className={classes.paper}>
-								<img src={company} alt="Logo" width="500px" />
-							</Paper>
+							<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
 						</Grid>
 						<Grid item xs={12} md={4}>
-							<Paper className={classes.paper}>
-								<h2>User</h2>
+							<Paper elevation={3} className={classes.paper}>
+								<img src={pushPin} alt="Logo" width="55px" height="40px" />
+								<a href="/MainPage/Profile" className={classes.atag}>
+									<h2>User </h2>
+								</a>
 								<User
 									lastname={this.state.lastname}
 									name={this.state.name}
@@ -110,29 +231,41 @@ class Home extends Component {
 								/>
 							</Paper>
 						</Grid>
-						<Grid item xs={12} md={8}>
-							<Paper className={classes.paper}>
-								<h2>Current Schedule</h2>
-								<CurrentSchedule />
+						<Grid item xs={8}>
+							<Paper className={classes.paper} elevation={3}>
+								<img src={pushPin} alt="Logo" width="55px" height="40px" />
+								<a href="/MainPage/Schedule" className={classes.atag}>
+									<h2>Current Schedule </h2>
+								</a>
+
+								<List className={classes.schedule}>{this.state.schedules}</List>
 							</Paper>
 						</Grid>
 
 						<Grid item xs={12} md={4}>
-							<Paper className={classes.paper}>
-								<h2>Annoucements</h2>
+							<Paper elevation={3} className={classes.paper}>
+								<img src={pushPin} alt="Logo" width="55px" height="40px" />
+								<a href="/MainPage/Board" className={classes.atag}>
+									<h2>Annoucements</h2>
+								</a>
 								{/* <Annoucement /> */}
 								<List className={classes.messages}>{this.state.announcements}</List>
 							</Paper>
 						</Grid>
 						<Grid item xs={12} md={8}>
-							<Paper className={classes.paper}>
-								<h2>Messages</h2>
+							<Paper elevation={3} className={classes.paper}>
+								<img src={pushPin} alt="Logo" width="55px" height="40px" />
+								<a href="/MainPage/Board" className={classes.atag}>
+									<h2>Messages</h2>
+								</a>
 								{/* <Messagess /> */}
 								<List className={classes.messages}>{this.state.messages}</List>
 							</Paper>
 						</Grid>
 					</Grid>
 				</div>
+				<br />
+				<br />
 			</div>
 		);
 	}

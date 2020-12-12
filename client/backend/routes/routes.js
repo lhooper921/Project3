@@ -11,7 +11,9 @@ const bcrypt = require('bcrypt');
 router.post('/register', async (req, res) => {
 	const saltPassword = await bcrypt.genSalt(10);
 	const securePassword = await bcrypt.hash(req.body.password, saltPassword);
+	console.log(req.body);
 	const newUser = new UserModel({
+		avatar: req.body.avatar,
 		firstName: req.body.firstName,
 		lastName: req.body.lastName,
 		email: req.body.email,
@@ -35,6 +37,7 @@ router.post('/register', async (req, res) => {
 router.post('/message', async (req, res) => {
 	const newMessage = new MessageModel({
 		name: req.body.name,
+		name2: req.body.name2,
 		sender: req.body.sender,
 		title: req.body.title,
 		message: req.body.message,
@@ -85,6 +88,30 @@ router.post('/request', async (req, res) => {
 			res.json(error);
 		});
 });
+
+router.post('/schedule', async (req, res) => {
+	const newSchedule = new ScheduleModel({
+		userId: req.body.userId,
+		weekNumber: req.body.weekNumber,
+		monday: req.body.monday,
+		tuesday: req.body.tuesday,
+		wednesday: req.body.wednesday,
+		thursday: req.body.thursday,
+		friday: req.body.friday,
+		saturday: req.body.saturday,
+		sunday: req.body.sunday
+	});
+
+	newSchedule
+		.save()
+		.then((data) => {
+			res.json(data);
+		})
+		.catch((error) => {
+			res.json(error);
+		});
+});
+
 router.get('/users', (req, res) => {
 	UserModel.find({})
 		.then((users) => {
@@ -114,7 +141,6 @@ router.get('/login', (req, res) => {
 			bcrypt.compare(req.query.password, user[0].password, function(err, response) {
 				if (response === true) {
 					res.json(user[0]._id);
-					console.log(user[0]._id);
 				} else res.json('0');
 
 				//res.json(response);

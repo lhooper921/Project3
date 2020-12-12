@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-	avatarID:{
-		type: String,
+	avatar:{
+		type: Number,
 		required: true
 	},
 	firstName: {

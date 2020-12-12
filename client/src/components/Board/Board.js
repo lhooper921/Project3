@@ -13,6 +13,9 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import axios from 'axios';
+import Icon from '@material-ui/core/Icon';
+
+import image from '../Home/images/bannerImage.jpg';
 
 const useStyles = (theme) => ({
 	root: {
@@ -24,7 +27,9 @@ const useStyles = (theme) => ({
 		padding: theme.spacing(2),
 		textAlign: 'center',
 		color: theme.palette.text.secondary,
-		backgroundColor: 'lightgray'
+		backgroundColor: 'lightgray',
+		marginLeft: '25px',
+		marginRight: '25px'
 	},
 	texts: {
 		margin: 'auto',
@@ -33,7 +38,7 @@ const useStyles = (theme) => ({
 		padding: '30px'
 	},
 	input: {
-		backgroundColor: 'gray'
+		backgroundColor: 'lightblue'
 	},
 	formControl: {
 		margin: theme.spacing(1),
@@ -41,6 +46,20 @@ const useStyles = (theme) => ({
 	},
 	selectEmpty: {
 		marginTop: theme.spacing(2)
+	},
+	paper2: {
+		padding: theme.spacing(2),
+		textAlign: 'left',
+		color: theme.palette.text.secondary,
+		backgroundColor: 'lightblue'
+	},
+	element: {
+		marginLeft: '20px'
+	},
+	button: {
+		marginLeft: '20px',
+		marginTop: '30px'
+		// backgroundColor: 'orange'
 	}
 });
 
@@ -99,7 +118,7 @@ class Board extends Component {
 			response.data.map((message) => {
 				if (message.recipient === this.state.newMessage.sender) {
 					const newMessage = {
-						name: message.sender,
+						name: message.name,
 						title: message.title,
 						message: message.message,
 						id: message._id
@@ -120,7 +139,7 @@ class Board extends Component {
 			response.data.map((message) => {
 				if (message.sender === this.state.newMessage.sender) {
 					const newMessage = {
-						name: message.name,
+						name: message.name2,
 						title: message.title,
 						message: message.message,
 						id: message._id
@@ -166,8 +185,6 @@ class Board extends Component {
 			});
 
 			this.setState({ users: resusers });
-
-			console.log('users state', this.state.users);
 		});
 	}
 
@@ -182,16 +199,6 @@ class Board extends Component {
 		}
 	}
 
-	//Messages vvvv
-
-	// changeName(event) {
-	// 	this.setState({
-	// 		newMessage: {
-	// 			...this.state.newMessage,
-	// 			name: event.target.value
-	// 		}
-	// 	});
-	// }
 	changeTitle(event) {
 		this.setState({
 			newMessage: {
@@ -213,7 +220,7 @@ class Board extends Component {
 
 		const newMessage = {
 			name: this.state.newMessage.name,
-
+			name2: this.state.newMessage.name2,
 			title: this.state.newMessage.title,
 			message: this.state.newMessage.message,
 			sender: this.state.newMessage.sender,
@@ -226,14 +233,13 @@ class Board extends Component {
 
 		this.setState({
 			newMessage: {
-				message: '',
-				title: ''
+				...this.state.newMessage,
+				title: '',
+				message: ''
 			}
 		});
 
-		console.log('State:', this.state);
-
-		// this.componentDidMount();
+		this.componentDidMount();
 	}
 
 	//Annoucement vvvv
@@ -265,13 +271,11 @@ class Board extends Component {
 
 		var mm = today.getMonth() + 1;
 		var yyyy = today.getFullYear();
-		var hh = today.getHours();
-		var nn = today.getMinutes();
 
 		const newAnnoucement = {
 			content: this.state.newAnnoucement.content,
 			title: this.state.newAnnoucement.title,
-			date: hh + ':' + nn + ' - ' + mm + '/' + dd + '/' + yyyy
+			date: mm + '/' + dd + '/' + yyyy
 		};
 
 		axios
@@ -302,9 +306,19 @@ class Board extends Component {
 	};
 
 	handleChange = (event) => {
-		console.log(event.target);
 		this.setState({ user: event.target.value });
 		this.state.user = event.target.value;
+
+		axios.get('http://localhost:4000/app/userid', { params: { id: event.target.value } }).then((response) => {
+			console.log(response.data[0].firstName);
+			this.setState({
+				newMessage: {
+					name2: response.data[0].firstName,
+					name: this.state.newMessage.name,
+					sender: this.state.newMessage.sender
+				}
+			});
+		});
 	};
 
 	render() {
@@ -313,74 +327,113 @@ class Board extends Component {
 		return (
 			<div className={classes.root}>
 				<Grid container spacing={3}>
+					<Grid item xs={12}>
+						<Paper className={classes.paper}>
+							<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
+						</Paper>
+					</Grid>
 					<Grid item xs={4}>
 						<Paper className={classes.paper}>
 							<h2>Announcements</h2>
-							<form className={classes.root} className={classes.input} noValidate autoComplete="off">
-								<TextField
-									id="title"
-									label="Title"
-									onChange={this.changeATitle}
-									value={this.state.newAnnoucement.title}
-								/>
-								<TextField
-									id="annoucement"
-									label="Annoucement"
-									onChange={this.changeAContent}
-									value={this.state.newAnnoucement.content}
-								/>
-								<Button variant="contained" color="primary" onClick={this.onASubmit}>
-									Post
-								</Button>
-							</form>
+							<Paper className={classes.paper2} elevation={5}>
+								<form className={classes.root} className={classes.input} noValidate autoComplete="off">
+									<TextField
+										id="title"
+										label="Title"
+										onChange={this.changeATitle}
+										value={this.state.newAnnoucement.title}
+									/>
+									<TextField
+										id="announcement"
+										label="Announcement"
+										onChange={this.changeAContent}
+										value={this.state.newAnnoucement.content}
+									/>
+									<br />
+
+									<Button
+										className={classes.button}
+										variant="contained"
+										color="primary"
+										onClick={this.onASubmit}
+										size="large"
+									>
+										Post
+									</Button>
+								</form>
+							</Paper>
+							<br />
 
 							<List className={classes.root}>{this.state.annoucements}</List>
 						</Paper>
 					</Grid>
 					<Grid item xs={8}>
 						<Paper className={classes.paper} elevation={3}>
-							<h2>Received</h2>
+							<h2>Inbox</h2>
 							<List className={classes.root}>{this.state.receivedMessages}</List>
-							<h2>Sent</h2>
-							<form className={classes.root} className={classes.input} noValidate autoComplete="off">
-								<FormControl className={classes.formControl}>
-									<InputLabel id="demo-simple-select-label">User</InputLabel>
-									<Select
-										labelId="demo-simple-select-label"
-										id="demo-simple-select"
-										value={this.state.user}
-										onChange={this.handleChange}
-									>
-										{this.state.users.map((user, index) => (
-											<MenuItem value={user.id} id={index}>
-												{user.name}
-											</MenuItem>
-										))}
-									</Select>
-									<FormHelperText>Recipient</FormHelperText>
-								</FormControl>
-								<TextField
-									id="title"
-									label="Title"
-									onChange={this.changeTitle}
-									value={this.state.newMessage.title}
-								/>
+							<br />
+						</Paper>
+						<br />
 
-								<TextField
-									id="message"
-									label="Message"
-									onChange={this.changeMessage}
-									value={this.state.newMessage.message}
-								/>
-								<Button variant="contained" color="primary" onClick={this.onSubmit}>
-									Create
-								</Button>
-							</form>
+						<Paper className={classes.paper} elevation={3}>
+							<h2>Sent</h2>
+
+							<Paper className={classes.paper2} elevation={5}>
+								<form className={classes.root} className={classes.input} noValidate autoComplete="off">
+									<FormControl className={classes.formControl}>
+										<InputLabel id="demo-simple-select-label" className={classes.element}>
+											User
+										</InputLabel>
+										<Select
+											labelId="demo-simple-select-label"
+											id="demo-simple-select"
+											value={this.state.user}
+											onChange={this.handleChange}
+										>
+											{this.state.users.map((user, index) => (
+												<MenuItem value={user.id} id={index}>
+													{user.name}
+												</MenuItem>
+											))}
+										</Select>
+										<FormHelperText>Recipient</FormHelperText>
+									</FormControl>
+
+									<TextField
+										className={classes.element}
+										id="title"
+										label="Title"
+										onChange={this.changeTitle}
+										value={this.state.newMessage.title}
+									/>
+
+									<TextField
+										className={classes.element}
+										id="message"
+										label="Message"
+										onChange={this.changeMessage}
+										value={this.state.newMessage.message}
+									/>
+									<Button
+										variant="contained"
+										color="primary"
+										onClick={this.onSubmit}
+										className={classes.button}
+										endIcon={<Icon>send</Icon>}
+										size="large"
+									>
+										Send
+									</Button>
+								</form>
+							</Paper>
+							<br />
 
 							<List className={classes.root}>{this.state.sentMessages}</List>
 						</Paper>
 					</Grid>
 				</Grid>
+				<br />
+				<br />
 			</div>
 		);
 	}
