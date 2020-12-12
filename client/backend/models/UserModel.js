@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
+	avatar:{
+		type: Number,
+		required: true
+	},
 	firstName: {
 		type: String,
 		required: true

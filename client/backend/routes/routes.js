@@ -11,7 +11,9 @@ const bcrypt = require('bcrypt');
 router.post('/register', async (req, res) => {
 	const saltPassword = await bcrypt.genSalt(10);
 	const securePassword = await bcrypt.hash(req.body.password, saltPassword);
+	console.log(req.body);
 	const newUser = new UserModel({
+		avatar: req.body.avatar,
 		firstName: req.body.firstName,
 		lastName: req.body.lastName,
 		email: req.body.email,
