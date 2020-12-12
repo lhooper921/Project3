@@ -9,11 +9,15 @@ import './TimeOff.css'
 import image from '../Home/images/bluebanner.jpg';
 import pushPin from '../Home/images/pushPinBlue.png';
 
+<<<<<<< HEAD
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+=======
+import image from '../Home/images/bannerImage.jpg';
+>>>>>>> 58d9347e404be58e960f3a3c9a0ac04474f22f5f
 const useStyles = (theme) => ({
 	root: {
 		flexGrow: 1,
@@ -89,7 +93,7 @@ class TimeOff extends Component {
 	}
 
 	componentDidMount() {
-		axios.get('http://localhost:3001/app/requests').then((response) => {
+		axios.get('http://localhost:4000/app/requests').then((response) => {
 			const requests = response.data.map((request) => (
 				<TimeOffElement
 					name={request.name}
@@ -236,6 +240,8 @@ class TimeOff extends Component {
 									onChange={this.changeName}
 									value={this.state.newRequest.name}
 								/>
+								<br />
+								<br />
 								<TextField
 									align="right"
 									id="firstDate"
@@ -245,6 +251,7 @@ class TimeOff extends Component {
 									onChange={this.changeFirstDate}
 									value={this.state.newRequest.firstDate}
 								/>
+								{'              '}
 								<TextField
 									align="right"
 									id="lastDate"
@@ -254,7 +261,8 @@ class TimeOff extends Component {
 									onChange={this.changeLastDate}
 									value={this.state.newRequest.lastDate}
 								/>
-
+								<br />
+								<br />
 								<FormControl className={classes.formControl}>
 									<InputLabel id="requestType">Request Type</InputLabel>
 									<Select
@@ -262,11 +270,10 @@ class TimeOff extends Component {
 										onChange={this.changeRequestType}
 										value={this.state.newRequest.requestType}
 									>
-										<MenuItem value={'Paid Time Off (PTO)'}>Paid Time Off (PTO)</MenuItem>
+										<MenuItem value={'Paid Time Off'}>Paid Time Off</MenuItem>
 										<MenuItem value={'Unpaid Time Off'}>Unpaid Time Off</MenuItem>
-										<MenuItem value={'Other (Specify in comments'}>
-											Other (Specify in comments)
-										</MenuItem>
+										<MenuItem value={'Vacations'}>Vacations</MenuItem>
+										<MenuItem value={'Personal Holiday'}>Personal Holiday</MenuItem>
 									</Select>
 								</FormControl>
 
@@ -276,7 +283,9 @@ class TimeOff extends Component {
 									onChange={this.changeComment}
 									value={this.state.newRequest.comment}
 								/>
-								<Button variant="contained" color="primary" onClick={this.onSubmit}>
+								<br />
+								<br />
+								<Button variant="contained" size="large" color="primary" onClick={this.onSubmit}>
 									Create Request
 								</Button>
 							</form>	
@@ -289,11 +298,13 @@ class TimeOff extends Component {
 					<Grid item xs={12} md={8}>
 						<Paper className={classes.paper} elevation={3}>
 						<img src={pushPin} alt="Logo" width="55px" height="40px" />
-							<h2>All Time Off Requests</h2>
+							<h2>All Your Requests</h2>
 							<List className={classes.root}>{this.state.requests}</List>
 						</Paper>
 					</Grid>
 				</Grid>
+				<br />
+				<br />
 			</div>
 			</div>
 		);

@@ -13,11 +13,18 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import axios from 'axios';
+<<<<<<< HEAD
 import "./Board.css"
 import image from '../Home/images/bluebanner.jpg';
 import pushPin from '../Home/images/pushPinBlue.png';
 import EmailIcon from '@material-ui/icons/Email';
 import TelegramIcon from '@material-ui/icons/Telegram';
+=======
+import Icon from '@material-ui/core/Icon';
+
+import image from '../Home/images/bannerImage.jpg';
+
+>>>>>>> 58d9347e404be58e960f3a3c9a0ac04474f22f5f
 const useStyles = (theme) => ({
 	root: {
 		flexGrow: 1,
@@ -70,8 +77,12 @@ const useStyles = (theme) => ({
 		backgroundColor: 'white'
 	},
 	input: {
+<<<<<<< HEAD
 		backgroundColor: 'white',
 		
+=======
+		backgroundColor: 'lightblue'
+>>>>>>> 58d9347e404be58e960f3a3c9a0ac04474f22f5f
 	},
 	formControl: {
 		margin: theme.spacing(1),
@@ -82,6 +93,20 @@ const useStyles = (theme) => ({
 
 	selectEmpty: {
 		marginTop: theme.spacing(2)
+	},
+	paper2: {
+		padding: theme.spacing(2),
+		textAlign: 'left',
+		color: theme.palette.text.secondary,
+		backgroundColor: 'lightblue'
+	},
+	element: {
+		marginLeft: '20px'
+	},
+	button: {
+		marginLeft: '20px',
+		marginTop: '30px'
+		// backgroundColor: 'orange'
 	}
 });
 
@@ -134,8 +159,6 @@ class Board extends Component {
 					name: response.data[0].firstName
 				}
 			});
-
-			console.log('user ID:', this.state.newMessage);
 		});
 
 		axios.get('http://localhost:4000/app/messages').then((response) => {
@@ -255,9 +278,15 @@ class Board extends Component {
 			.post('http://localhost:4000/app/message', newMessage)
 			.then((response) => console.log('New Message:', response.data));
 
-		console.log('State:', newMessage);
+		this.setState({
+			newMessage: {
+				...this.state.newMessage,
+				title: '',
+				message: ''
+			}
+		});
 
-		// this.componentDidMount();
+		this.componentDidMount();
 	}
 
 	//Annoucement vvvv
@@ -348,6 +377,7 @@ class Board extends Component {
 					<Grid container spacing={3}>
 						<Grid item xs={12}>
 							<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
+<<<<<<< HEAD
 						</Grid>
 
 						<Grid item xs={12} md={4}>
@@ -459,6 +489,112 @@ class Board extends Component {
 						</Grid>
 					</Grid>
 				</div>
+=======
+						</Paper>
+					</Grid>
+					<Grid item xs={4}>
+						<Paper className={classes.paper}>
+							<h2>Announcements</h2>
+							<Paper className={classes.paper2} elevation={5}>
+								<form className={classes.root} className={classes.input} noValidate autoComplete="off">
+									<TextField
+										id="title"
+										label="Title"
+										onChange={this.changeATitle}
+										value={this.state.newAnnoucement.title}
+									/>
+									<TextField
+										id="announcement"
+										label="Announcement"
+										onChange={this.changeAContent}
+										value={this.state.newAnnoucement.content}
+									/>
+									<br />
+
+									<Button
+										className={classes.button}
+										variant="contained"
+										color="primary"
+										onClick={this.onASubmit}
+										size="large"
+									>
+										Post
+									</Button>
+								</form>
+							</Paper>
+							<br />
+
+							<List className={classes.root}>{this.state.annoucements}</List>
+						</Paper>
+					</Grid>
+					<Grid item xs={8}>
+						<Paper className={classes.paper} elevation={3}>
+							<h2>Inbox</h2>
+							<List className={classes.root}>{this.state.receivedMessages}</List>
+							<br />
+						</Paper>
+						<br />
+
+						<Paper className={classes.paper} elevation={3}>
+							<h2>Sent</h2>
+
+							<Paper className={classes.paper2} elevation={5}>
+								<form className={classes.root} className={classes.input} noValidate autoComplete="off">
+									<FormControl className={classes.formControl}>
+										<InputLabel id="demo-simple-select-label" className={classes.element}>
+											User
+										</InputLabel>
+										<Select
+											labelId="demo-simple-select-label"
+											id="demo-simple-select"
+											value={this.state.user}
+											onChange={this.handleChange}
+										>
+											{this.state.users.map((user, index) => (
+												<MenuItem value={user.id} id={index}>
+													{user.name}
+												</MenuItem>
+											))}
+										</Select>
+										<FormHelperText>Recipient</FormHelperText>
+									</FormControl>
+
+									<TextField
+										className={classes.element}
+										id="title"
+										label="Title"
+										onChange={this.changeTitle}
+										value={this.state.newMessage.title}
+									/>
+
+									<TextField
+										className={classes.element}
+										id="message"
+										label="Message"
+										onChange={this.changeMessage}
+										value={this.state.newMessage.message}
+									/>
+									<Button
+										variant="contained"
+										color="primary"
+										onClick={this.onSubmit}
+										className={classes.button}
+										endIcon={<Icon>send</Icon>}
+										size="large"
+									>
+										Send
+									</Button>
+								</form>
+							</Paper>
+							<br />
+
+							<List className={classes.root}>{this.state.sentMessages}</List>
+						</Paper>
+					</Grid>
+				</Grid>
+				<br />
+				<br />
+>>>>>>> 58d9347e404be58e960f3a3c9a0ac04474f22f5f
 			</div>
 		);
 	}

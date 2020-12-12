@@ -139,7 +139,6 @@ router.get('/login', (req, res) => {
 			bcrypt.compare(req.query.password, user[0].password, function(err, response) {
 				if (response === true) {
 					res.json(user[0]._id);
-					console.log(user[0]._id);
 				} else res.json('0');
 
 				//res.json(response);

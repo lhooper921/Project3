@@ -20,9 +20,8 @@ const useStyles = makeStyles((theme) => ({
 		margin: theme.spacing(4, 0, 2)
 	},
 	text: {
-		fontWeight: 'bold',
 		color: 'teal',
-		fontSize: '50px'
+		fontsize: '2.4rem'
 	},
 	img: {
 		width: '160px'
@@ -49,7 +48,11 @@ export default function User(props) {
 								<ListItemText primary="LastName:" secondary={props.lastname} className={classes.text} />
 							</ListItem>
 							<ListItem>
-								<ListItemText primary="Department:" secondary={props.department} />
+								<ListItemText
+									primary="Department:"
+									secondary={props.department}
+									className={classes.text}
+								/>
 							</ListItem>
 							<ListItem>
 								<ListItemText primary="Position:" secondary={props.position} className={classes.text} />
