@@ -2,17 +2,25 @@ import React from 'react';
 import { Component } from 'react';
 
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
+
 import InputAdornment from '@material-ui/core/InputAdornment';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import VpnKey from '@material-ui/icons/VpnKey';
 
-import { Container, Row, Button, Col } from 'react-bootstrap';
+
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import image from '../Home/images/bluebanner.jpg';
+import Hidden from '@material-ui/core/Hidden';
 
+import {
+	
+	TextField,
+	Button,
+	Paper,
+	Grid,
+
+} from '@material-ui/core';
 const useStyles = (theme) => ({
 	root: {
 		flexGrow: 1,
@@ -67,7 +75,7 @@ const useStyles = (theme) => ({
 		marginLeft: '20px',
 		marginTop: '30px'
 	}
-		
+
 });
 
 class Login extends Component {
@@ -129,97 +137,95 @@ class Login extends Component {
 	render() {
 		const { classes } = this.props;
 		return (
-			<div class='container-fluid' style={{ minHeight: '1vh' }}>
+			<div style={{ minHeight: '100vh', }}>
 				<div className={classes.root}>
 					<Grid container spacing={3}>
-						
-						<Grid item 
-						  container
-						  direction="row"
-						  justify="center"
-						  alignItems="center"
-						 
+
+						<Hidden smDown>
+							<Grid item xs={12}>
+								<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
+							</Grid>
+						</Hidden>
+
+						<Grid item
+						xs={12}
+							container
+							direction="row"
+							justify="center"
+							alignItems="center"
+
 						>
 							<Paper className={classes.paper}>
 								<h2>Login</h2>
 								<Paper elevation={3} className={classes.paper3} style={{ paddingTop: '20px' }}>
-								<form className={classes.root} noValidate autoComplete="off">
-	<TextField
-												id="inputUser"
-												label="User"
-												style={{ width: '60%' }} 
-												InputProps={{
-													startAdornment: (
-														<InputAdornment position="start">
-															<AccountCircle />
-														</InputAdornment>
-													)
-												}}
-												onChange={this.changeUser}
-												value={this.state.user}
-												autoFocus
-											/>
-											<TextField
-											style={{ width: '60%' }} 
-												type="password"
-												id="inputPassword"
-												label="Password"
-												InputProps={{
-													startAdornment: (
-														<InputAdornment position="start">
-															<VpnKey />
-														</InputAdornment>
-													)
-												}}
-												onChange={this.changePassword}
-												value={this.state.password}
-											/>
-												<Button variant="primary" onClick={this.onSubmit}>
-												<Link to="/MainPage/Home"> Log In</Link>
-											</Button>
-											<Link to="/Register" className="navlink">
-												<Button variant="secondary">Register</Button>
-											</Link>
+									<form className={classes.root} style={{ marginBottom: '25px' }} noValidate autoComplete="off">
+										<TextField
 
-								</form>
-</Paper>
-
-								{/* <Container className={classes.texts}>
-									<Col>
-										<Row>
+											id="inputUser"
+											label="User"
+											style={{ width: '60%',  marginBottom: '25px'  }}
+											variant='outlined'
+											InputProps={{
+												startAdornment: (
+													<InputAdornment position="start">
+														<AccountCircle />
+													</InputAdornment>
+												)
+											}}
+											onChange={this.changeUser}
+											value={this.state.user}
+											autoFocus
+										/>
 										
-										</Row>
+										<TextField
+											style={{ width: '60%',  marginBottom: '25px' }}
+											type="password"
+											id="inputPassword"
+											label="Password"
+											
+											variant='outlined'
+											
+											InputProps={{
+												
+												startAdornment: (
+													<InputAdornment position="start">
+														<VpnKey />
+													</InputAdornment>
+												)
+											}}
+											onChange={this.changePassword}
+											value={this.state.password}
+										/>
+										<Grid item xs={12}>
+											<Button 
+											variant="contained"  
+											
+											style={{ 
+												background:'#5dafff', 
+												margin:'10px', 
+												color: 'white' }}
+											onClick={this.onSubmit}>
 
-										<Row>
-											<TextField
-												type="password"
-												id="inputPassword"
-												label="Password"
-												InputProps={{
-													startAdornment: (
-														<InputAdornment position="start">
-															<VpnKey />
-														</InputAdornment>
-													)
-												}}
-												onChange={this.changePassword}
-												value={this.state.password}
-											/>
-										</Row>
-										<Row>
-											<Button variant="primary" onClick={this.onSubmit}>
-												<Link to="/MainPage/Home"> Log In</Link>
+												<Link to="/MainPage/Home" style={{
+														
+														 fontSize: '18px', color: 'white'}}> Log In</Link>
 											</Button>
-										</Row>
-									</Col>
-									<Col>
-										<Row>
-											<Link to="/Register" className="navlink">
-												<Button variant="secondary">Register</Button>
-											</Link>
-										</Row>
-									</Col> */}
-								{/* </Container> */}
+										
+												<Button variant="contained"
+												  	style={{
+														   background:'#5dafff', 
+														   margin:'10px', 
+														   color: 'white' }} >	<Link	style={{
+														
+															fontSize: '18px', color: 'white' }} to="/Register" 
+											>
+															   Register
+											</Link></Button>
+										</Grid>
+									</form>
+								</Paper>
+
+							
 							</Paper>
 						</Grid>
 					</Grid>
