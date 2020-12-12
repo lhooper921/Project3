@@ -1,6 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
-
+import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 
 import ListItemText from '@material-ui/core/ListItemText';
@@ -9,11 +9,16 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 
+import Paper from '@material-ui/core/Paper';
+
 class MessageElement extends Component {
+	
 	state = {};
-	render() {
+	render() { 
+
 		return (
 			<div>
+				<Paper>
 				<ListItem alignItems="flex-start">
 					<ListItemAvatar>
 						<Avatar alt={this.props.name} src="./media/user.png" />
@@ -31,7 +36,7 @@ class MessageElement extends Component {
 						}
 					/>
 				</ListItem>
-				<Divider variant="inset" component="li" />
+				<Divider variant="inset" component="li" /></Paper>
 			</div>
 		);
 	}

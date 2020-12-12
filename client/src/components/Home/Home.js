@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import image from './images/bannerImage.jpg';
+import image from './images/bluebanner.jpg';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';

@@ -21,7 +21,7 @@ class NavBar extends Component {
 			// 	<div className="row">
 			// 		<div className="col s12 m12 l12">
 			<nav>
-				<div className="nav-wrapper blue">
+				<div className="nav-wrapper">
 					<a className="navHeader" href="/">
 						<img src={logo} alt="Logo" width="50px" /> The Boring Company
 					</a>

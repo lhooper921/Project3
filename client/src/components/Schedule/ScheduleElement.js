@@ -21,9 +21,8 @@ const useStyles = (theme) => ({
 		height: '300px'
 	},
 	row1: {
-		backgroundColor: '#2196F3 ',
-		fontColor: 'white',
-		color: 'white'
+		backgroundColor: '#2196f3',
+	
 	},
 	row2: {
 		backgroundColor: 'lightblue',
@@ -47,13 +46,13 @@ class ScheduleElement extends Component {
 									<Table className={this.table} aria-label="simple table">
 										<TableHead>
 											<TableRow className={classes.row1}>
-												<TableCell>Monday</TableCell>
-												<TableCell>Tuesday</TableCell>
-												<TableCell>Wednesday</TableCell>
-												<TableCell>Thursday</TableCell>
-												<TableCell>Friday</TableCell>
-												<TableCell>Saturday</TableCell>
-												<TableCell>Sunday</TableCell>
+												<TableCell style={{ color:'white'}}>Monday</TableCell>
+												<TableCell style={{ color:'white'}}>Tuesday</TableCell>
+												<TableCell style={{ color:'white'}}>Wednesday</TableCell>
+												<TableCell style={{ color:'white'}}>Thursday</TableCell>
+												<TableCell style={{ color:'white'}}>Friday</TableCell>
+												<TableCell style={{ color:'white'}}>Saturday</TableCell>
+												<TableCell style={{ color:'white'}}>Sunday</TableCell>
 											</TableRow>
 										</TableHead>
 										<TableBody>

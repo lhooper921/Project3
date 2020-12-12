@@ -11,7 +11,7 @@ nav{
 
 }
 .nav-wrapper{
-      background-color: none;
+      background-color: #2196f3;
       
 }
 .navlink{
@@ -29,10 +29,7 @@ nav{
 }
 
     
-    /* mouse over link */
-    a:hover {
-      color: rgb(246,159,105);
-    }
+   
     
     /* selected link */
     a:active {
