@@ -27,6 +27,8 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+import Hidden from '@material-ui/core/Hidden';
 const useStyles = (theme) => ({
 	root: {
 		flexGrow: 1,
@@ -406,9 +408,11 @@ class Schedule extends Component {
 				<div className={classes.root}>
 					<Grid container spacing={3}>
 
+					<Hidden smDown>
 						<Grid item xs={12}>
 							<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
 						</Grid>
+						</Hidden>
 
 
 						<Grid item xs={12} md={4}>
@@ -598,7 +602,7 @@ class Schedule extends Component {
 						</Grid>
 
 
-						<Grid item xs={8}>
+						<Grid item xs={12} md={8}>
 							<Paper className={classes.paper} elevation={3}>
 							<img src={pushPin} alt="Logo" width="55px" height="40px" />
 								<h2>Current Week </h2>

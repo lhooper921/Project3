@@ -15,7 +15,8 @@ import AnnoucementElement from '../Board/AnnoucementElement';
 import CurrentSchedule from './CurentSchedule';
 import ScheduleElement from '../Schedule/ScheduleElement';
 import List from '@material-ui/core/List';
-
+import Hidden from '@material-ui/core/Hidden';
+import withWidth from '@material-ui/core/withWidth';
 import pushPin from './images/pushPinBlue.png';
 import './Home.css';
 // import { createMuiTheme } from '@material-ui/core/styles';
@@ -214,9 +215,11 @@ class Home extends Component {
 			<div className="container-fluid">
 				<div className={classes.root}>
 					<Grid container spacing={3}>
+					<Hidden smDown>
 						<Grid item xs={12}>
 							<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
 						</Grid>
+						</Hidden>
 						<Grid item xs={12} md={4}>
 							<Paper elevation={3} className={classes.paper}>
 								<img src={pushPin} alt="Logo" width="55px" height="40px" />
@@ -231,7 +234,7 @@ class Home extends Component {
 								/>
 							</Paper>
 						</Grid>
-						<Grid item xs={8}>
+						<Grid item xs={12} md={8}>
 							<Paper className={classes.paper} elevation={3}>
 								<img src={pushPin} alt="Logo" width="55px" height="40px" />
 								<a href="/MainPage/Schedule" className={classes.atag}>
