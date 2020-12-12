@@ -20,7 +20,7 @@ import {
 import axios from 'axios';
 import CreateIcon from '@material-ui/icons/Create';
 import pushPin from '../Home/images/pushPinBlue.png';
-import image from '../Home/images/bannerImage.jpg';
+import image from '../Home/images/bluebanner.jpg';
 
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';

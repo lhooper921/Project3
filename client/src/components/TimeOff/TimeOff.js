@@ -5,25 +5,57 @@ import TimeOffElement from './TimeOffElement';
 import { format, compareAsc } from 'date-fns';
 import { List, TextField, Button, Paper, Grid, MenuItem, FormControl, Select, InputLabel } from '@material-ui/core';
 import axios from 'axios';
+import './TimeOff.css'
+import image from '../Home/images/bluebanner.jpg';
+import pushPin from '../Home/images/pushPinBlue.png';
 
-import image from "../Home/images/bannerImage.jpg"
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 const useStyles = (theme) => ({
 	root: {
-		alignItems: 'center',
-		width: '100%',
-		backgroundColor: 'whitesmoke'
+		flexGrow: 1,
+		marginLeft: '25px',
+		marginRight: '25px',
+		// backgroundColor: 'floralwhite',
+		padding: '25px'
 	},
 	paper: {
-		padding: theme.spacing(2),
+		padding: theme.spacing(3),
+		paddingBottom: theme.spacing(4),
+		paddingTop: theme.spacing(0),
 		textAlign: 'center',
 		color: theme.palette.text.secondary,
-		backgroundColor: 'lightgray'
+		backgroundColor: 'lightgray',
+		marginBottom: '25px'
+
+	},
+	paper2: {
+
+
+		textAlign: 'center',
+		color: theme.palette.text.secondary,
+		backgroundColor: 'white',
+
+	},
+	paper3: {
+
+		textAlign: 'center',
+		color: theme.palette.text.secondary,
+		backgroundColor: 'white',
+
 	},
 	texts: {
 		margin: 'auto',
 		width: '50%',
 		border: '3px solid teal',
 		padding: '30px'
+	},
+	input: {
+		backgroundColor: 'white',
+
 	},
 	formControl: {
 		margin: theme.spacing(1),
@@ -169,19 +201,35 @@ class TimeOff extends Component {
 	render() {
 		const { classes } = this.props;
 		return (
+			<div className="container-fluid">
 			<div className={classes.root}>
 				<Grid container spacing={3}>
 				<Grid item xs={12}>
-							<Paper className={classes.paper}>
+							
 	
 
 								<img class ="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}}/>
-							</Paper>
+							
 						</Grid>
 					<Grid item xs={12} md={4}>
 						<Paper className={classes.paper}>
-							<h2>Time Off Requests</h2>
-							<form className={classes.root} noValidate autoComplete="off">
+						<img src={pushPin} alt="Logo" width="55px" height="40px" />
+							<h2>Make a Request</h2>
+							
+							<Accordion style={{ backgroundColor: '#2196F3 ' }}>
+									<AccordionSummary
+									style={{ color:'white'}}
+										expandIcon={<ExpandMoreIcon />}
+										aria-controls="panel1a-content"
+										id="panel1a-header"
+									>
+										<Typography className={classes.heading}>Create New Request</Typography>
+									</AccordionSummary>
+									<AccordionDetails>
+
+									<Paper className={classes.paper3} style={{ paddingTop: '20px' }}>
+										<form className={classes.root} noValidate autoComplete="off">
+
 								<TextField
 									id="name"
 									label="Name"
@@ -231,15 +279,22 @@ class TimeOff extends Component {
 								<Button variant="contained" color="primary" onClick={this.onSubmit}>
 									Create Request
 								</Button>
-							</form>
+							</form>	
+							</Paper>
+							</AccordionDetails>
+						</Accordion>
 						</Paper>
+					
 					</Grid>
 					<Grid item xs={12} md={8}>
 						<Paper className={classes.paper} elevation={3}>
+						<img src={pushPin} alt="Logo" width="55px" height="40px" />
+							<h2>All Time Off Requests</h2>
 							<List className={classes.root}>{this.state.requests}</List>
 						</Paper>
 					</Grid>
 				</Grid>
+			</div>
 			</div>
 		);
 	}

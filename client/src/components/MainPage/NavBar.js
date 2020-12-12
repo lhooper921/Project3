@@ -5,7 +5,7 @@ import out from './out.png';
 
 // Import Materialize
 import M from 'materialize-css';
-import checkLogo from '../Home/images/checkLogo.png';
+
 
 import './NavBar.css';
 
