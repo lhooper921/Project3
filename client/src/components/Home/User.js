@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 export default function User(props) {
 	const classes = useStyles();
 
-	var userimg = <img src={user} alt="Logo" className={classes.img} />;
+	var userimg = <img src={''} alt="Logo" className={classes.img} />;
 	switch (props.avatar) {
 		case 1:
 			userimg = <img src={user1} alt="Logo" className={classes.img} />;
