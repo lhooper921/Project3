@@ -125,8 +125,9 @@ class Register extends Component {
 	}
 
 	handleAvatarClick(id) {
-		this.state.avatar = id;
-		console.log(id);
+		this.setState({
+			avatar: id
+		});
 	}
 
 	onSubmit(event) {
@@ -159,6 +160,8 @@ class Register extends Component {
 			phone: '',
 			address: ''
 		});
+
+		window.location.href = '/';
 	}
 
 	render() {
@@ -176,7 +179,7 @@ class Register extends Component {
 						<Grid item xs={12} container direction="row" justify="center" alignItems="center">
 							<Paper className={classes.paper}>
 								<h2>Registration </h2>
-								<Paper elevation={3} className={classes.paper3} style={{ paddingTop: '20px' }}>
+								<Paper elevation={5} className={classes.paper3} style={{ paddingTop: '20px' }}>
 									<form
 										className={classes.root}
 										style={{ marginBottom: '25px' }}
@@ -213,6 +216,7 @@ class Register extends Component {
 											variant="outlined"
 											onChange={this.changeFirstName}
 											value={this.state.firstName}
+											// autoFocus
 										/>
 										<TextField
 											id="LastName"
@@ -250,13 +254,30 @@ class Register extends Component {
 											value={this.state.department}
 										/>
 										<Grid item xs={12}>
+											<Link to="/">
+												<Button
+													variant="contained"
+													style={{
+														background: '#5dafff',
+														margin: '10px',
+														color: 'white',
+														outline: 'none',
+														cursor: 'pointer'
+													}}
+												>
+													Go Back
+												</Button>
+											</Link>
+
 											<Button
 												onClick={this.onSubmit}
 												variant="contained"
 												style={{
 													background: '#5dafff',
 													margin: '10px',
-													color: 'white'
+													color: 'white',
+													outline: 'none',
+													cursor: 'pointer'
 												}}
 											>
 												Register

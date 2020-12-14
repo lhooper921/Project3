@@ -13,8 +13,6 @@ import user4 from '../avatar/4.png';
 import user5 from '../avatar/5.png';
 import user6 from '../avatar/6.png';
 
-import user from './images/user.png';
-
 const useStyles = makeStyles((theme) => ({
 	root: {
 		maxWidth: '100%'
@@ -30,7 +28,8 @@ const useStyles = makeStyles((theme) => ({
 		fontsize: '2.4rem'
 	},
 	img: {
-		width: '140px'
+		width: '150px',
+		border: '3px solid whitesmoke'
 	}
 }));
 
@@ -56,6 +55,9 @@ export default function User(props) {
 			break;
 		case 6:
 			userimg = <img src={user6} alt="Logo" className={classes.img} />;
+			break;
+
+		default:
 			break;
 	}
 

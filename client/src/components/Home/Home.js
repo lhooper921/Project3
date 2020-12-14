@@ -6,17 +6,17 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { format, compareAsc, getISOWeek, add, addWeeks, startOfWeek, endOfWeek } from 'date-fns';
 
-import company from './images/company.jpg';
+// import company from './images/company.jpg';
 import User from './User';
-import Annoucement from './Annoucements';
-import Messagess from './Messages';
+// import Annoucement from './Annoucements';
+// import Messagess from './Messages';
 import MessageElement from '../Board/MessageElement';
 import AnnoucementElement from '../Board/AnnoucementElement';
-import CurrentSchedule from './CurentSchedule';
+// import CurrentSchedule from './CurentSchedule';
 import ScheduleElement from '../Schedule/ScheduleElement';
 import List from '@material-ui/core/List';
 import Hidden from '@material-ui/core/Hidden';
-import withWidth from '@material-ui/core/withWidth';
+// import withWidth from '@material-ui/core/withWidth';
 import pushPin from './images/pushPinBlue.png';
 import './Home.css';
 // import { createMuiTheme } from '@material-ui/core/styles';
@@ -104,16 +104,6 @@ class Home extends Component {
 			});
 		});
 
-		// axios.get('http://localhost:4000/app/messages').then((response) => {
-		// 	const messages = response.data.map((message) => (
-		// 		<MessageElement name={message.name} title={message.title} message={message.message} key={message.id} />
-		// 	));
-
-		// 	this.setState({
-		// 		messages: messages
-		// 	});
-		// });
-
 		axios.get('http://localhost:4000/app/messages').then((response) => {
 			response.data.map((message) => {
 				if (message.recipient === this.state.id) {
@@ -197,8 +187,6 @@ class Home extends Component {
 				}
 			});
 		});
-
-		console.log(this.state.avatar);
 	}
 
 	loadStoraged() {
