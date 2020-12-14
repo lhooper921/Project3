@@ -160,7 +160,13 @@ class Board extends Component {
 			});
 
 			const Rmessages = this.state.allmessages.map((message) => (
-				<MessageElement name={message.name} title={message.title} message={message.message} key={message.id} />
+				<MessageElement
+					id={message.id}
+					name={message.name}
+					title={message.title}
+					message={message.message}
+					key={message.id}
+				/>
 			));
 
 			this.setState({
@@ -381,7 +387,7 @@ class Board extends Component {
 										aria-controls="panel1a-content"
 										id="panel1a-header"
 									>
-										Create New Annoucement
+										Create New Announcement
 									</AccordionSummary>
 									<AccordionDetails>
 										<Paper className={classes.paper3} style={{ marginTop: '25px' }}>

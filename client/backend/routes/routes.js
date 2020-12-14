@@ -191,4 +191,27 @@ router.get('/schedules', (req, res) => {
 		});
 });
 
+router.put('/userupdate', (req, res) => {
+	const newUser = new UserModel({
+		avatar: req.body.avatar,
+		firstName: req.body.firstName,
+		lastName: req.body.lastName,
+		email: req.body.email,
+		password: securePassword,
+		department: req.body.department,
+		position: req.body.position,
+		phone: req.body.phone,
+		address: req.body.address
+	});
+
+	newUser
+		.updateOne({ _id: req.query.id }, newUser)
+		.then((data) => {
+			res.json(data);
+		})
+		.catch((error) => {
+			res.json(error);
+		});
+});
+
 module.exports = router;
