@@ -1,4 +1,3 @@
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # Project 3 - Company Dashboard
 ![Dashboard logo](https://github.com/analuna01/Project3/blob/main/client/src/components/Home/images/bluebanner.jpg)
 ## Table of Contents
@@ -49,6 +48,7 @@ THEN it will display my personal information and allow me to edit and update the
 
 
 ## Installation
+
 ### Heroku
 This app has been deployed to Heroku at:
 
@@ -113,6 +113,7 @@ GitHub: https://github.com/Kanoa89
 ![GitHub repo size](https://img.shields.io/github/repo-size/analuna01/project3)
 ![Top Language](https://img.shields.io/github/languages/top/analuna01/project3)
 ![Count Language](https://img.shields.io/github/languages/count/analuna01/project3)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
 
