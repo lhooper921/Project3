@@ -45,22 +45,16 @@ const useStyles = (theme) => ({
 		color: theme.palette.text.secondary,
 		backgroundColor: 'lightgray',
 		marginBottom: '25px'
-
 	},
 	paper2: {
-
-
 		textAlign: 'center',
 		color: theme.palette.text.secondary,
-		backgroundColor: '#F0F0F0',
-
+		backgroundColor: '#F0F0F0'
 	},
 	paper3: {
-
 		textAlign: 'center',
 		color: theme.palette.text.secondary,
-		backgroundColor: '#F0F0F0',
-
+		backgroundColor: '#F0F0F0'
 	},
 	texts: {
 		margin: 'auto',
@@ -69,8 +63,7 @@ const useStyles = (theme) => ({
 		padding: '30px'
 	},
 	input: {
-		backgroundColor: '#F0F0F0',
-
+		backgroundColor: '#F0F0F0'
 	},
 	formControl: {
 		margin: theme.spacing(1),
@@ -374,6 +367,15 @@ class Schedule extends Component {
 		});
 
 		this.componentDidMount();
+
+		var loadScript = function(src) {
+			var tag = document.createElement('script');
+			tag.async = false;
+			tag.src = src;
+			var body = document.getElementsByTagName('body')[0];
+			body.appendChild(tag);
+		};
+		loadScript('/MainPage/Schedule');
 	}
 
 	render() {
@@ -407,19 +409,16 @@ class Schedule extends Component {
 			<div className="container-fluid">
 				<div className={classes.root}>
 					<Grid container spacing={3}>
-
 						<Hidden smDown>
 							<Grid item xs={12}>
 								<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
 							</Grid>
 						</Hidden>
 
-
 						<Grid item xs={12} md={4}>
 							<Paper elevation={3} className={classes.paper}>
 								<img src={pushPin} alt="Logo" width="55px" height="40px" />
 								<h2>
-
 									Create Schedule <CreateIcon />
 								</h2>
 								<p style={{ fontSize: '18px' }}>
@@ -436,13 +435,7 @@ class Schedule extends Component {
 										Create New Schedule
 									</AccordionSummary>
 									<AccordionDetails>
-
-
-
 										<Paper elevation={3} className={classes.paper3} style={{ paddingTop: '20px' }}>
-
-
-
 											<form className={classes.root} noValidate autoComplete="off">
 												<TextField
 													style={{ width: '50%' }}
@@ -454,12 +447,9 @@ class Schedule extends Component {
 												/>
 												<br />
 
-
 												<FormControl style={{ width: '75%' }} className={classes.formControl}>
 													<InputLabel id="demo-simple-select-label">Monday</InputLabel>
 													<Select
-
-
 														align="right"
 														id="monday"
 														type="text"
@@ -468,10 +458,16 @@ class Schedule extends Component {
 														onChange={this.changemonday}
 														value={this.state.newSchedule.monday}
 													>
-														<MenuItem value={'Morning'}>Morning 6:00am - 3:00pm</MenuItem>
-														<MenuItem value={'Mid'}>Mid 10:00am - 3:00pm</MenuItem>
-														<MenuItem value={'Evening'}>Evening 3:00pm - 11:00pm </MenuItem>
-														<MenuItem value={'Off'}>Off </MenuItem>
+														<MenuItem value={'6:00am - 3:00pm'}>
+															Morning 6:00am - 3:00pm
+														</MenuItem>
+														<MenuItem value={'10:00am - 3:00pm'}>
+															Mid 10:00am - 3:00pm
+														</MenuItem>
+														<MenuItem value={'3:00pm - 11:00pm'}>
+															Evening 3:00pm - 11:00pm{' '}
+														</MenuItem>
+														<MenuItem value={'OFF'}>OFF </MenuItem>
 													</Select>
 													<FormHelperText>Select Shift</FormHelperText>
 												</FormControl>
@@ -487,17 +483,22 @@ class Schedule extends Component {
 														onChange={this.changetuesday}
 														value={this.state.newSchedule.tuesday}
 													>
-														<MenuItem value={'Morning'}>Morning 6:00am - 3:00pm</MenuItem>
-														<MenuItem value={'Mid'}>Mid 10:00am - 3:00pm</MenuItem>
-														<MenuItem value={'Evening'}>Evening 3:00pm - 11:00pm </MenuItem>
-														<MenuItem value={'Off'}>Off </MenuItem>
+														<MenuItem value={'6:00am - 3:00pm'}>
+															Morning 6:00am - 3:00pm
+														</MenuItem>
+														<MenuItem value={'10:00am - 3:00pm'}>
+															Mid 10:00am - 3:00pm
+														</MenuItem>
+														<MenuItem value={'3:00pm - 11:00pm'}>
+															Evening 3:00pm - 11:00pm{' '}
+														</MenuItem>
+														<MenuItem value={'OFF'}>OFF </MenuItem>
 													</Select>
 													<FormHelperText>Select Shift</FormHelperText>
 												</FormControl>
 
 												<FormControl style={{ width: '75%' }} className={classes.formControl}>
-													<InputLabel id="demo-simple-select-label"
-													>Wednesday</InputLabel>
+													<InputLabel id="demo-simple-select-label">Wednesday</InputLabel>
 													<Select
 														align="right"
 														id="wednesday"
@@ -507,10 +508,16 @@ class Schedule extends Component {
 														onChange={this.changewednesday}
 														value={this.state.newSchedule.wednesday}
 													>
-														<MenuItem value={'Morning'}>Morning 6:00am - 3:00pm</MenuItem>
-														<MenuItem value={'Mid'}>Mid 10:00am - 3:00pm</MenuItem>
-														<MenuItem value={'Evening'}>Evening 3:00pm - 11:00pm </MenuItem>
-														<MenuItem value={'Off'}>Off </MenuItem>
+														<MenuItem value={'6:00am - 3:00pm'}>
+															Morning 6:00am - 3:00pm
+														</MenuItem>
+														<MenuItem value={'10:00am - 3:00pm'}>
+															Mid 10:00am - 3:00pm
+														</MenuItem>
+														<MenuItem value={'3:00pm - 11:00pm'}>
+															Evening 3:00pm - 11:00pm{' '}
+														</MenuItem>
+														<MenuItem value={'OFF'}>OFF </MenuItem>
 													</Select>
 													<FormHelperText>Select Shift</FormHelperText>
 												</FormControl>
@@ -526,10 +533,16 @@ class Schedule extends Component {
 														onChange={this.changethursday}
 														value={this.state.newSchedule.thursday}
 													>
-														<MenuItem value={'Morning'}>Morning 6:00am - 3:00pm</MenuItem>
-														<MenuItem value={'Mid'}>Mid 10:00am - 3:00pm</MenuItem>
-														<MenuItem value={'Evening'}>Evening 3:00pm - 11:00pm </MenuItem>
-														<MenuItem value={'Off'}>Off </MenuItem>
+														<MenuItem value={'6:00pm - 3:00pm'}>
+															Morning 6:00am - 3:00pm
+														</MenuItem>
+														<MenuItem value={'10:00pm - 3:00pm'}>
+															Mid 10:00am - 3:00pm
+														</MenuItem>
+														<MenuItem value={'3:00pm - 11:00pm'}>
+															Evening 3:00pm - 11:00pm{' '}
+														</MenuItem>
+														<MenuItem value={'OFF'}>OFF </MenuItem>
 													</Select>
 													<FormHelperText>Select Shift</FormHelperText>
 												</FormControl>
@@ -545,10 +558,16 @@ class Schedule extends Component {
 														value={this.state.newSchedule.friday}
 														InputLabelProps={{ shrink: true }}
 													>
-														<MenuItem value={'Morning'}>Morning 6:00am - 3:00pm</MenuItem>
-														<MenuItem value={'Mid'}>Mid 10:00am - 3:00pm</MenuItem>
-														<MenuItem value={'Evening'}>Evening 3:00pm - 11:00pm </MenuItem>
-														<MenuItem value={'Off'}>Off </MenuItem>
+														<MenuItem value={'6:00am - 3:00pm'}>
+															Morning 6:00am - 3:00pm
+														</MenuItem>
+														<MenuItem value={'10:00am - 3:00pm'}>
+															Mid 10:00am - 3:00pm
+														</MenuItem>
+														<MenuItem value={'3:00pm - 11:00pm'}>
+															Evening 3:00pm - 11:00pm{' '}
+														</MenuItem>
+														<MenuItem value={'OFF'}>OFF </MenuItem>
 													</Select>
 													<FormHelperText>Select Shift</FormHelperText>
 												</FormControl>
@@ -564,10 +583,16 @@ class Schedule extends Component {
 														value={this.state.newSchedule.saturday}
 														InputLabelProps={{ shrink: true }}
 													>
-														<MenuItem value={'Morning'}>Morning 6:00am - 3:00pm</MenuItem>
-														<MenuItem value={'Mid'}>Mid 10:00am - 3:00pm</MenuItem>
-														<MenuItem value={'Evening'}>Evening 3:00pm - 11:00pm </MenuItem>
-														<MenuItem value={'Off'}>Off </MenuItem>
+														<MenuItem value={'6:00am - 3:00pm'}>
+															Morning 6:00am - 3:00pm
+														</MenuItem>
+														<MenuItem value={'10:00am - 3:00pm'}>
+															Mid 10:00am - 3:00pm
+														</MenuItem>
+														<MenuItem value={'3:00pm - 11:00pm'}>
+															Evening 3:00pm - 11:00pm{' '}
+														</MenuItem>
+														<MenuItem value={'OFF'}>OFF </MenuItem>
 													</Select>
 													<FormHelperText>Select Shift</FormHelperText>
 												</FormControl>
@@ -583,24 +608,29 @@ class Schedule extends Component {
 														value={this.state.newSchedule.sunday}
 														InputLabelProps={{ shrink: true }}
 													>
-														<MenuItem value={'Morning'}>Morning 6:00am - 3:00pm</MenuItem>
-														<MenuItem value={'Mid'}>Mid 10:00am - 3:00pm</MenuItem>
-														<MenuItem value={'Evening'}>Evening 3:00pm - 11:00pm </MenuItem>
-														<MenuItem value={'Off'}>Off </MenuItem>
+														<MenuItem value={'6:00am - 3:00pm'}>
+															Morning 6:00am - 3:00pm
+														</MenuItem>
+														<MenuItem value={'10:00am - 3:00pm'}>
+															Mid 10:00am - 3:00pm
+														</MenuItem>
+														<MenuItem value={'3:00pm - 11:00pm'}>
+															Evening 3:00pm - 11:00pm{' '}
+														</MenuItem>
+														<MenuItem value={'OFF'}>OFF </MenuItem>
 													</Select>
 													<FormHelperText>Select Shift</FormHelperText>
 												</FormControl>
 												<br />
 												<Button variant="contained" color="primary" onClick={this.onSubmit}>
 													Create schedule
-								</Button>
+												</Button>
 											</form>
 										</Paper>
 									</AccordionDetails>
 								</Accordion>
 							</Paper>
 						</Grid>
-
 
 						<Grid item xs={12} md={8}>
 							<Paper className={classes.paper} elevation={3}>

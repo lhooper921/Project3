@@ -7,20 +7,12 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import VpnKey from '@material-ui/icons/VpnKey';
 
-
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import image from '../Home/images/bluebanner.jpg';
 import Hidden from '@material-ui/core/Hidden';
 
-import {
-	
-	TextField,
-	Button,
-	Paper,
-	Grid,
-
-} from '@material-ui/core';
+import { TextField, Button, Paper, Grid } from '@material-ui/core';
 const useStyles = (theme) => ({
 	root: {
 		flexGrow: 1,
@@ -37,22 +29,16 @@ const useStyles = (theme) => ({
 		color: theme.palette.text.secondary,
 		backgroundColor: 'lightgray',
 		marginBottom: '25px'
-
 	},
 	paper2: {
-
-
 		textAlign: 'center',
 		color: theme.palette.text.secondary,
-		backgroundColor: '#F0F0F0',
-
+		backgroundColor: '#F0F0F0'
 	},
 	paper3: {
-
 		textAlign: 'center',
 		color: theme.palette.text.secondary,
-		backgroundColor: '#F0F0F0',
-
+		backgroundColor: '#F0F0F0'
 	},
 	texts: {
 		margin: 'auto',
@@ -61,8 +47,7 @@ const useStyles = (theme) => ({
 		padding: '30px'
 	},
 	input: {
-		backgroundColor: '#F0F0F0',
-
+		backgroundColor: '#F0F0F0'
 	},
 	formControl: {
 		margin: theme.spacing(1),
@@ -75,7 +60,6 @@ const useStyles = (theme) => ({
 		marginLeft: '20px',
 		marginTop: '30px'
 	}
-
 });
 
 class Login extends Component {
@@ -137,34 +121,30 @@ class Login extends Component {
 	render() {
 		const { classes } = this.props;
 		return (
-			<div style={{ minHeight: '100vh', }}>
+			<div style={{ minHeight: '100vh' }}>
 				<div className={classes.root}>
 					<Grid container spacing={3}>
-
 						<Hidden smDown>
 							<Grid item xs={12}>
 								<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
 							</Grid>
 						</Hidden>
 
-						<Grid item
-						xs={12}
-							container
-							direction="row"
-							justify="center"
-							alignItems="center"
-
-						>
+						<Grid item xs={12} container direction="row" justify="center" alignItems="center">
 							<Paper className={classes.paper} style={{ paddingTop: '20px' }}>
 								<h2>Login</h2>
-								<Paper elevation={3} className={classes.paper3} style={{ paddingTop: '20px' }}>
-									<form className={classes.root} style={{ marginBottom: '25px' }} noValidate autoComplete="off">
+								<Paper elevation={5} className={classes.paper3} style={{ paddingTop: '20px' }}>
+									<form
+										className={classes.root}
+										style={{ marginBottom: '25px' }}
+										noValidate
+										autoComplete="off"
+									>
 										<TextField
-
 											id="inputUser"
 											label="User"
-											style={{ width: '60%',  marginBottom: '25px'  }}
-											variant='outlined'
+											style={{ width: '60%', marginBottom: '25px' }}
+											variant="outlined"
 											InputProps={{
 												startAdornment: (
 													<InputAdornment position="start">
@@ -174,19 +154,16 @@ class Login extends Component {
 											}}
 											onChange={this.changeUser}
 											value={this.state.user}
-											autoFocus
+											// autoFocus
 										/>
-										
+
 										<TextField
-											style={{ width: '60%',  marginBottom: '25px' }}
+											style={{ width: '60%', marginBottom: '25px' }}
 											type="password"
 											id="inputPassword"
 											label="Password"
-											
-											variant='outlined'
-											
+											variant="outlined"
 											InputProps={{
-												
 												startAdornment: (
 													<InputAdornment position="start">
 														<VpnKey />
@@ -197,35 +174,49 @@ class Login extends Component {
 											value={this.state.password}
 										/>
 										<Grid item xs={12}>
-											<Button 
-											variant="contained"  
-											
-											style={{ 
-												background:'#5dafff', 
-												margin:'10px', 
-												color: 'white' }}
-											onClick={this.onSubmit}>
-
-												<Link to="/MainPage/Home" style={{
-														
-														 fontSize: '18px', color: 'white'}}> Log In</Link>
-											</Button>
-										
-												<Button variant="contained"
-												  	style={{
-														   background:'#5dafff', 
-														   margin:'10px', 
-														   color: 'white' }} >	<Link	style={{
-														
-															fontSize: '18px', color: 'white' }} to="/Register" 
+											<Button
+												variant="contained"
+												style={{
+													background: '#5dafff',
+													margin: '10px',
+													color: 'white'
+												}}
+												onClick={this.onSubmit}
 											>
-															   Register
-											</Link></Button>
+												<Link
+													to="/MainPage/Home"
+													style={{
+														fontSize: '18px',
+														color: 'white'
+													}}
+												>
+													{' '}
+													Log In
+												</Link>
+											</Button>
+
+											<Button
+												variant="contained"
+												style={{
+													background: '#5dafff',
+													margin: '10px',
+													color: 'white'
+												}}
+											>
+												{' '}
+												<Link
+													style={{
+														fontSize: '18px',
+														color: 'white'
+													}}
+													to="/Register"
+												>
+													Register
+												</Link>
+											</Button>
 										</Grid>
 									</form>
 								</Paper>
-
-							
 							</Paper>
 						</Grid>
 					</Grid>

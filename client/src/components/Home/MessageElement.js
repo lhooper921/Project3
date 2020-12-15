@@ -22,7 +22,12 @@ class MEssageElement extends Component {
 						primary={this.props.title}
 						secondary={
 							<React.Fragment>
-								<Typography component="span" variant="body2" color="textPrimary">
+								<Typography
+									component="span"
+									variant="body2"
+									color="textPrimary"
+									style="font-weight:bold;"
+								>
 									{this.props.name}
 								</Typography>
 								{' — '}

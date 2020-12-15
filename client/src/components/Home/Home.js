@@ -6,17 +6,17 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { format, compareAsc, getISOWeek, add, addWeeks, startOfWeek, endOfWeek } from 'date-fns';
 
-import company from './images/company.jpg';
+// import company from './images/company.jpg';
 import User from './User';
-import Annoucement from './Annoucements';
-import Messagess from './Messages';
+// import Annoucement from './Annoucements';
+// import Messagess from './Messages';
 import MessageElement from '../Board/MessageElement';
 import AnnoucementElement from '../Board/AnnoucementElement';
-import CurrentSchedule from './CurentSchedule';
+// import CurrentSchedule from './CurentSchedule';
 import ScheduleElement from '../Schedule/ScheduleElement';
 import List from '@material-ui/core/List';
 import Hidden from '@material-ui/core/Hidden';
-import withWidth from '@material-ui/core/withWidth';
+// import withWidth from '@material-ui/core/withWidth';
 import pushPin from './images/pushPinBlue.png';
 import './Home.css';
 // import { createMuiTheme } from '@material-ui/core/styles';
@@ -77,6 +77,7 @@ const useStyles = (theme) => ({
 class Home extends Component {
 	state = {
 		id: '',
+		avatar: '',
 		name: '',
 		lastname: '',
 		department: '',
@@ -95,22 +96,13 @@ class Home extends Component {
 		axios.get('http://localhost:4000/app/userid', { params: { id: userId } }).then((response) => {
 			this.setState({
 				id: response.data[0]._id,
+				avatar: response.data[0].avatar,
 				name: response.data[0].firstName,
 				lastname: response.data[0].lastName,
 				department: response.data[0].department,
 				position: response.data[0].position
 			});
 		});
-
-		// axios.get('http://localhost:4000/app/messages').then((response) => {
-		// 	const messages = response.data.map((message) => (
-		// 		<MessageElement name={message.name} title={message.title} message={message.message} key={message.id} />
-		// 	));
-
-		// 	this.setState({
-		// 		messages: messages
-		// 	});
-		// });
 
 		axios.get('http://localhost:4000/app/messages').then((response) => {
 			response.data.map((message) => {
@@ -215,10 +207,10 @@ class Home extends Component {
 			<div className="container-fluid">
 				<div className={classes.root}>
 					<Grid container spacing={3}>
-					<Hidden smDown>
-						<Grid item xs={12}>
-							<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
-						</Grid>
+						<Hidden smDown>
+							<Grid item xs={12}>
+								<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
+							</Grid>
 						</Hidden>
 						<Grid item xs={12} md={4}>
 							<Paper elevation={3} className={classes.paper}>
@@ -227,6 +219,7 @@ class Home extends Component {
 									<h2>User </h2>
 								</a>
 								<User
+									avatar={this.state.avatar}
 									lastname={this.state.lastname}
 									name={this.state.name}
 									department={this.state.department}

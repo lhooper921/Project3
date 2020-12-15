@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 // Import Materialize
 import M from 'materialize-css';
@@ -10,7 +10,7 @@ import Profile from '../Profile/Profile';
 import Schedule from '../Schedule/Schedule';
 import TimeOff from '../TimeOff/TimeOff';
 import Board from '../Board/Board';
-import Footer from '../Footer/Footer';
+// import Footer from '../Footer/Footer';
 
 class MainPage extends Component {
 	componentDidMount() {
@@ -31,7 +31,7 @@ class MainPage extends Component {
 					<Route path="/MainPage/Board" component={Board} />
 				</Switch>
 				<br />
-				<Footer />
+				{/* <Footer /> */}
 			</div>
 		);
 	}

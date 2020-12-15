@@ -20,12 +20,22 @@ import Paper from '@material-ui/core/Paper';
 const useStyles = (theme) => ({
 	table: {
 		minWidth: 650,
+		height: '300px'
 	},
+	row1: {
+		backgroundColor: '#5dafff',
+	
+	},
+	row2: {
+		backgroundColor: '#F0F0F0',
+		fontColor: 'white'
+	}
 });
-
 class RequestElement extends Component {
 	state = {};
 	render() {
+
+		const { classes } = this.props;
 		return (
 			<div>
 				<ListItem alignItems="flex-start">
@@ -39,19 +49,19 @@ class RequestElement extends Component {
 								<TableContainer component={Paper}>
 									<Table className={this.table} aria-label="simple table">
 										<TableHead>
-											<TableRow>
-												<TableCell>First Request Date</TableCell>
-												<TableCell>Last Request Date</TableCell>
-												<TableCell>Request Type</TableCell>
+											<TableRow className={classes.row1} style={{ border: '1px solid #11518f', color:'white'}} >
+												<TableCell  style={{ borderRight: '1px ridge #808080', fontSize:'24px'}}>First Request Date</TableCell>
+												<TableCell style={{ borderRight: '1px ridge #808080', fontSize:'24px'}}>Last Request Date</TableCell>
+												<TableCell style={{ borderRight: '1px ridge #808080', fontSize:'24px'}}>Request Type</TableCell>
 												<TableCell>Comment</TableCell>
 											</TableRow>
 										</TableHead>
 										<TableBody>
-											<TableRow key={this.props.name}>
-												<TableCell align="left">{this.props.firstDate}</TableCell>
-												<TableCell align="left">{this.props.lastDate}</TableCell>
-												<TableCell align="left">{this.props.requestType}</TableCell>
-												<TableCell align="left">{this.props.comment}</TableCell>
+											<TableRow className={classes.row2} key={this.props.name}>
+												<TableCell style={{ fontSize:'16px', borderRight: '1px ridge #808080'}} align="left">{this.props.firstDate}</TableCell>
+												<TableCell style={{ fontSize:'16px', borderRight: '1px ridge #808080'}} align="left">{this.props.lastDate}</TableCell>
+												<TableCell style={{ fontSize:'16px', borderRight: '1px ridge #808080'}} align="left">{this.props.requestType}</TableCell>
+												<TableCell style={{ fontSize:'16px', borderRight: '1px ridge #808080'}} align="left">{this.props.comment}</TableCell>
 											</TableRow>
 										</TableBody>
 									</Table>
