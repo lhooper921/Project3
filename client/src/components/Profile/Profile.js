@@ -34,15 +34,66 @@ export default function Profile() {
 	const classes = useStyles();
 
 	return (
-		<div className="container-fluid"> 
-			<div className={classes.root}>
-			<Grid container spacing={3}>
-				<Hidden smDown>
-						<Grid item xs={12}>
-							<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
-						</Grid>
-						</Hidden>
+// 		<div className="container-fluid"> 
+// 			<div className={classes.root}>
+// 			<Grid container spacing={3}>
+// 				<Hidden smDown>
+// 						<Grid item xs={12}>
+// 							<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
+// 						</Grid>
+// 						</Hidden>
 				
+// 						<Grid item xs={12} md={4}>
+// 							<Paper elevation={3} className={classes.paper}>
+// 								<img src={pushPin} alt="Logo" width="55px" height="40px" />
+
+// 								<h2>Announcements</h2>
+// 								<Accordion style={{ backgroundColor: '#5dafff ', marginBottom: '25px' }}>
+// 									<AccordionSummary
+// 										style={{ color: 'white', fontSize: '18px', textAlign: 'center' }}
+// 										expandIcon={<ExpandMoreIcon />}
+// 										aria-controls="panel1a-content"
+// 										id="panel1a-header"
+// 									>
+// 										Update Profile
+// 									</AccordionSummary>
+// 									<AccordionDetails>
+// 										<Paper className={classes.paper3} style={{ marginTop: '25px' }}>
+// 											<form className={classes.root} noValidate autoComplete="off">
+// 												<TextField
+// 													style={{ width: '50%' }}
+// 													id="First name"
+// 													label="First name"
+// 													variant="outlined"
+// 													// onChange={this.changeFirstName}
+// 													// value={this.state.newAnnoucement.title}
+// 												/>
+
+// 												<TextField
+// 													style={{ width: '80%', margin: '25px', alignContent: 'center' }}
+// 													id="Last name"
+// 													label="Last name"
+// 													variant="outlined"
+												
+// 													// onChange={this.changeAContent}
+// 													// value={this.state.newAnnoucement.content}
+// 												/>
+
+// 												<Button variant="contained" color="primary" onClick={this.onASubmit}>
+// 													Post
+// 												</Button>
+// 											</form>
+// 										</Paper>
+// 									</AccordionDetails>
+// 								</Accordion>
+
+// </Paper>
+
+
+
+
+
+{/* 
 						<Grid item xs={12}>
 							<h2>Personal info</h2>
 							</Grid>
@@ -59,5 +110,5 @@ export default function Profile() {
 			
 			</div>
 		</div>
-	);
+	); */}
 }
