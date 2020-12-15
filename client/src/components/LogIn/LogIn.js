@@ -14,7 +14,7 @@ import image from '../Home/images/bluebanner.jpg';
 import Hidden from '@material-ui/core/Hidden';
 
 import {
-	
+
 	TextField,
 	Button,
 	Paper,
@@ -148,7 +148,7 @@ class Login extends Component {
 						</Hidden>
 
 						<Grid item
-						xs={12}
+							xs={12}
 							container
 							direction="row"
 							justify="center"
@@ -160,10 +160,9 @@ class Login extends Component {
 								<Paper elevation={3} className={classes.paper3} style={{ paddingTop: '20px' }}>
 									<form className={classes.root} style={{ marginBottom: '25px' }} noValidate autoComplete="off">
 										<TextField
-
 											id="inputUser"
 											label="User"
-											style={{ width: '60%',  marginBottom: '25px'  }}
+											style={{ width: '60%', marginBottom: '25px' }}
 											variant='outlined'
 											InputProps={{
 												startAdornment: (
@@ -176,17 +175,14 @@ class Login extends Component {
 											value={this.state.user}
 											autoFocus
 										/>
-										
+
 										<TextField
-											style={{ width: '60%',  marginBottom: '25px' }}
+											style={{ width: '60%', marginBottom: '25px' }}
 											type="password"
 											id="inputPassword"
 											label="Password"
-											
 											variant='outlined'
-											
 											InputProps={{
-												
 												startAdornment: (
 													<InputAdornment position="start">
 														<VpnKey />
@@ -197,35 +193,34 @@ class Login extends Component {
 											value={this.state.password}
 										/>
 										<Grid item xs={12}>
-											<Button 
-											variant="contained"  
-											
-											style={{ 
-												background:'#5dafff', 
-												margin:'10px', 
-												color: 'white' }}
-											onClick={this.onSubmit}>
-
+											<Button
+												variant="contained"
+												style={{
+													background: '#5dafff',
+													margin: '10px',
+													color: 'white'
+												}}
+												onClick={this.onSubmit}>
 												<Link to="/MainPage/Home" style={{
-														
-														 fontSize: '18px', color: 'white'}}> Log In</Link>
+													fontSize: '18px', color: 'white'
+												}}> Log In</Link>
 											</Button>
-										
-												<Button variant="contained"
-												  	style={{
-														   background:'#5dafff', 
-														   margin:'10px', 
-														   color: 'white' }} >	<Link	style={{
-														
-															fontSize: '18px', color: 'white' }} to="/Register" 
-											>
-															   Register
-											</Link></Button>
+											<Button variant="contained"
+												style={{
+													background: '#5dafff',
+													margin: '10px',
+													color: 'white'
+												}} >	<Link style={{
+
+													fontSize: '18px', color: 'white'
+												}} to="/Register"
+												>
+													Register
+											</Link>
+											</Button>
 										</Grid>
 									</form>
 								</Paper>
-
-							
 							</Paper>
 						</Grid>
 					</Grid>

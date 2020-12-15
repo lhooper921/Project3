@@ -18,7 +18,7 @@ class MessageElement extends Component {
 
 		return (
 			<div>
-				<Paper style={{background:'#F0F0F0', marginBottom: '5px'}}>
+				<Paper style={{background:'#F0F0F0', marginBottom: '5px', border: '1px solid #11518f'}}>
 				<ListItem alignItems="flex-start">
 					<ListItemAvatar>
 						<Avatar alt={this.props.name} src="./media/user.png" />

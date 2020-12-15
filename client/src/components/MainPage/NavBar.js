@@ -93,7 +93,7 @@ class NavBar extends Component {
 						<li>
 							<Link to="/" className="navlink">
 								<a>
-									<img style={{color:'black'}} src={out} alt="Logo" width="30px" />
+									Log Out
 								</a>
 							</Link>
 						</li>
