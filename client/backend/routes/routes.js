@@ -11,7 +11,7 @@ const bcrypt = require('bcrypt');
 router.post('/register', async (req, res) => {
 	const saltPassword = await bcrypt.genSalt(10);
 	const securePassword = await bcrypt.hash(req.body.password, saltPassword);
-	console.log(req.body);
+
 	const newUser = new UserModel({
 		avatar: req.body.avatar,
 		firstName: req.body.firstName,
@@ -188,6 +188,29 @@ router.get('/schedules', (req, res) => {
 		})
 		.catch((err) => {
 			res.status(404).json(err);
+		});
+});
+
+router.put('/userupdate', (req, res) => {
+	const newUser = new UserModel({
+		avatar: req.body.avatar,
+		firstName: req.body.firstName,
+		lastName: req.body.lastName,
+		email: req.body.email,
+		password: securePassword,
+		department: req.body.department,
+		position: req.body.position,
+		phone: req.body.phone,
+		address: req.body.address
+	});
+
+	newUser
+		.updateOne({ _id: req.query.id }, newUser)
+		.then((data) => {
+			res.json(data);
+		})
+		.catch((error) => {
+			res.json(error);
 		});
 });
 

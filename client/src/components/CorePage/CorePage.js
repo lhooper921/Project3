@@ -8,6 +8,7 @@ import LogIn from '../LogIn/LogIn';
 
 import Register from '../Register/Register';
 import MainPage from '../MainPage/MainPage';
+import Footer from '../Footer/Footer';
 
 class CorePage extends Component {
 	componentDidMount() {
@@ -26,6 +27,7 @@ class CorePage extends Component {
 						<Route path="/MainPage" component={MainPage} />
 					</Switch>
 				</BrowserRouter>
+				<Footer />
 			</div>
 		);
 	}

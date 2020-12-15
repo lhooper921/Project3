@@ -3,31 +3,20 @@ import { Component } from 'react';
 
 import { withStyles } from '@material-ui/core/styles';
 
-
-
 // import { Container, Row, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
 import image from '../Home/images/bluebanner.jpg';
 import Hidden from '@material-ui/core/Hidden';
 
-import {
-	
-	TextField,
-	Button,
-	Paper,
-	Grid,
+import avatar1 from '../avatar/1.png';
+import avatar2 from '../avatar/2.png';
+import avatar3 from '../avatar/3.png';
+import avatar4 from '../avatar/4.png';
+import avatar5 from '../avatar/5.png';
+import avatar6 from '../avatar/6.png';
 
-} from '@material-ui/core';
-
-import avatar1 from "../avatar/1.png";
-import avatar2 from "../avatar/2.png";
-import avatar3 from "../avatar/3.png";
-import avatar4 from "../avatar/4.png";
-import avatar5 from "../avatar/5.png";
-import avatar6 from "../avatar/6.png";
-
+import { TextField, Button, Paper, Grid } from '@material-ui/core';
 
 const useStyles = (theme) => ({
 	root: {
@@ -45,22 +34,16 @@ const useStyles = (theme) => ({
 		color: theme.palette.text.secondary,
 		backgroundColor: 'lightgray',
 		marginBottom: '25px'
-
 	},
 	paper2: {
-
-
 		textAlign: 'center',
 		color: theme.palette.text.secondary,
-		backgroundColor: '#F0F0F0',
-
+		backgroundColor: '#F0F0F0'
 	},
 	paper3: {
-
 		textAlign: 'center',
 		color: theme.palette.text.secondary,
-		backgroundColor: '#F0F0F0',
-
+		backgroundColor: '#F0F0F0'
 	},
 	texts: {
 		margin: 'auto',
@@ -69,8 +52,7 @@ const useStyles = (theme) => ({
 		padding: '30px'
 	},
 	input: {
-		backgroundColor: '#F0F0F0',
-
+		backgroundColor: '#F0F0F0'
 	},
 	formControl: {
 		margin: theme.spacing(1),
@@ -83,13 +65,19 @@ const useStyles = (theme) => ({
 		marginLeft: '20px',
 		marginTop: '30px'
 	}
-
 });
 class Register extends Component {
 	constructor() {
 		super();
 		this.state = {
-			avatarList: [{img:avatar1, id:1}, {img:avatar2, id:2}, {img:avatar3, id:3}, {img:avatar4, id:4}, {img:avatar5, id:5},{img:avatar6, id:6}],
+			avatarList: [
+				{ img: avatar1, id: 1 },
+				{ img: avatar2, id: 2 },
+				{ img: avatar3, id: 3 },
+				{ img: avatar4, id: 4 },
+				{ img: avatar5, id: 5 },
+				{ img: avatar6, id: 6 }
+			],
 			avatar: 1,
 			firstName: '',
 			lastName: '',
@@ -136,9 +124,10 @@ class Register extends Component {
 		});
 	}
 
-	handleAvatarClick(id){
-		this.state.avatar = id
-		console.log(id);
+	handleAvatarClick(id) {
+		this.setState({
+			avatar: id
+		});
 	}
 
 	onSubmit(event) {
@@ -157,7 +146,7 @@ class Register extends Component {
 		};
 		console.log(registered);
 		axios
-			.post('/app/register', registered)
+			.post('http://localhost:4000/app/register', registered)
 			.then((response) => console.log('User Registered', response.data));
 
 		this.setState({
@@ -171,163 +160,135 @@ class Register extends Component {
 			phone: '',
 			address: ''
 		});
+
+		window.location.href = '/';
 	}
 
 	render() {
 		const { classes } = this.props;
 		return (
-			<div style={{ minHeight: '100vh', }}>
-			<div className={classes.root}>
-				<Grid container spacing={3}>
-
-				<Hidden smDown>
+			<div style={{ minHeight: '100vh' }}>
+				<div className={classes.root}>
+					<Grid container spacing={3}>
+						<Hidden smDown>
 							<Grid item xs={12}>
 								<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
 							</Grid>
 						</Hidden>
 
-					<Grid item
-						xs={12} 
-							container
-							direction="row"
-							justify="center"
-							alignItems="center"
-
-						>
+						<Grid item xs={12} container direction="row" justify="center" alignItems="center">
 							<Paper className={classes.paper}>
-							<h2>Registration </h2>
-							<Paper elevation={3} className={classes.paper3} style={{ paddingTop: '20px' }}>
-									<form className={classes.root} style={{ marginBottom: '25px' }} noValidate autoComplete="off">
-									<Grid item xs={12}>
-									<h4>Select your avatar</h4>
-									{this.state.avatarList.map( (avatar, key) => {
-										return <Button  key={key} variant="outline-light" size="sm" onClick={(e) => {this.handleAvatarClick(avatar.id)}}><img src={avatar.img} value={avatar.id} alt={avatar.id} width="50px" /></Button>
-	
-									})}
-										</Grid>	
-										<h4 style={{marginTop:'25px'  }}>Personal Info</h4>
-										<TextField
-										id="FirstName"
-										label="First Name"
-										style={{ width: '55%',  marginBottom: '15px'  }}
-											variant='outlined'
-										onChange={this.changeFirstName}
-										value={this.state.firstName}
-									/>
-										<TextField
-										id="LastName"
-										label="Last Name"
-										style={{ width: '55%',  marginBottom: '25px'  }}
-										variant='outlined'
-										onChange={this.changeLastName}
-										value={this.state.lastName}
-									/>
-									<h4>Login Info</h4>
-										<TextField
-										id="Email"
-										label="Email"
-										style={{ width: '55%',  marginBottom: '15px'  }}
-										variant='outlined'
-										onChange={this.changeEmail}
-										value={this.state.email}
-									/>
-										<TextField
-										id="Password"
-										label="Password"
-										style={{ width: '55%',  marginBottom: '25px'  }}
-										variant='outlined'
-										onChange={this.changePassword}
-										value={this.state.password}
-										type="password"
-									/>
-									<h4>Company Info</h4>
-										<TextField
-										id="Department"
-										label="Department"
-										style={{ width: '55%',  marginBottom: '15px'  }}
-										variant='outlined'
-										onChange={this.changeDepartment}
-										value={this.state.department}
-									/>
-									<Grid item xs={12}>
-										<Button onClick={this.onSubmit} variant="contained"
-												  	style={{
-														   background:'#5dafff', 
-														   margin:'10px', 
-														   color: 'white' }} >
-										Register
-									</Button>
+								<h2>Registration </h2>
+								<Paper elevation={5} className={classes.paper3} style={{ paddingTop: '20px' }}>
+									<form
+										className={classes.root}
+										style={{ marginBottom: '25px' }}
+										noValidate
+										autoComplete="off"
+									>
+										<Grid item xs={12}>
+											<h4>Select your avatar</h4>
+											{this.state.avatarList.map((avatar, key) => {
+												return (
+													<Button
+														key={key}
+														variant="outline-light"
+														size="sm"
+														onClick={(e) => {
+															this.handleAvatarClick(avatar.id);
+														}}
+													>
+														<img
+															src={avatar.img}
+															value={avatar.id}
+															alt={avatar.id}
+															width="50px"
+														/>
+													</Button>
+												);
+											})}
 										</Grid>
-										</form></Paper>
-							{/* <Container className={classes.texts}>
-								<Row>
-								<h4>Select your avatar:</h4>
-								</Row>
+										<h4 style={{ marginTop: '25px' }}>Personal Info</h4>
+										<TextField
+											id="FirstName"
+											label="First Name"
+											style={{ width: '55%', marginBottom: '15px' }}
+											variant="outlined"
+											onChange={this.changeFirstName}
+											value={this.state.firstName}
+											// autoFocus
+										/>
+										<TextField
+											id="LastName"
+											label="Last Name"
+											style={{ width: '55%', marginBottom: '25px' }}
+											variant="outlined"
+											onChange={this.changeLastName}
+											value={this.state.lastName}
+										/>
+										<h4>Login Info</h4>
+										<TextField
+											id="Email"
+											label="Email"
+											style={{ width: '55%', marginBottom: '15px' }}
+											variant="outlined"
+											onChange={this.changeEmail}
+											value={this.state.email}
+										/>
+										<TextField
+											id="Password"
+											label="Password"
+											style={{ width: '55%', marginBottom: '25px' }}
+											variant="outlined"
+											onChange={this.changePassword}
+											value={this.state.password}
+											type="password"
+										/>
+										<h4>Company Info</h4>
+										<TextField
+											id="Department"
+											label="Department"
+											style={{ width: '55%', marginBottom: '15px' }}
+											variant="outlined"
+											onChange={this.changeDepartment}
+											value={this.state.department}
+										/>
+										<Grid item xs={12}>
+											<Link to="/">
+												<Button
+													variant="contained"
+													style={{
+														background: '#5dafff',
+														margin: '10px',
+														color: 'white',
+														outline: 'none',
+														cursor: 'pointer'
+													}}
+												>
+													Go Back
+												</Button>
+											</Link>
 
-								<Row>
-									{this.state.avatarList.map( (avatar, key) => {
-										return <Button  key={key} variant="outline-light" size="sm" onClick={(e) => {this.handleAvatarClick(avatar.id)}}><img src={avatar.img} value={avatar.id} alt={avatar.id} width="50px" /></Button>
-	
-									})}
-								
-								 </Row>
-								<Row>
-									<TextField
-										id="FirstName"
-										label="First Name"
-										onChange={this.changeFirstName}
-										value={this.state.firstName}
-									/>
-								</Row>
-								<Row>
-									<TextField
-										id="LastName"
-										label="Last Name"
-										onChange={this.changeLastName}
-										value={this.state.lastName}
-									/>
-								</Row>
-								<Row>
-									<TextField
-										id="Email"
-										label="Email"
-										onChange={this.changeEmail}
-										value={this.state.email}
-									/>
-								</Row>
-								<Row>
-									<TextField
-										id="Password"
-										label="Password"
-										onChange={this.changePassword}
-										value={this.state.password}
-										type="password"
-									/>
-								</Row>
-								<Row>
-									<TextField
-										id="Department"
-										label="Department"
-										onChange={this.changeDepartment}
-										value={this.state.department}
-									/>
-								</Row>
-
-								<Row>
-									<Button variant="primary" onClick={this.onSubmit}>
-										Register
-									</Button>
-								</Row>
-								<Row>
-									<Link to="/" className="navlink">
-										<Button variant="secondary">Login</Button>
-									</Link>
-								</Row>
-							</Container> */}
-						</Paper>
+											<Button
+												onClick={this.onSubmit}
+												variant="contained"
+												style={{
+													background: '#5dafff',
+													margin: '10px',
+													color: 'white',
+													outline: 'none',
+													cursor: 'pointer'
+												}}
+											>
+												Register
+											</Button>
+										</Grid>
+									</form>
+								</Paper>
+							</Paper>
+						</Grid>
 					</Grid>
-				</Grid>
-			</div>
+				</div>
 			</div>
 		);
 	}
