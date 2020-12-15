@@ -9,12 +9,12 @@ import axios from 'axios';
 import image from '../Home/images/bluebanner.jpg';
 import Hidden from '@material-ui/core/Hidden';
 
-import avatar1 from '../avatar/1.png';
-import avatar2 from '../avatar/2.png';
-import avatar3 from '../avatar/3.png';
-import avatar4 from '../avatar/4.png';
-import avatar5 from '../avatar/5.png';
-import avatar6 from '../avatar/6.png';
+import avatar1 from '../Avatar/1.png';
+import avatar2 from '../Avatar/2.png';
+import avatar3 from '../Avatar/3.png';
+import avatar4 from '../Avatar/4.png';
+import avatar5 from '../Avatar/5.png';
+import avatar6 from '../Avatar/6.png';
 
 import { TextField, Button, Paper, Grid } from '@material-ui/core';
 

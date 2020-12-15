@@ -6,12 +6,12 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import Grid from '@material-ui/core/Grid';
-import user1 from '../avatar/1.png';
-import user2 from '../avatar/2.png';
-import user3 from '../avatar/3.png';
-import user4 from '../avatar/4.png';
-import user5 from '../avatar/5.png';
-import user6 from '../avatar/6.png';
+import user1 from '../Avatar/1.png';
+import user2 from '../Avatar/2.png';
+import user3 from '../Avatar/3.png';
+import user4 from '../Avatar/4.png';
+import user5 from '../Avatar/5.png';
+import user6 from '../Avatar/6.png';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
