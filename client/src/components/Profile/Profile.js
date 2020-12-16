@@ -296,7 +296,7 @@ class Profile extends Component {
 									{/* <p1>
 									<strong>Name: </strong>
 									{this.state.firstName} {this.state.lastName}
-									<br />
+									<br/>
 								</p1>
 								<p2>
 									<strong>Department: </strong>

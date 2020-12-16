@@ -23,7 +23,7 @@ AND communicate with my coworkers through announcements and direct messages.
 ## Acceptance Criteria
 
 GIVEN an employee portal  
-WHEN I register and enter my user credentials I w will  
+WHEN I register and enter my user credentials I will  
 THEN be given access to an employee dashboard containing a summary of recent activity  
 WHEN I click on Board on the navigation bar and hyperlink  
 THEN it will display announcements and messages I have received and I can send messages  
@@ -34,33 +34,32 @@ THEN it will display a request time off form with a list of past requests
 WHEN I click Personal Info on the navigation bar  
 THEN it will display my personal information and allow me to edit and update the fields
 
-
 ## Demo
-
-
-
-
-
-
 
 ## Screenshots
 
+### Register:
+![register](./media/register.PNG)
 
+### Login:
+![login](./media/login.PNG)  
+
+### Home:
+![home](./media/home.PNG)   
+
+### Schedule:
+![schedule](./media/schedule.PNG)
+ 
+### Timeoff:  
+![timeoff](./media/timeoff.PNG)
 
 ## Installation
-
-### Heroku
-This app has been deployed to Heroku at:
-
-
-
-### Run locally
-
 1. Clone the repo to your local machine.
 2. Run `npm install`
 3. Follow the instructions on the terminal to find and visit your port.
 
-
+### Heroku
+This app has been deployed to Heroku at:
 
 
 ## License
