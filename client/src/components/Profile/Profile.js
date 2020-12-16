@@ -1,207 +1,222 @@
 import React, { Component } from 'react';
-<<<<<<< Updated upstream
-// import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { Avatar, Input } from '@material-ui/core';
-=======
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import { Avatar, Input, Hidden } from '@material-ui/core';
->>>>>>> Stashed changes
-import {formControl} from '@material-ui/core';
+import List from '@material-ui/core/List';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-<<<<<<< Updated upstream
-import Register from '../Register/Register.js';
-import { withStyles } from '@material-ui/core/styles';
 import axios from 'axios';
-import '../Profile/Profile.css';
-=======
-import Register from '../Register/Register';
-import { withStyles } from '@material-ui/core/styles';
-import axios from 'axios';
-import '../Profile/Profile.css';
+import { Link } from 'react-router-dom';
 import image from '../Home/images/bluebanner.jpg';
-import { Link, NavLink } from 'react-router-dom';
-
->>>>>>> Stashed changes
-
-const useStyles=(theme)=>({
-	root: {
-		flexGrow: 1,
-		marginLeft: '100px',
-		marginRight: '100px'
-	},
-	paper: {
-		padding: theme.spacing(2),
-		textAlign: 'center',
-		color: theme.palette.text.secondary,
-		backgroundColor: 'lightgray',
-	}
-})
-<<<<<<< Updated upstream
+import pushPin from '../Home/images/pushPinBlue.png';
+import EmailIcon from '@material-ui/icons/Email';
+import TelegramIcon from '@material-ui/icons/Telegram';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Hidden from '@material-ui/core/Hidden';
+import '../Profile/Profile.css';
+const useStyles = (theme) => ({
+      root: {
+            flexGrow: 1,
+            marginLeft: '100px',
+            marginRight: '100px'
+      },
+      paper: {
+            padding: theme.spacing(2),
+            textAlign: 'center',
+            color: theme.palette.text.secondary,
+            backgroundColor: 'lightgray'
+      }
+});
 class Profile extends Component {
-	constructor () {
-		super ();
-		this.state = {
-			id:'',
-			firstName: 'Jim',
-			lastName: 'Halpert',
-			email: 'J.Halpert@aol.com',
-			department: 'Sales',
-			position: 'Salesman',
-			phone: '909-428-6500',
-			address:'764 Ender Way, Scanton Pa 91911',
-		}
-	}
-componentDidMount(){
-	const userId = this.loadStoraged();
+      constructor() {
+            super();
+            this.state = {
+                  id: '',
+                  firstName: 'Jim',
+                  lastName: 'Halpert',
+                  email: 'J.Halpert@aol.com',
+                  department: 'Sales',
+                  position: 'Salesman',
+                  phone: '909-428-6500',
+                  address: '764 Ender Way, Scanton Pa 91911'
+            };
+      }
+      componentDidMount() {
+            const userId = this.loadStoraged();
             axios.get('http://localhost:4000/app/userid', { params: { id: userId } }).then((response) => {
                   this.setState({
                         id: response.data[0]._id,
-                        fristName: response.data[0].firstName,
-						lastName: response.data[0].lastName,
-						email:response.data[0].email,
+                        firstName: response.data[0].firstName,
+                        lastName: response.data[0].lastName,
+                        email: response.data[0].email,
                         department: response.data[0].department,
-						position: response.data[0].position,
-						phone:response.data[0].phone,
-						address:response.data[0].address,
+                        position: response.data[0].position,
+                        phone: response.data[0].phone,
+                        address: response.data[0].address
                   });
-            });                                           
-}
-loadStoraged() {
-	if (JSON.parse(localStorage.getItem('users'))) {
-		  var storedUsers = JSON.parse(localStorage.getItem('users'));
-		  return storedUsers[0].id;
-	} else {
-		  console.log('not storaged');
-		  return 0;
-	}
-}
-render(){
-    const{classes}=this.props;
-    return (
-        <div>
-        <div className={classes.root}>
-            <Grid container spacing={3}>
-                <Grid item xs={12}>
-                    <Paper className={classes.paper}>
-                        <h2>Personal Info</h2>
-                        <Grid item xs={12} sm={6}>
-                              <Paper className={classes.paper}>
-                                  <img alt='User Image' src='https://i.imgflip.com/2ev98a.jpg' width='300' height='200'/>
-                                  {/* <Avatar alt='User Image' src='https://i.imgflip.com/2ev98a.jpg' className={classes.large}/> */}
-                                  </Paper>
-                            </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <Paper className={classes.paper}>
-                                <h1>User Info</h1> 
-                                <p1><strong>Name: </strong>{this.state.firstName} {this.state.lastName}<br /></p1>
-                                <p2><strong>Department: </strong>{this.state.department} <br/><strong>Position: </strong>{this.state.position}<br /></p2>
-                                <p3><strong>Email: </strong>{this.state.email} <br/>
-								<strong>Phone #:</strong> {this.state.phone}<br /></p3>
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Paper className={classes.paper}>
-                                user bio
-                            </Paper>
-                        </Grid>
-                    </Paper>
-                </Grid>
-            </Grid>
-        </div>
-    </div>
-    )
-}
-}
+            });
+      }
+      loadStoraged() {
+            if (JSON.parse(localStorage.getItem('users'))) {
+                  var storedUsers = JSON.parse(localStorage.getItem('users'));
+                  return storedUsers[0].id;
+            } else {
+                  console.log('not storaged');
+                  return 0;
+            }
+      }
+      render() {
+        const { classes } = this.props;
+        return (
+              <div className="container-fluid">
+                    <div className={classes.root}>
+                          <Grid container spacing={3}>
+                                <Hidden smDown>
+                                      <Grid item xs={12}>
+                                            <img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
+                                      </Grid>
+                                </Hidden>
+                                <Grid item xs={12} md={6}>
+                                      <Paper elevation={3} className={classes.paper}>
+                                            <img src={pushPin} alt="Logo" width="55px" height="40px" />
+                                            <h2>Update Info</h2>
+                                            <Accordion style={{ backgroundColor: '#5dafff ', marginBottom: '25px' }}>
+                                                  <AccordionSummary
+                                                        style={{ color: 'white', fontSize: '18px', textAlign: 'center' }}
+                                                        expandIcon={<ExpandMoreIcon />}
+                                                        aria-controls="panel1a-content"
+                                                        id="panel1a-header"
+                                                  >
+                                                        Update my Info
+                                                  </AccordionSummary>
+                                                  <AccordionDetails>
+                                                        <Paper className={classes.paper3} style={{ marginTop: '25px' }}>
+                                                              <form className={classes.root} noValidate autoComplete="off">
+                                                                    <TextField
+                                                                          id="FirstName"
+                                                                          label="First Name"
+                                                                          style={{ margin: '15px' }}
+                                                                          variant="outlined"
+                                                                          onChange={this.changeFirstName}
+                                                                          value={this.state.firstName}
+                                                                          // autoFocus
+                                                                    />
+                                                                    <TextField
+                                                                          id="LastName"
+                                                                          label="Last Name"
+                                                                          style={{ margin: '15px' }}
+                                                                          variant="outlined"
+                                                                          onChange={this.changeLastName}
+                                                                          value={this.state.lastName}
+                                                                    />
+                                                                    <TextField
+                                                                          id="Email"
+                                                                          label="Email"
+                                                                          style={{ margin: '15px' }}
+                                                                          variant="outlined"
+                                                                          onChange={this.changeEmail}
+                                                                          value={this.state.email}
+                                                                    />
+                                                                    <TextField
+                                                                          id="Password"
+                                                                          label="Password"
+                                                                          style={{ margin: '15px' }}
+                                                                          variant="outlined"
+                                                                          onChange={this.changePassword}
+                                                                          value={this.state.password}
+                                                                          type="password"
+                                                                    />
+                                                                    <TextField
+                                                                          id="Department"
+                                                                          label="Department"
+                                                                          style={{ margin: '15px' }}
+                                                                          variant="outlined"
+                                                                          onChange={this.changeDepartment}
+                                                                          value={this.state.department}
+                                                                    />
+                                                                    <TextField
+                                                                          id="Position"
+                                                                          label="Position"
+                                                                          style={{ margin: '15px' }}
+                                                                          variant="outlined"
+                                                                          // onChange={this.changeDepartment}
+                                                                          // value={this.state.department}
+                                                                    />
+                                                                    <TextField
+                                                                          id="Phone"
+                                                                          label="Phone"
+                                                                          style={{ margin: '15px' }}
+                                                                          variant="outlined"
+                                                                          // onChange={this.changeDepartment}
+                                                                          // value={this.state.department}
+                                                                    />
+                                                                    <Grid item xs={12}>
+                                                                          <Button
+                                                                                onClick={this.onSubmit}
+                                                                                variant="contained"
+                                                                                style={{
+                                                                                      background: '#5dafff',
+                                                                                      margin: '10px',
+                                                                                      color: 'white',
+                                                                                      outline: 'none',
+                                                                                      cursor: 'pointer'
+                                                                                }}
+                                                                          >
+                                                                                Update
+                                                                          </Button>
+                                                                    </Grid>
+                                                              </form>
+                                                        </Paper>
+                                                  </AccordionDetails>
+                                            </Accordion>
+                                      </Paper>
+                                </Grid>
+                                <Grid item xs={12} md={6}>
+                                      <Paper className={classes.paper} elevation={3}>
+                                            <img src={pushPin} alt="Logo" width="55px" height="40px" />
+                                            <h1>User Info</h1>
+                                            <Paper className={classes.paper3} style={{ paddingTop: '20px' }}>
+                                                  <h5>First name: {this.state.firstName} </h5>
+                                                  <h5>Last name: {this.state.lastName} </h5>
+                                                  <h5>Email: {this.state.email} </h5>
+                                                  <h5>Department: {this.state.department} </h5>
+                                                  <h5>Position: {this.state.position} </h5>
+                                                  <h5>Phone: {this.state.position} </h5>
+                                                  {/* <p1>
+                                                  <strong>Name: </strong>
+                                                  {this.state.firstName} {this.state.lastName}
+                                                  <br />
+                                            </p1>
+                                            <p2>
+                                                  <strong>Department: </strong>
+                                                  {this.state.department} <br />
+                                                  <strong>Position: </strong>
+                                                  {this.state.position}
+                                                  <br />
+                                            </p2>
+                                    
 
-
+<p3>
+                                                      <strong>Email: </strong>
+                                                      {this.state.email} <br />
+                                                      <strong>Phone #:</strong> {this.state.phone}
+                                                      <br />
+                                                </p3> */}
+                                                </Paper>
+                                          </Paper>
+                                    </Grid>
+                              </Grid>
+                        </div>
+                  </div>
+            );
+      }
+}
 export default withStyles(useStyles)(Profile);
-=======
-
-
-
-class Profile extends Component {
-	constructor () {
-		super ();
-		this.state = {
-			id:'',
-			firstName: 'Jim',
-			lastName: 'Halpert',
-			email: 'J.Halpert@aol.com',
-			department: 'Sales',
-			position: 'Salesman',
-			phone: '909-428-6500',
-			address:'764 Ender Way, Scanton Pa 91911',
-		}
-	}
-componentDidMount(){
-	const userId = this.loadStoraged();
-            axios.get('http://localhost:4000/app/userid', { params: { id: userId } }).then((response) => {
-                  this.setState({
-                        id: response.data[0]._id,
-                        fristName: response.data[0].firstName,
-						lastName: response.data[0].lastName,
-						email:response.data[0].email,
-                        department: response.data[0].department,
-						position: response.data[0].position,
-						phone:response.data[0].phone,
-						address:response.data[0].address,
-                  });
-            });                                           
-}
-loadStoraged() {
-	if (JSON.parse(localStorage.getItem('users'))) {
-		  var storedUsers = JSON.parse(localStorage.getItem('users'));
-		  return storedUsers[0].id;
-	} else {
-		  console.log('not storaged');
-		  return 0;
-	}
-}
-render(){
-    const{classes}=this.props;
-    return (
-        <div ClassName="container-fluid">
-			<div className={classes.root}>
-				<Grid container spacing={3}>
-					<Hidden smDown>
-						<Grid item xs={12}>
-							<img class="hero-image" src={image} alt="Logo" width="100%" height="250px" style={{}} />
-						</Grid>
-					</Hidden>
-					<Grid item xs={12}>
-						<h1>Personal Info</h1>
-					</Grid>
-					<Grid item xs={12} md={6}>
-					<p1>
-						<strong>Name: </strong>{this.state.firstName} {this.state.lastName} <br/> 
-						<strong>Department: </strong>{this.state.department} <br/>
-						<strong>Position: </strong>{this.state.position} <br/>
-						<strong>Email: </strong>{this.state.email} <br />
-						<strong>Phone #: </strong>{this.state.phone} <br />
-						<strong>Address: </strong> {this.state.address} <br/>
-						</p1>
-					</Grid>
-					<Grid item xs={12} md={6}>
-						<strong>Update User Info: </strong>
-						<li><Link to="../Register/Register">Update/ Register New User</Link></li>
-					</Grid>
-				</Grid>
-			</div>
-		</div>
-    )
-}
-}
-
-
-export default withStyles(useStyles)(Profile);
-
-
-
->>>>>>> Stashed changes
