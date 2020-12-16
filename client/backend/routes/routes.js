@@ -191,7 +191,7 @@ router.get('/schedules', (req, res) => {
 		});
 });
 
-router.put('/userupdate', (req, res) => {
+router.put('/update', (req, res) => {
 	const newUser = new UserModel({
 		avatar: req.body.avatar,
 		firstName: req.body.firstName,
